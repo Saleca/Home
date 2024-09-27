@@ -9,25 +9,32 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.theme-toggle {
+.settings {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+}
+
+.toggle {
+    display: flex;
     margin-top: 20px;
 }
 
-.theme-toggle label {
+.toggle label {
     padding: 5px 5px;
     cursor: pointer;
     border: 1px solid var(--dark);
     margin: 0 5px;
 }
 
-#dark:checked ~ .theme-toggle label[for="dark"] {
+#dark:checked ~ .toggle label[for="dark"] {
     background-color: var(--light);
     color: var(--dark);
 }
 
-#light:checked ~ .theme-toggle label[for="light"], #device:checked ~ .theme-toggle label[for="device"] {
+#light:checked ~ .toggle label[for="light"],
+#device:checked ~ .toggle label[for="device"],
+#pt:checked ~ .toggle label[for="pt"],
+#en:checked ~ .toggle label[for="en"] {
     background-color: var(--dark);
     color: var(--light);
 }
@@ -46,11 +53,14 @@ html:has(#dark:checked) {
         color: var(--dark-link-visited);
     }
 
-    .theme-toggle label {
+    .toggle label {
         border: 1px solid var(--light);
     }
 
-    #device:checked ~ .theme-toggle label[for="device"] {
+    #device:checked ~ .toggle label[for="device"],
+    #pt:checked ~ .toggle label[for="pt"],
+    #en:checked ~ .toggle label[for="en"] 
+    {
         background-color: var(--light);
         color: var(--dark);
     }
@@ -66,19 +76,37 @@ html:has(#dark:checked) {
         a {
             color: var(--dark-link);
         }
-   
+
         a:visited {
             color: var(--dark-link-visited);
         }
 
-        .theme-toggle label {
+        .toggle label {
              border: 1px solid var(--light);
         }
 
-        #device:checked ~ .theme-toggle label[for="device"] {
+        #device:checked ~ .toggle label[for="device"],
+        #pt:checked ~ .toggle label[for="pt"],
+        #en:checked ~ .toggle label[for="en"]  {
              background-color: var(--light);
              color: var(--dark);
         }
+    }
+}
+
+.pt, .en{
+    display: none;
+}
+
+html:has(#pt:checked) {
+    .pt {
+        display: block;
+    }
+}
+
+html:has(#en:checked) {
+    .en{
+        display: block;
     }
 }
 
