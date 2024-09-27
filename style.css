@@ -9,10 +9,23 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-@media (prefers-color-scheme: dark) {
+theme-toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.theme-toggle label {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+}
+
+html:has(#dark:checked) {
     body {
         background-color: var(--dark);
-        color: var(--light);
+        text-color: var(--light);
     }
 
     a {
@@ -21,6 +34,23 @@ body {
 
     a:visited {
         color: var(--dark-link-visited);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:has(#device:checked) {
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        a {
+            color: var(--dark-link);
+        }
+
+        a:visited {
+            color: var(--dark-link-visited);
+        }
     }
 }
 
