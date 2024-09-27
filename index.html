@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="settings">
@@ -16,8 +17,8 @@
         <input type="radio" id="dark" name="theme" value="dark" hidden>
     
         <div class="toggle lang">
-            <label for="pt">PT</label>
-            <label for="en">EN</label>
+            <label for="pt" onclick="changeLanguage('pt')">PT</label>
+            <label for="en" onclick="changeLanguage('en')">EN</label>
         </div>    
 
         <div class="toggle theme">
@@ -26,6 +27,7 @@
             <label for="dark">Dark</label>
         </div>
     </div>
+
 <div class="en">
     <h1>Welcome</h1>
     <p>Hold on while I work this out.</p>
