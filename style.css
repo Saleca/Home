@@ -8,11 +8,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: SlateGray;
+    color: cornflowerblue;
 }
 
 a:visited {
-    color: Thistle;
+    color: darkslateblue;
 }
 
 @media (min-width: 768px) {
