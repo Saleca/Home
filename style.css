@@ -22,17 +22,12 @@ body {
     margin: 0 5px;
 }
 
-#dark:checked + .theme-toggle label[for="dark"] {
+#dark:checked ~ .theme-toggle label[for="dark"] {
     background-color: var(--light);
     color: var(--dark);
 }
 
-#light:checked + .theme-toggle label[for="light"] {
-    background-color: var(--dark);
-    color: var(--light);
-}
-
-#device:checked + .theme-toggle label[for="device"] {
+#light:checked ~ .theme-toggle label[for="light"], #device:checked ~ .theme-toggle label[for="device"] {
     background-color: var(--dark);
     color: var(--light);
 }
@@ -55,7 +50,7 @@ html:has(#dark:checked) {
         border: 1px solid var(--light);
     }
 
-    #device:checked + .theme-toggle label[for="device"] {
+    #device:checked ~ .theme-toggle label[for="device"] {
         background-color: var(--light);
         color: var(--dark);
     }
