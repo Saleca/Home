@@ -1,34 +1,32 @@
 :root {
     --dark: black;
     --light: gray;
-    --background-color: var(--light);
-    --text-color: var(--dark);
+    --dark-link: cornflowerblue;
+    --dark-link-visited: darkslateblue;
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: var(--dark);
-        --text-color: var(--light);
+    body {
+        background-color: var(--dark);
+        color: var(--light);
+    }
+
+    a {
+        color: var(--dark-link);
+    }
+
+    a:visited {
+        color: var(--dark-link-visited);
     }
 }
 
 
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
-}
-
-a {
-    color: cornflowerblue;
-}
-
-a:visited {
-    color: darkslateblue;
 }
 
 @media (min-width: 768px) {
