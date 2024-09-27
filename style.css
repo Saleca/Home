@@ -1,7 +1,23 @@
-body {
-    background-color: black;
-    color: gray;
+:root {
+    --dark: black;
+    --light: gray;
+    --background-color: var(--light);
+    --text-color: var(--dark);
 }
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    
+        --background-color: var(--dark);
+        --text-color: var(--light);
+    
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
