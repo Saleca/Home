@@ -25,7 +25,7 @@ body {
 html:has(#dark:checked) {
     body {
         background-color: var(--dark);
-        text-color: var(--light);
+        color: var(--light);
     }
 
     a {
