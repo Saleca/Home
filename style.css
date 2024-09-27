@@ -22,6 +22,21 @@ body {
     margin: 0 5px;
 }
 
+#dark:checked + .theme-toggle label[for="dark"] {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+#light:checked + .theme-toggle label[for="light"] {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+#device:checked + .theme-toggle label[for="device"] {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
 html:has(#dark:checked) {
     body {
         background-color: var(--dark);
@@ -39,6 +54,84 @@ html:has(#dark:checked) {
     .theme-toggle label {
         border: 1px solid var(--light);
     }
+
+    #device:checked + .theme-toggle label[for="device"] {
+        background-color: var(--light);
+        color: var(--dark);
+    }
+}
+
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+}
+
+.theme-toggle label {
+    padding: 5px 5px;
+    cursor: pointer;
+    border: 1px solid var(--dark);
+    margin: 0 5px;
+}
+
+html:has(#dark:checked) {
+    body {
+        background-color: var(--dark);
+        color: var(--light);
+    }
+
+    a {
+        color: var(--dark-link);
+    }
+
+    a:visited {
+        color: var(--dark-link-visited);
+    }
+
+    .theme-toggle label {
+        border: 1px solid var(--light);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html:has(#device:checked) {
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        a {
+            color: var(--dark-link);
+        }
+
+        a:visited {
+            color: var(--dark-link-visited);
+        }
+
+        .theme-toggle label {
+            border: 1px solid var(--light);
+        }
+    }
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    p {
+        width: 50%; 
+        margin: 0 auto;
+    }
+}label[for="dark"] {
+    background-color: var(--light);
+    color: var(--dark);
+}
 }
 
 @media (prefers-color-scheme: dark) {
