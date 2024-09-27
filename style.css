@@ -98,16 +98,12 @@ html:has(#dark:checked) {
     display: none;
 }
 
-html:has(#pt:checked) {
-    .pt {
-        display: block;
-    }
+html[lang="pt"] .pt {
+    display: block;
 }
 
-html:has(#en:checked) {
-    .en{
-        display: block;
-    }
+html[lang="en"] .en{
+    display: block;
 }
 
 h1, h2, h3, h4, h5, h6 {
