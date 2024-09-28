@@ -9,9 +9,8 @@
     }
     a {
         text-decoration: none;
-        color: black;
     }
-    a:visited {
+    a:link, a:visited, a:active, a:hover {
         color: black;
     }
     .no-print {
