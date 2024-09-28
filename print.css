@@ -10,8 +10,8 @@
     a {
         text-decoration: none;
     }
-    a:link, a:visited, a:active, a:hover {
-        color: black;
+    a, a:link, a:visited, a:active, a:hover {
+        color: black !important;
     }
     .no-print {
         display: none;
