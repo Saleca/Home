@@ -116,24 +116,3 @@ h1, h2, h3, h4, h5, h6 {
         margin: 0 auto;
     }
 }
-
-@media print {
-    @page {
-        size: A4;
-        margin: 20mm;
-    }
-    body {
-        background-color: white;
-        color: black;
-    }
-    a {
-        text-decoration: none;
-        color: black;
-    }
-    a:visited {
-        color: black;
-    }
-    .no-print {
-        display: none;
-    }
-}
