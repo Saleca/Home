@@ -10,7 +10,7 @@
     a {
         text-decoration: none;
     }
-    a, a:link, a:visited, a:active, a:hover {
+    a, a:visited {
         color: black !important;
     }
     .no-print {
