@@ -1,0 +1,19 @@
+<div class="settings">
+    <input type="radio" id="pt" name="lang" value="pt" hidden>
+    <input type="radio" id="en" name="lang" value="en" hidden checked>
+
+    <input type="radio" id="light" name="theme" value="light" hidden>
+    <input type="radio" id="device" name="theme" value="device" hidden>
+    <input type="radio" id="dark" name="theme" value="dark" hidden checked>
+    
+    <div class="toggle lang">
+        <label for="pt" onclick="changeLanguage('pt')">PT</label>
+        <label for="en" onclick="changeLanguage('en')">EN</label>
+    </div>   
+
+    <div class="toggle theme">
+        <label for="light">Light</label>
+        <label for="device">Device</label>
+        <label for="dark">Dark</label>
+    </div>
+</div>
