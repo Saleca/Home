@@ -23,6 +23,22 @@ p {
     line-height: 1.5em;
 }
 
+.details {
+    hyphens: unset;
+    text-align: left;
+}
+
+.focus {
+    hyphens: unset;
+    text-indent: unset;
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+h1 + .focus, h2 + .focus, h3 + .focus {
+    margin-top: -1em;  
+}
+
 .settings {
     display: flex;
     justify-content: space-between;
