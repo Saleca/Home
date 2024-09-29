@@ -39,7 +39,7 @@ h1 + .focus, h2 + .focus, h3 + .focus {
     margin-top: -1em;  
 }
 
-.settings {
+.state-form {
     display: flex;
     justify-content: space-between;
 }
