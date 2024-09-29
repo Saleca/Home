@@ -9,6 +9,20 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    text-wrap: balance;
+}
+
+p {
+    width: 90%;
+    margin: 0 auto;
+    text-align: justify;
+    text-indent: 4ch;
+    hyphens: auto;
+    line-height: 1.5em;
+}
+
 .settings {
     display: flex;
     justify-content: space-between;
@@ -106,13 +120,8 @@ html[lang="en"] .en{
     display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    text-align: center;
-}
-
 @media (min-width: 768px) {
     p {
-        width: 50%; 
-        margin: 0 auto;
+        width: 70ch;
     }
 }
