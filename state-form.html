@@ -5,15 +5,15 @@
     <input type="radio" id="light" name="theme" value="light" hidden>
     <input type="radio" id="device" name="theme" value="device" hidden checked>
     <input type="radio" id="dark" name="theme" value="dark" hidden>
-    
+
     <div class="toggle lang">
-        <label for="pt" onclick="changeLanguage('pt')">PT</label>
-        <label for="en" onclick="changeLanguage('en')">EN</label>
+        <label for="pt" onclick="setLanguage(Languages.PORTUGUESE)">PT</label>
+        <label for="en" onclick="setLanguage(Languages.ENGLISH)">EN</label>
     </div>   
 
     <div class="toggle theme">
-        <label for="light">Light</label>
-        <label for="device">Device</label>
-        <label for="dark">Dark</label>
+        <label for="light" onclick="setTheme(Themes.LIGHT)">Light</label>
+        <label for="device" onclick="setTheme(Themes.DEVICE)">Device</label>
+        <label for="dark" onclick="setTheme(Themes.DARK)">Dark</label>
     </div>
 </div>
