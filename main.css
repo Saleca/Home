@@ -5,8 +5,28 @@
     --dark-link-visited: mediumslateblue;
 }
 
-body {
+#load-screen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+
+    color: var(--light);
+    background: var(--dark);
+    font-family: 'Courier New', Courier, monospace;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
     transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    /*loading*/
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
