@@ -18,10 +18,14 @@
     font-family: 'Courier New', Courier, monospace;
 
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: start;
 
     transition: background-color 0.3s, color 0.3s;
+}
+
+#navigation-history {
+    text-wrap: nowrap;
 }
 
 body {

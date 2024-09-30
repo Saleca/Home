@@ -55,34 +55,41 @@ function navigationManager()
   const navEntries = performance.getEntriesByType('navigation');
   if (navEntries.length > 0) {
     switch (navEntries[0].type) {
+      case 'back_forward':
       case 'reload':
         navigationType = NavigationType.RELOAD;
-        break;
-      case 'navigation':
+        return navigationType;
+      case 'navigate':
         const referrer = document.referrer;
+        if(!referrer || referrer === '') {
+          navigationType = NavigationType.EXTERNAL;
+          clearNavigationStack();
+          return navigationType;
+        }
         const currentDomain = window.location.origin;
         if (referrer && !referrer.startsWith(currentDomain)) {
           navigationType = NavigationType.EXTERNAL;
           clearNavigationStack();
-        } else {
-          navigationType = NavigationType.INTERNAL;
-          let url = window.location.href.replace(/^.*www\./, '');
-          if(!url) {
-            url = window.location.href;
-          }
-          addUrlToNavigationStack(window.location.href);
+          return navigationType;
+        } 
+
+        navigationType = NavigationType.INTERNAL;
+        let url = window.location.href.replace(/^.*www\./, '');
+        if(!url) {
+          url = window.location.href;
         }
-        break;
+        addUrlToNavigationStack(window.location.href);
+        return navigationType;
     }
   }
-  
-  return navigationType;
 }
 
 /** Adds URL to navigation stack. */
 function addUrlToNavigationStack(url = '/') {
   let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
+  
   navigationStack.push(url);
+  
   localStorage.setItem('navigation-stack', JSON.stringify(navigationStack));
 }
 
@@ -93,10 +100,17 @@ function clearNavigationStack(){
 
 /** @returns All items from the navigation stack. */
 function getAllNavigationItems() {
-  const navigationStack =  JSON.parse(localStorage.getItem('navigation-stack')) || [];
+  let navigationStack =  JSON.parse(localStorage.getItem('navigation-stack')) || [];
   if(navigationStack.length === 0) {
     addUrlToNavigationStack();
+    navigationStack =  JSON.parse(localStorage.getItem('navigation-stack')) || [];
   }
+
+  for(let i = 0; i<navigationStack.length; i++)
+  {
+    console.error(navigationStack[i]);
+  }
+
   return navigationStack;
 }
 
@@ -108,16 +122,23 @@ const cursorChar = '█';
 
 /** Manages the loading animation. */
 function loadingAnimation(loadType, signal) {
-  const urlTextElement = document.getElementById('url-text');
+  const loadScreenElement = document.getElementById('load-screen');
+
   const navigationStack = getAllNavigationItems();
-  const textAnimationElement = document.getElementById('text-animation');
+  if(navigationStack.length > 2) {
+    fillNavigationHistoryElement(navigationStack.slice(0, -1), loadScreenElement);
+  }
+  const pElement = document.createElement('p');
+  const urlTextElement = document.createElement('span');
+  const textAnimationElement = document.createElement('span');
+  pElement.append(urlTextElement, document.createTextNode(' > '), textAnimationElement);
+  loadScreenElement.append(pElement);
 
   if(loadType === NavigationType.INTERNAL)
   {
-    fillNavigationHistoryElement(navigationStack.pop());
-    if(navigationStack.length > 2) {
-      urlTextElement.textContent = navigationStack[-1];
-      animateText(navigationStack[-1], textAnimationElement, signal)
+    if(navigationStack.length >= 2) {
+      urlTextElement.textContent = navigationStack[navigationStack.length-1];
+      animateText(navigationStack[0], textAnimationElement, signal)
     }
     else {
       console.error('invalid navigationStack length')
@@ -125,7 +146,7 @@ function loadingAnimation(loadType, signal) {
   }
   else { //if external or reload
     if(navigationStack.length > 0) {
-      urlTextElement.textContent = navigationStack[-0];
+      urlTextElement.textContent = navigationStack[0];
       threeDotsAnimation(textAnimationElement, signal);
     }
     else {
@@ -134,16 +155,16 @@ function loadingAnimation(loadType, signal) {
   }
 }
 
-function fillNavigationHistoryElement(navigationStack)
+function fillNavigationHistoryElement(navigationStack, loadScreenElement)
 {
-  const navigationHistoryElement = document.getElementById('navigation-history');
-
   let text = '';
   const length = navigationStack.length-1;
   for (let i = 1; i < length; i++) {
-    text += `${navigationStack[i-1]} > ${navigationStack[i]}\n`
+    text += `${navigationStack[i-1]} > ${navigationStack[i]}\n`;
+    const p = document.createElement('p');
+    p.textContent = text;
+    loadScreenElement.append(p);
   }
-  navigationHistoryElement.textContent = text;
 }
 
 async function animateText(text, textAnimationElement, signal)
