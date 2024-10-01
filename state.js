@@ -170,11 +170,15 @@ function fillNavigationHistoryElement(navigationStack, loadScreenElement)
 
 async function animateText(text, textAnimationElement, signal)
 {
+  await animateCursor(textAnimationElement, 3);
   for (let i = 0; i < text.length; i++) {
     const character = text[i];
-    textAnimationElement.textContent += character;
-    if(character === ' ' || character === ' ') {
-      await delay(300 + Math.random() * 300)
+    if(textAnimationElement.textContent. includes(cursorChar) {
+      textAnimationElement.textContent = textAnimationElement.textContent. replace(cursorChar, '');
+    }
+    textAnimationElement.textContent += character + cursorChar;
+    if(character === '/') {
+      await animateCursor(textAnimationElement, 1);
     }
     else {
       await delay(100 + Math.random() * 200)
@@ -198,7 +202,7 @@ async function threeDotsAnimation(textAnimationElement, signal, defaultText = ''
     let textAnimation = defaultText;
     switch (i) {
       case 0:
-        await animateCursor(3);
+        await animateCursor(3, );
         textAnimation = `.` + cursorChar;
         break;
       case 1:
@@ -210,7 +214,7 @@ async function threeDotsAnimation(textAnimationElement, signal, defaultText = ''
         textAnimation = `...` + cursorChar;
         break;
       case 3:
-        await animateCursor(6);
+        await animateCursor(textAnimationElement, 6);
         textAnimation = `` + cursorChar;
         break;
     }
