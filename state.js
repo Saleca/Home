@@ -72,17 +72,18 @@ function navigationManager() {
 /** Manages navigation from external origins */
 function externalNavigation() {
   clearNavigationStack();
+  addPathToNavigationStack(getPath());
   return NavigationType.EXTERNAL;
 }
 
 /** Manages navigation from internal origins */
 function internalNavigation() {
+  addPathToNavigationStack(getPath());
+  return NavigationType.INTERNAL;
+}
+
+function getPath() {
   let path = window.location.href;
-  /*
-  if (path.includes('www.')) {
-    path = path.replace(/^.*www\./, '');
-  } 
-  //*/
   if (path.includes('saleca.github.io/PrivacyPolicy/')) { 
     path = path.replace(/^.*saleca.github.io\/PrivacyPolicy\//, '');
   }
@@ -105,11 +106,8 @@ function internalNavigation() {
   } else {
     path = path.replace('/', '\\');
   }
-
-  addPathToNavigationStack(path);
-
-  return NavigationType.INTERNAL;
-}
+  return path;
+)
 
 /** Adds path to navigation stack. */
 function addPathToNavigationStack(path = '\\') {
