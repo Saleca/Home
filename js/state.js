@@ -84,10 +84,10 @@ function internalNavigation() {
 
 function getPath() {
   let path = window.location.href;
-  if (path.includes('saleca.github.io/PrivacyPolicy/')) { 
+  if (path.includes('saleca.github.io/PrivacyPolicy/')) {
     path = path.replace(/^.*saleca.github.io\/PrivacyPolicy\//, '');
   }
-  /* live server
+  //* live server
   if (path.includes('127.0.0.1:5500/')) {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
@@ -99,6 +99,10 @@ function getPath() {
 
   if (path.includes('index')) {
     path = path.replace('index', '');
+  }
+
+  if (path.endsWith("/")) {
+    path = path.slice(0, -1);
   }
 
   if (path === '') {
@@ -171,14 +175,19 @@ async function loadingAnimation(loadType, signal) {
 
   if (loadType === NavigationType.INTERNAL) {
     if (navigationStack.length > 1) {
-      dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 2]);
-      await animateText(formatNavigationPath(navigationStack[navigationStack.length - 1]), navElement, signal);
+      const previousPath = navigationStack[navigationStack.length - 2];
+      let currentPath = navigationStack[navigationStack.length - 1];
+      if(currentPath.includes(previousPath)) {
+        currentPath = currentPath.replace(previousPath+'\\', '');
+      }
+      dirElement.textContent = formatDirectoryPath(previousPath);
+      await animateText(formatNavigationPath(currentPath), navElement, signal);
     } else {
       console.error('Internal navigation requires stack with more than one path.');
     }
   }
   else { //external or reload
-    if (navigationStack.length > 0) { 
+    if (navigationStack.length > 0) {
       dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 1]);
       threeDotsAnimation(navElement, signal);
     } else {
@@ -189,7 +198,7 @@ async function loadingAnimation(loadType, signal) {
 
 function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = 'Saleca Devlopment [Version 0.1]\n(c) Saleca. All rights reserved.';
+  start.textContent = 'Saleca Development [Version 0.1]\n(c) Saleca. All rights reserved.';
   loadScreenElement.append(start);
 }
 
@@ -223,7 +232,7 @@ async function animateText(text, navElement, signal) {
       await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
     }
   }
-
+  await animateCursor(navElement, 3);
   animateCursorIndefinetely(navElement, signal);
 }
 
@@ -301,30 +310,36 @@ function blinkCursor(navElement) {
     navElement.textContent += cursorChar;
   }
 }
+
 /* #endregion */
 
 /* #region Load Page */
 
-//let isMobile;
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
   const startTime = Date.now();
-  /*while using live server
+
+  /* live server
   cleanUrl();
   //*/
+
   const controller = new AbortController();
   const loadType = navigationManager();
   const loadingPromise = loadingAnimation(loadType, controller.signal);
 
-  /*
-  isMobile = IsMobile();
-  if(isMobile) {
+  /* mobile only (test)
+  if(IsMobile()) {
     window.addEventListener('popstate', forceReload);
   }
   //*/
 
-  await addStateForm();
+  const stateFormAdded = waitEvent('state-form-added');
+  window.dispatchEvent(new Event('add-state-form'));
+  await stateFormAdded;
+  const headerAdded = waitEvent('header-added');
+  window.dispatchEvent(new Event('add-header'));
   applyState();
+  await headerAdded;
   await loadingPromise;
 
   if (Date.now() - startTime < 2000) {
@@ -335,8 +350,7 @@ async function loadResources() {
   clearLoadScreen();
 }
 
-/*
-/** for mobile only */
+/* mobile only (test)
 function forceReload() {
     const url = window.location.href.split('?')[0];
     window.location.href = `${url}?cache_bust=1`;
@@ -347,7 +361,7 @@ function isMobile() {
 }
 //*/
 
-/* while using live server
+/* live server
 function cleanUrl() {
   let url = window.location.pathname;
   if (url.endsWith('.html')) {
@@ -360,14 +374,14 @@ function cleanUrl() {
 }
 //*/
 
-/** Adds the 'state-form.html' to the element with the ID 'state-form' at start up. @async */
-async function addStateForm() {
-  await fetch('state-form.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('state-form').innerHTML = data;
-    })
-    .catch(error => console.error('Error fetching state form:', error));
+function waitEvent(event) {
+  return new Promise((resolve) => {
+    const eventHandler = () => {
+      window.removeEventListener(event, eventHandler);
+      resolve();
+    };
+    window.addEventListener(event, eventHandler);
+  });
 }
 
 /** When loading is complete clears the loading screen. */
