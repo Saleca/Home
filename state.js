@@ -107,7 +107,7 @@ function getPath() {
     path = path.replace('/', '\\');
   }
   return path;
-)
+}
 
 /** Adds path to navigation stack. */
 function addPathToNavigationStack(path = '\\') {
