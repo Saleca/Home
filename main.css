@@ -5,7 +5,7 @@
     --dark-link-visited: mediumslateblue;
 }
 
-#load-screen{
+#load-screen {
     position: fixed;
     top: 0;
     left: 0;
@@ -21,6 +21,7 @@
     flex-direction: column;
     justify-content: start;
     text-align: left;
+    font-weight: bold;
 
     transition: background-color 0.3s, color 0.3s;
 }
@@ -34,7 +35,12 @@ body {
     overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     text-align: center;
     text-wrap: balance;
 }
@@ -60,8 +66,10 @@ p {
     margin-bottom: 1.5em;
 }
 
-h1 + .focus, h2 + .focus, h3 + .focus {
-    margin-top: -1em;  
+h1+.focus,
+h2+.focus,
+h3+.focus {
+    margin-top: -1em;
 }
 
 .state-form {
@@ -81,15 +89,15 @@ h1 + .focus, h2 + .focus, h3 + .focus {
     margin: 0 5px;
 }
 
-#dark:checked ~ .toggle label[for="dark"] {
+#dark:checked~.toggle label[for="dark"] {
     background-color: var(--light);
     color: var(--dark);
 }
 
-#light:checked ~ .toggle label[for="light"],
-#device:checked ~ .toggle label[for="device"],
-#pt:checked ~ .toggle label[for="pt"],
-#en:checked ~ .toggle label[for="en"] {
+#light:checked~.toggle label[for="light"],
+#device:checked~.toggle label[for="device"],
+#pt:checked~.toggle label[for="pt"],
+#en:checked~.toggle label[for="en"] {
     background-color: var(--dark);
     color: var(--light);
 }
@@ -112,10 +120,9 @@ html:has(#dark:checked) {
         border: 1px solid var(--light);
     }
 
-    #device:checked ~ .toggle label[for="device"],
-    #pt:checked ~ .toggle label[for="pt"],
-    #en:checked ~ .toggle label[for="en"] 
-    {
+    #device:checked~.toggle label[for="device"],
+    #pt:checked~.toggle label[for="pt"],
+    #en:checked~.toggle label[for="en"] {
         background-color: var(--light);
         color: var(--dark);
     }
@@ -137,19 +144,20 @@ html:has(#dark:checked) {
         }
 
         .toggle label {
-             border: 1px solid var(--light);
+            border: 1px solid var(--light);
         }
 
-        #device:checked ~ .toggle label[for="device"],
-        #pt:checked ~ .toggle label[for="pt"],
-        #en:checked ~ .toggle label[for="en"]  {
-             background-color: var(--light);
-             color: var(--dark);
+        #device:checked~.toggle label[for="device"],
+        #pt:checked~.toggle label[for="pt"],
+        #en:checked~.toggle label[for="en"] {
+            background-color: var(--light);
+            color: var(--dark);
         }
     }
 }
 
-.pt, .en{
+.pt,
+.en {
     display: none;
 }
 
@@ -157,7 +165,7 @@ html[lang="pt"] .pt {
     display: block;
 }
 
-html[lang="en"] .en{
+html[lang="en"] .en {
     display: block;
 }
 

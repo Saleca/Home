@@ -49,9 +49,9 @@ const NavigationType = {
 };
 
 /** Manages the navigation-stack used for the animation */
-function navigationManager()
-{
+function navigationManager() {
   const navEntries = performance.getEntriesByType('navigation');
+
   if (navEntries.length > 0) {
     switch (navEntries[0].type) {
       case 'reload':
@@ -60,58 +60,68 @@ function navigationManager()
       case 'navigate':
         const referrer = document.referrer;
         const currentDomain = window.location.origin;
-        if((!referrer || referrer === '')
+        if ((!referrer || referrer === '')
           || (referrer && !referrer.startsWith(currentDomain))) {
-          clearNavigationStack();
-          return NavigationType.EXTERNAL;;
+          return externalNavigation();
         }
-
-        let url = window.location.href;
-        if(url.includes('www.')) { 
-          url.replace(/^.*www\./, '');
-        }
-        else if(url.includes('127.0.0.1:5500/')) {
-          url = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');;
-        }
-
-        if(url.includes('index')) {
-          url = '/';
-        }
-        console.error(url);
-        addUrlToNavigationStack(url);
-
-        return NavigationType.INTERNAL;;
+        return internalNavigation();
     }
   }
+}
+
+/** Manages navigation from external origins */
+function externalNavigation() {
+  console.error('external');
+
+  clearNavigationStack();
+  return NavigationType.EXTERNAL;
+}
+
+/** Manages navigation from internal origins */
+function internalNavigation() {
+  let url = window.location.href;
+  if (url.includes('www.')) {
+    url.replace(/^.*www\./, '');
+  }
+  //*
+  else if (url.includes('127.0.0.1:5500/')) {
+    url = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');;
+  }
+  //*/
+
+  if (url ==='' || url.includes('index')) {
+    url = '/';
+  }
+
+  addUrlToNavigationStack(url);
+
+  return NavigationType.INTERNAL;
 }
 
 /** Adds URL to navigation stack. */
 function addUrlToNavigationStack(url = '/') {
   let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
-  
+
   navigationStack.push(url);
-  
+
   localStorage.setItem('navigation-stack', JSON.stringify(navigationStack));
 }
 
 /** Clears navigation stack. */
-function clearNavigationStack(){
+function clearNavigationStack() {
   localStorage.removeItem('navigation-stack');
 }
 
 /** @returns All items from the navigation stack. */
 function getAllNavigationItems() {
-  let navigationStack =  JSON.parse(localStorage.getItem('navigation-stack')) || [];
-  if(navigationStack.length === 0) {
+  let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
+  if (navigationStack.length === 0) {
     addUrlToNavigationStack();
-    navigationStack =  JSON.parse(localStorage.getItem('navigation-stack')) || [];
+    navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
   }
 
-  /*
-  for(let i = 0; i<navigationStack.length; i++)
-  {
-    console.error(navigationStack[i]);
-  }
+  //*
+  console.error('navigationStack:\n' + navigationStack.join('\n'));
   //*/
 
   return navigationStack;
@@ -128,28 +138,30 @@ async function loadingAnimation(loadType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
 
   const navigationStack = getAllNavigationItems();
-  if(navigationStack.length >= 2) {
-    fillNavigationHistoryElement(navigationStack.slice(0, -1), loadScreenElement);
+  if (navigationStack.length > 1) {
+    generateNavigationHistory(navigationStack, loadScreenElement);
   }
+
   const pElement = document.createElement('p');
   const urlTextElement = document.createElement('span');
   const textAnimationElement = document.createElement('span');
-  pElement.append(urlTextElement, document.createTextNode(' > '), textAnimationElement);
+  pElement.append(urlTextElement, document.createTextNode('>'), textAnimationElement);
   loadScreenElement.append(pElement);
 
-  if(loadType === NavigationType.INTERNAL)
-  {
-    if(navigationStack.length >= 2) {
-      urlTextElement.textContent = navigationStack[navigationStack.length-2];
-      await animateText(navigationStack[navigationStack.length-1], textAnimationElement, signal)
+  console.error(loadType);
+
+  if (loadType === NavigationType.INTERNAL) {
+    if (navigationStack.length >= 2) {
+      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 2] === '/'? '' : navigationStack[navigationStack.length - 2]}`;
+      await animateText(`cd ${navigationStack[navigationStack.length - 1] === '/'? '..' : navigationStack[navigationStack.length - 1]}`, textAnimationElement, signal)
     }
     else {
       console.error('invalid navigationStack length')
     }
   }
   else { //if external or reload
-    if(navigationStack.length > 0) {
-      urlTextElement.textContent = navigationStack[0];
+    if (navigationStack.length > 0) {
+      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 1] === '/'? '' : navigationStack[navigationStack.length - 1]}`;;
       threeDotsAnimation(textAnimationElement, signal);
     }
     else {
@@ -158,28 +170,25 @@ async function loadingAnimation(loadType, signal) {
   }
 }
 
-function fillNavigationHistoryElement(navigationStack, loadScreenElement)
-{
-  let text = '';
-  const length = navigationStack.length-1;
+function generateNavigationHistory(navigationStack, loadScreenElement) {
+  const length = navigationStack.length - 1;
   for (let i = 1; i < length; i++) {
-    text += `${navigationStack[i-1]} > ${navigationStack[i]}\n`;
+    const text = `saleca:\\${navigationStack[i - 1] === '/'? '':navigationStack[i - 1]}>cd ${navigationStack[i] === '/'? '..' : navigationStack[i]}`;
     const p = document.createElement('p');
     p.textContent = text;
     loadScreenElement.append(p);
   }
 }
 
-async function animateText(text, textAnimationElement, signal)
-{
+async function animateText(text, textAnimationElement, signal) {
   await animateCursor(textAnimationElement, 3);
   for (let i = 0; i < text.length; i++) {
     const character = text[i];
-    if(textAnimationElement.textContent.includes(cursorChar)) {
+    if (textAnimationElement.textContent.includes(cursorChar)) {
       textAnimationElement.textContent = textAnimationElement.textContent.replace(cursorChar, '');
     }
     textAnimationElement.textContent += character + cursorChar;
-    if(character === '/') {
+    if (character === '/') {
       await animateCursor(textAnimationElement, 1);
     }
     else {
@@ -187,8 +196,7 @@ async function animateText(text, textAnimationElement, signal)
     }
   }
 
-  if(!signal.aborted)
-  {
+  if (!signal.aborted) {
     threeDotsAnimation(textAnimationElement, signal, text);
   }
 }
@@ -197,11 +205,11 @@ async function animateText(text, textAnimationElement, signal)
  * @async
  * @param {AbortSignal} signal - The signal to control the abortion of the animation.
  */
-async function threeDotsAnimation(textAnimationElement, signal, defaultText = '')
-{
+async function threeDotsAnimation(textAnimationElement, signal, defaultText = '') {
   let i = 0;
-  while(!signal.aborted) {
-    let textAnimation = defaultText;
+  const text = defaultText.length > 0 ? defaultText + ' ' : '';
+  while (!signal.aborted) {
+    let textAnimation = text;
     switch (i) {
       case 0:
         await animateCursor(textAnimationElement, 3);
@@ -223,8 +231,7 @@ async function threeDotsAnimation(textAnimationElement, signal, defaultText = ''
     textAnimationElement.textContent = textAnimation;
 
     i++
-    if(i > 3)
-    {
+    if (i > 3) {
       i = 0;
     }
   }
@@ -234,8 +241,7 @@ async function threeDotsAnimation(textAnimationElement, signal, defaultText = ''
  * @async
  * @param {Number} ms - The delay time in miliseconds.
  */
-async function delay(ms)
-{
+async function delay(ms) {
   await new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -243,16 +249,14 @@ async function delay(ms)
 * @param {HTMLSpanElement} textAnimationElement element where the cursor is animated. 
 * @param {Number} n number of times the cursor is animated.
 */
-async function animateCursor(textAnimationElement, n)
-{
+async function animateCursor(textAnimationElement, n) {
   for (let b = 0; b < n; b++) {
     await delay(500);
     blinkCursor();
   }
 
   /** Switches the state of the cursor */
-  function blinkCursor()
-  {
+  function blinkCursor() {
     if (textAnimationElement.textContent.includes(cursorChar)) {
       textAnimationElement.textContent = textAnimationElement.textContent.replace(cursorChar, '');
     } else {
@@ -265,18 +269,18 @@ async function animateCursor(textAnimationElement, n)
 /* #region Load Page */
 
 /** Main function to load resources and managing loading screen. @async */
-async function loadResources()
-{
+async function loadResources() {
   const startTime = Date.now();
   //*while using live server
   cleanUrl();
   //*/
   const controller = new AbortController();
   const loadType = navigationManager();
-  const loadingPromise =  loadingAnimation(loadType, controller.signal);
+  const loadingPromise = loadingAnimation(loadType, controller.signal);
   await addStateForm();
   applyState();
   await loadingPromise;
+
   if (Date.now() - startTime < 2000) {
     await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
   }
@@ -286,22 +290,20 @@ async function loadResources()
 }
 
 /* while using live server*/
-function cleanUrl()
-{
+function cleanUrl() {
   let url = window.location.pathname;
   if (url.endsWith('.html')) {
-      url = url.replace('.html', '');
-      if(url.includes('index')) {
-        url = url.replace('index', '');
-      }
-      history.replaceState(null, '', url);
+    url = url.replace('.html', '');
+    if (url.includes('index')) {
+      url = url.replace('index', '');
+    }
+    history.replaceState(null, '', url);
   }
 }
 /**/
 
 /** Adds the 'state-form.html' to the element with the ID 'state-form' at start up. @async */
-async function addStateForm()
-{
+async function addStateForm() {
   await fetch('state-form.html')
     .then(response => response.text())
     .then(data => {
@@ -312,8 +314,7 @@ async function addStateForm()
 }
 
 /** When loading is complete clears the loading screen. */
-function clearLoadScreen()
-{
+function clearLoadScreen() {
   const loadScreen = document.getElementById('load-screen');
   loadScreen.style.background = `transparent`;
   loadScreen.style.color = 'transparent';
