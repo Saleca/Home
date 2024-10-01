@@ -81,7 +81,10 @@ function externalNavigation() {
 function internalNavigation() {
   let url = window.location.href;
   if (url.includes('www.')) {
-    url.replace(/^.*www\./, '');
+    url = url.replace(/^.*www\./, '');
+  }
+  else if (url.includes('saleca.github.io/')) {
+    url = url.replace(/^.*saleca.github.io\//, '');
   }
   //*
   else if (url.includes('127.0.0.1:5500/')) {
