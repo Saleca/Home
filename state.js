@@ -54,30 +54,30 @@ function navigationManager()
   const navEntries = performance.getEntriesByType('navigation');
   if (navEntries.length > 0) {
     switch (navEntries[0].type) {
-      case 'back_forward':
       case 'reload':
         return NavigationType.RELOAD;
+      case 'back_forward':
       case 'navigate':
         const referrer = document.referrer;
         const currentDomain = window.location.origin;
-
         if((!referrer || referrer === '')
           || (referrer && !referrer.startsWith(currentDomain))) {
           clearNavigationStack();
           return NavigationType.EXTERNAL;;
         }
 
-        let url = window.location.href.replace(/^.*www\./, '');
-        if(!url)
-        {
+        let url = window.location.href;
+        if(url.includes('www.')) { 
+          url.replace(/^.*www\./, '');
+        }
+        else if(url.includes('127.0.0.1:5500/')) {
           url = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');;
         }
 
-        if(!url || url === 'index.html')
-        {
+        if(url.includes('index')) {
           url = '/';
         }
-
+        console.error(url);
         addUrlToNavigationStack(url);
 
         return NavigationType.INTERNAL;;
@@ -107,10 +107,12 @@ function getAllNavigationItems() {
     navigationStack =  JSON.parse(localStorage.getItem('navigation-stack')) || [];
   }
 
+  /*
   for(let i = 0; i<navigationStack.length; i++)
   {
     console.error(navigationStack[i]);
   }
+  //*/
 
   return navigationStack;
 }
@@ -122,11 +124,11 @@ function getAllNavigationItems() {
 const cursorChar = '█';
 
 /** Manages the loading animation. */
-function loadingAnimation(loadType, signal) {
+async function loadingAnimation(loadType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
 
   const navigationStack = getAllNavigationItems();
-  if(navigationStack.length > 2) {
+  if(navigationStack.length >= 2) {
     fillNavigationHistoryElement(navigationStack.slice(0, -1), loadScreenElement);
   }
   const pElement = document.createElement('p');
@@ -139,7 +141,7 @@ function loadingAnimation(loadType, signal) {
   {
     if(navigationStack.length >= 2) {
       urlTextElement.textContent = navigationStack[navigationStack.length-2];
-      animateText(navigationStack[navigationStack.length-1], textAnimationElement, signal)
+      await animateText(navigationStack[navigationStack.length-1], textAnimationElement, signal)
     }
     else {
       console.error('invalid navigationStack length')
@@ -173,8 +175,8 @@ async function animateText(text, textAnimationElement, signal)
   await animateCursor(textAnimationElement, 3);
   for (let i = 0; i < text.length; i++) {
     const character = text[i];
-    if(textAnimationElement.textContent. includes(cursorChar) {
-      textAnimationElement.textContent = textAnimationElement.textContent. replace(cursorChar, '');
+    if(textAnimationElement.textContent.includes(cursorChar)) {
+      textAnimationElement.textContent = textAnimationElement.textContent.replace(cursorChar, '');
     }
     textAnimationElement.textContent += character + cursorChar;
     if(character === '/') {
@@ -202,7 +204,7 @@ async function threeDotsAnimation(textAnimationElement, signal, defaultText = ''
     let textAnimation = defaultText;
     switch (i) {
       case 0:
-        await animateCursor(3, );
+        await animateCursor(textAnimationElement, 3);
         textAnimation = `.` + cursorChar;
         break;
       case 1:
@@ -266,11 +268,15 @@ async function animateCursor(textAnimationElement, n)
 async function loadResources()
 {
   const startTime = Date.now();
+  //*while using live server
+  cleanUrl();
+  //*/
   const controller = new AbortController();
   const loadType = navigationManager();
-  loadingAnimation(loadType, controller.signal);
+  const loadingPromise =  loadingAnimation(loadType, controller.signal);
   await addStateForm();
   applyState();
+  await loadingPromise;
   if (Date.now() - startTime < 2000) {
     await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
   }
@@ -278,6 +284,20 @@ async function loadResources()
   controller.abort();
   clearLoadScreen();
 }
+
+/* while using live server*/
+function cleanUrl()
+{
+  let url = window.location.pathname;
+  if (url.endsWith('.html')) {
+      url = url.replace('.html', '');
+      if(url.includes('index')) {
+        url = url.replace('index', '');
+      }
+      history.replaceState(null, '', url);
+  }
+}
+/**/
 
 /** Adds the 'state-form.html' to the element with the ID 'state-form' at start up. @async */
 async function addStateForm()
