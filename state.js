@@ -271,7 +271,7 @@ async function animateCursor(textAnimationElement, n) {
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
   const startTime = Date.now();
-  //*while using live server
+  /*while using live server
   cleanUrl();
   //*/
   const controller = new AbortController();
@@ -289,7 +289,7 @@ async function loadResources() {
   clearLoadScreen();
 }
 
-/* while using live server*/
+/* while using live server
 function cleanUrl() {
   let url = window.location.pathname;
   if (url.endsWith('.html')) {
@@ -300,7 +300,7 @@ function cleanUrl() {
     history.replaceState(null, '', url);
   }
 }
-/**/
+//*/
 
 /** Adds the 'state-form.html' to the element with the ID 'state-form' at start up. @async */
 async function addStateForm() {
