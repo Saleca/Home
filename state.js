@@ -83,8 +83,8 @@ function internalNavigation() {
   if (url.includes('www.')) {
     url = url.replace(/^.*www\./, '');
   }
-  else if (url.includes('saleca.github.io/')) {
-    url = url.replace(/^.*saleca.github.io\//, '');
+  else if (url.includes('saleca.github.io/')) { //'saleca.github.io/PrivacyPolicy/'
+    url = url.replace(/^.*saleca.github.io\//, ''); //saleca.github.io\/PrivacyPolicy\/
   }
   //*
   else if (url.includes('127.0.0.1:5500/')) {
@@ -92,9 +92,19 @@ function internalNavigation() {
   }
   //*/
 
-  if (url ==='' || url.includes('index')) {
+  if (url.includes('.html')) {
+    url = url.replace('.html', '');
+  }
+
+  if (url.includes('index')) {
+    url = url.replace('index', '');
+  }
+
+  if (url === '') {
     url = '/';
   }
+
+  url = url.replace('/','\\');
 
   addUrlToNavigationStack(url);
 
@@ -155,8 +165,8 @@ async function loadingAnimation(loadType, signal) {
 
   if (loadType === NavigationType.INTERNAL) {
     if (navigationStack.length >= 2) {
-      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 2] === '/'? '' : navigationStack[navigationStack.length - 2]}`;
-      await animateText(`cd ${navigationStack[navigationStack.length - 1] === '/'? '..' : navigationStack[navigationStack.length - 1]}`, textAnimationElement, signal)
+      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 2] === '/' ? '' : navigationStack[navigationStack.length - 2]}`;
+      await animateText(`cd ${navigationStack[navigationStack.length - 1] === '/' ? '..' : navigationStack[navigationStack.length - 1]}`, textAnimationElement, signal)
     }
     else {
       console.error('invalid navigationStack length')
@@ -164,7 +174,7 @@ async function loadingAnimation(loadType, signal) {
   }
   else { //if external or reload
     if (navigationStack.length > 0) {
-      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 1] === '/'? '' : navigationStack[navigationStack.length - 1]}`;;
+      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 1] === '/' ? '' : navigationStack[navigationStack.length - 1]}`;;
       threeDotsAnimation(textAnimationElement, signal);
     }
     else {
@@ -176,7 +186,7 @@ async function loadingAnimation(loadType, signal) {
 function generateNavigationHistory(navigationStack, loadScreenElement) {
   const length = navigationStack.length - 1;
   for (let i = 1; i < length; i++) {
-    const text = `saleca:\\${navigationStack[i - 1] === '/'? '':navigationStack[i - 1]}>cd ${navigationStack[i] === '/'? '..' : navigationStack[i]}`;
+    const text = `saleca:\\${navigationStack[i - 1] === '/' ? '' : navigationStack[i - 1]}>cd ${navigationStack[i] === '/' ? '..' : navigationStack[i]}`;
     const p = document.createElement('p');
     p.textContent = text;
     loadScreenElement.append(p);
