@@ -306,7 +306,7 @@ function blinkCursor(navElement) {
 /* #endregion */
 
 /* #region Load Page */
-
+let isMobile;
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
   const startTime = Date.now();
@@ -316,6 +316,7 @@ async function loadResources() {
   const controller = new AbortController();
   const loadType = navigationManager();
   const loadingPromise = loadingAnimation(loadType, controller.signal);
+  isMobile = IsMobile();
   await addStateForm();
   applyState();
   await loadingPromise;
@@ -326,6 +327,15 @@ async function loadResources() {
 
   controller.abort();
   clearLoadScreen();
+}
+
+function forceReload() {
+    const url = window.location.href.split('?')[0];
+    window.location.href = `${url}?cache_bust=1`;
+}
+
+function isMobile() {
+  return /Mobi/i.test(navigator.userAgent);
 }
 
 /* while using live server
@@ -364,4 +374,6 @@ function clearLoadScreen() {
 }
 
 document.addEventListener('DOMContentLoaded', loadResources);
+window.addEventListener('popstate', forceReload);
+
 /* #endregion */
