@@ -71,70 +71,72 @@ function navigationManager() {
 
 /** Manages navigation from external origins */
 function externalNavigation() {
-  console.error('external');
-
   clearNavigationStack();
   return NavigationType.EXTERNAL;
 }
 
 /** Manages navigation from internal origins */
 function internalNavigation() {
-  let url = window.location.href;
-  if (url.includes('www.')) {
-    url = url.replace(/^.*www\./, '');
+  let path = window.location.href;
+  /*
+  if (path.includes('www.')) {
+    path = path.replace(/^.*www\./, '');
+  } 
+  //*/
+  if (path.includes('saleca.github.io/PrivacyPolicy/')) { 
+    path = path.replace(/^.*saleca.github.io\/PrivacyPolicy\//, '');
   }
-  else if (url.includes('saleca.github.io/')) { //'saleca.github.io/PrivacyPolicy/'
-    url = url.replace(/^.*saleca.github.io\//, ''); //saleca.github.io\/PrivacyPolicy\/
-  }
-  //*
-  else if (url.includes('127.0.0.1:5500/')) {
-    url = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');;
+  /* live server
+  if (path.includes('127.0.0.1:5500/')) {
+    path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
   //*/
 
-  if (url.includes('.html')) {
-    url = url.replace('.html', '');
+  if (path.includes('.html')) {
+    path = path.replace('.html', '');
   }
 
-  if (url.includes('index')) {
-    url = url.replace('index', '');
+  if (path.includes('index')) {
+    path = path.replace('index', '');
   }
 
-  if (url === '') {
-    url = '/';
+  if (path === '') {
+    path = '\\';
+  } else {
+    path = path.replace('/', '\\');
   }
 
-  url = url.replace('/','\\');
-
-  addUrlToNavigationStack(url);
+  addPathToNavigationStack(path);
 
   return NavigationType.INTERNAL;
 }
 
-/** Adds URL to navigation stack. */
-function addUrlToNavigationStack(url = '/') {
+/** Adds path to navigation stack. */
+function addPathToNavigationStack(path = '\\') {
   let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
 
-  navigationStack.push(url);
+  navigationStack.push(path);
 
   localStorage.setItem('navigation-stack', JSON.stringify(navigationStack));
+  //console.info('Navigation stack updated.');
 }
 
 /** Clears navigation stack. */
 function clearNavigationStack() {
   localStorage.removeItem('navigation-stack');
+  //console.info('Navigation stack cleared.');
 }
 
 /** @returns All items from the navigation stack. */
 function getAllNavigationItems() {
   let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
   if (navigationStack.length === 0) {
-    addUrlToNavigationStack();
+    addPathToNavigationStack();
     navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
   }
 
   //*
-  console.error('navigationStack:\n' + navigationStack.join('\n'));
+  console.info('navigationStack:\n' + navigationStack.join('\n') + '\n----------------');
   //*/
 
   return navigationStack;
@@ -145,103 +147,116 @@ function getAllNavigationItems() {
 /* #region Animation */
 
 const cursorChar = '█';
+const writeSpeedMS = 50;
+const writeSpeedVariationMS = 150;
+const writeHoldMS = 200;
+const cursorSpeedMS = 400;
 
 /** Manages the loading animation. */
 async function loadingAnimation(loadType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
-
+  startConsole(loadScreenElement);
   const navigationStack = getAllNavigationItems();
   if (navigationStack.length > 1) {
-    generateNavigationHistory(navigationStack, loadScreenElement);
+    if (loadType === NavigationType.RELOAD) {
+      generateNavigationHistory(navigationStack, loadScreenElement);
+    } else {
+      generateNavigationHistory(navigationStack.slice(0, navigationStack.length - 1), loadScreenElement);
+    }
   }
 
-  const pElement = document.createElement('p');
-  const urlTextElement = document.createElement('span');
-  const textAnimationElement = document.createElement('span');
-  pElement.append(urlTextElement, document.createTextNode('>'), textAnimationElement);
-  loadScreenElement.append(pElement);
-
-  console.error(loadType);
+  const currentConsoleLine = document.createElement('p');
+  const dirElement = document.createElement('span');
+  const navElement = document.createElement('span');
+  currentConsoleLine.append(dirElement, document.createTextNode('>'), navElement);
+  loadScreenElement.append(currentConsoleLine);
 
   if (loadType === NavigationType.INTERNAL) {
-    if (navigationStack.length >= 2) {
-      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 2] === '/' ? '' : navigationStack[navigationStack.length - 2]}`;
-      await animateText(`cd ${navigationStack[navigationStack.length - 1] === '/' ? '..' : navigationStack[navigationStack.length - 1]}`, textAnimationElement, signal)
-    }
-    else {
-      console.error('invalid navigationStack length')
-    }
-  }
-  else { //if external or reload
-    if (navigationStack.length > 0) {
-      urlTextElement.textContent = `saleca:\\${navigationStack[navigationStack.length - 1] === '/' ? '' : navigationStack[navigationStack.length - 1]}`;;
-      threeDotsAnimation(textAnimationElement, signal);
-    }
-    else {
-      console.error('invalid navigationStack length')
+    if (navigationStack.length > 1) {
+      dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 2]);
+      await animateText(formatNavigationPath(navigationStack[navigationStack.length - 1]), navElement, signal);
+    } else {
+      console.error('Internal navigation requires stack with more than one path.');
     }
   }
+  else { //external or reload
+    if (navigationStack.length > 0) { 
+      dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 1]);
+      threeDotsAnimation(navElement, signal);
+    } else {
+      console.error('External navigation or reload requires stack with at least one path.');
+    }
+  }
+}
+
+function startConsole(loadScreenElement) {
+  const start = document.createElement('p');
+  start.textContent = 'Saleca Devlopment [Version 0.1]\n(c) Saleca. All rights reserved.';
+  loadScreenElement.append(start);
 }
 
 function generateNavigationHistory(navigationStack, loadScreenElement) {
-  const length = navigationStack.length - 1;
-  for (let i = 1; i < length; i++) {
-    const text = `saleca:\\${navigationStack[i - 1] === '/' ? '' : navigationStack[i - 1]}>cd ${navigationStack[i] === '/' ? '..' : navigationStack[i]}`;
-    const p = document.createElement('p');
-    p.textContent = text;
-    loadScreenElement.append(p);
+  for (let i = 1; i < navigationStack.length; i++) {
+    const dir = document.createElement('p');
+    dir.textContent = formatDirectoryPath(navigationStack[i - 1]) + '>' + formatNavigationPath(navigationStack[i]);
+    loadScreenElement.append(dir);
   }
 }
 
-async function animateText(text, textAnimationElement, signal) {
-  await animateCursor(textAnimationElement, 3);
+function formatDirectoryPath(path) {
+  return `saleca:\\${path === '\\' ? '' : path}`;
+}
+
+function formatNavigationPath(path) {
+  return `cd ${path === '\\' ? '..' : path}`;
+}
+
+async function animateText(text, navElement, signal) {
+  await animateCursor(navElement, 3);
   for (let i = 0; i < text.length; i++) {
     const character = text[i];
-    if (textAnimationElement.textContent.includes(cursorChar)) {
-      textAnimationElement.textContent = textAnimationElement.textContent.replace(cursorChar, '');
+    if (navElement.textContent.includes(cursorChar)) {
+      navElement.textContent = navElement.textContent.replace(cursorChar, '');
     }
-    textAnimationElement.textContent += character + cursorChar;
-    if (character === '/') {
-      await animateCursor(textAnimationElement, 1);
-    }
-    else {
-      await delay(100 + Math.random() * 200)
+    navElement.textContent += character + cursorChar;
+    if (character === '\\') {
+      await animateCursor(navElement, 1);
+    } else {
+      await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
     }
   }
 
-  if (!signal.aborted) {
-    threeDotsAnimation(textAnimationElement, signal, text);
-  }
+  animateCursorIndefinetely(navElement, signal);
 }
 
-/** Helper function to simulate input. 
+/** Helper function to animate three dots. 
  * @async
  * @param {AbortSignal} signal - The signal to control the abortion of the animation.
  */
-async function threeDotsAnimation(textAnimationElement, signal, defaultText = '') {
+async function threeDotsAnimation(navElement, signal, navText = '') {
   let i = 0;
-  const text = defaultText.length > 0 ? defaultText + ' ' : '';
+  const navTextFormated = navText.length > 0 ? navText + ' ' : '';
   while (!signal.aborted) {
-    let textAnimation = text;
+    let navAnimation = navTextFormated;
     switch (i) {
       case 0:
-        await animateCursor(textAnimationElement, 3);
-        textAnimation = `.` + cursorChar;
+        await animateCursor(navElement, 3);
+        navAnimation += '.';
         break;
       case 1:
-        await delay(300 + Math.random() * 300);
-        textAnimation = `..` + cursorChar;
+        await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
+        navAnimation += '..';
         break;
       case 2:
-        await delay(300 + Math.random() * 300);
-        textAnimation = `...` + cursorChar;
+        await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
+        navAnimation += '...';
         break;
       case 3:
-        await animateCursor(textAnimationElement, 6);
-        textAnimation = `` + cursorChar;
+        await animateCursor(navElement, 4);
+        navAnimation += '';
         break;
     }
-    textAnimationElement.textContent = textAnimation;
+    navElement.textContent = navAnimation + cursorChar;
 
     i++
     if (i > 3) {
@@ -259,22 +274,33 @@ async function delay(ms) {
 }
 
 /** Animates the cursor
-* @param {HTMLSpanElement} textAnimationElement element where the cursor is animated. 
+* @param {HTMLSpanElement} navElement element where the cursor is animated. 
 * @param {Number} n number of times the cursor is animated.
 */
-async function animateCursor(textAnimationElement, n) {
+async function animateCursor(navElement, n) {
   for (let b = 0; b < n; b++) {
-    await delay(500);
-    blinkCursor();
+    await delay(cursorSpeedMS);
+    blinkCursor(navElement);
   }
+}
 
-  /** Switches the state of the cursor */
-  function blinkCursor() {
-    if (textAnimationElement.textContent.includes(cursorChar)) {
-      textAnimationElement.textContent = textAnimationElement.textContent.replace(cursorChar, '');
-    } else {
-      textAnimationElement.textContent += cursorChar;
-    }
+/** Animates the cursor
+* @param {HTMLSpanElement} navElement element where the cursor is animated. 
+* @param {AbortSignal} signal Signal to abort execution.
+*/
+async function animateCursorIndefinetely(navElement, signal) {
+  while (!signal.aborted) {
+    await delay(cursorSpeedMS);
+    blinkCursor(navElement);
+  }
+}
+
+/** Switches the state of the cursor */
+function blinkCursor(navElement) {
+  if (navElement.textContent.includes(cursorChar)) {
+    navElement.textContent = navElement.textContent.replace(cursorChar, '');
+  } else {
+    navElement.textContent += cursorChar;
   }
 }
 /* #endregion */
@@ -320,8 +346,7 @@ async function addStateForm() {
   await fetch('state-form.html')
     .then(response => response.text())
     .then(data => {
-      document.getElementById('state-form')
-        .innerHTML = data;
+      document.getElementById('state-form').innerHTML = data;
     })
     .catch(error => console.error('Error fetching state form:', error));
 }
