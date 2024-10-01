@@ -51,35 +51,36 @@ const NavigationType = {
 /** Manages the navigation-stack used for the animation */
 function navigationManager()
 {
-  let navigationType;
   const navEntries = performance.getEntriesByType('navigation');
   if (navEntries.length > 0) {
     switch (navEntries[0].type) {
       case 'back_forward':
       case 'reload':
-        navigationType = NavigationType.RELOAD;
-        return navigationType;
+        return NavigationType.RELOAD;
       case 'navigate':
         const referrer = document.referrer;
-        if(!referrer || referrer === '') {
-          navigationType = NavigationType.EXTERNAL;
-          clearNavigationStack();
-          return navigationType;
-        }
         const currentDomain = window.location.origin;
-        if (referrer && !referrer.startsWith(currentDomain)) {
-          navigationType = NavigationType.EXTERNAL;
-          clearNavigationStack();
-          return navigationType;
-        } 
 
-        navigationType = NavigationType.INTERNAL;
-        let url = window.location.href.replace(/^.*www\./, '');
-        if(!url) {
-          url = window.location.href;
+        if((!referrer || referrer === '')
+          || (referrer && !referrer.startsWith(currentDomain))) {
+          clearNavigationStack();
+          return NavigationType.EXTERNAL;;
         }
-        addUrlToNavigationStack(window.location.href);
-        return navigationType;
+
+        let url = window.location.href.replace(/^.*www\./, '');
+        if(!url)
+        {
+          url = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');;
+        }
+
+        if(!url || url === 'index.html')
+        {
+          url = '/';
+        }
+
+        addUrlToNavigationStack(url);
+
+        return NavigationType.INTERNAL;;
     }
   }
 }
@@ -137,8 +138,8 @@ function loadingAnimation(loadType, signal) {
   if(loadType === NavigationType.INTERNAL)
   {
     if(navigationStack.length >= 2) {
-      urlTextElement.textContent = navigationStack[navigationStack.length-1];
-      animateText(navigationStack[0], textAnimationElement, signal)
+      urlTextElement.textContent = navigationStack[navigationStack.length-2];
+      animateText(navigationStack[navigationStack.length-1], textAnimationElement, signal)
     }
     else {
       console.error('invalid navigationStack length')
