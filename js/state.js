@@ -176,18 +176,9 @@ async function loadingAnimation(loadType, signal) {
     if (navigationStack.length > 1) {
       const previousPath = navigationStack[navigationStack.length - 2];
       let currentPath = navigationStack[navigationStack.length - 1];
-      if (currentPath[0] === '\\') { // back navigation to root
-        currentPath = formatBackwardsNavigationPath(previousPath);
-      } else if (previousPath.includes(currentPath)) { // back navigation
-        const path = previousPath.replace(currentPath + '\\', '');
-        currentPath = formatBackwardsNavigationPath(path);
-        console.info(path + ' = ' + currentPath);
-      } else if (currentPath.includes(previousPath)) { //forward navigation
-        currentPath = currentPath.replace(previousPath + '\\', '');
-      }
-
+      let input = formatInputPath(previousPath, currentPath);
       dirElement.textContent = formatDirectoryPath(previousPath);
-      await animateText(formatInputPath(currentPath), inputElement, signal);
+      await animateText(input, inputElement, signal);
     } else {
       console.error('Internal navigation requires stack with more than one path.');
     }
@@ -221,15 +212,25 @@ function formatBackwardsNavigationPath(path) {
 }
 
 function generateConsoleLine(dir, input) {
-  return formatDirectoryPath(dir) + '>' + formatInputPath(input);
+  return formatDirectoryPath(dir) + '>' + formatInputPath(dir, input);
 }
 
 function formatDirectoryPath(path) {
   return `saleca:\\${path === '\\' ? '' : path}`;
 }
 
-function formatInputPath(path) {
-  return `cd ${path === '\\' ? '..' : path}`;
+function formatInputPath(dir, input) {
+  if (input[0] === '\\') { // back navigation to root
+    input = formatBackwardsNavigationPath(dir);
+  } else if (dir.includes(input)) { // rest of back navigations
+    const path = dir.replace(input + '\\', '');
+    input = formatBackwardsNavigationPath(path);
+    console.info(path + ' = ' + currentPath);
+  } else if (input.includes(dir)) { //forward navigation
+    input = input.replace(dir + '\\', '');
+  }
+
+  return 'cd ' + input;
 }
 
 async function animateText(input, inputElement, signal) {
