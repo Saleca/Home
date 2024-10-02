@@ -19,7 +19,6 @@
 
     display: flex;
     flex-direction: column;
-    
 
     transition: background-color 0.3s, color 0.3s;
 }
@@ -37,15 +36,14 @@
 }
 
 #page-path {
-    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
+    text-align: left;
     margin: 0 1em;
-    margin-bottom: 1em;
+    padding: 20px;
     text-indent: unset;
     hyphens: none;
-    overflow: hidden;
-    white-space: pre-line;
-    line-height: 1em;
+    line-height: 1.5em;
 }
 
 #page-path a {
@@ -56,6 +54,9 @@
 #page-path a:hover {
     color:inherit;
     background: rgba(128, 128, 128, 0.5);
+}
+#page-path a:visited {
+    color:inherit;
 }
 
 body {
