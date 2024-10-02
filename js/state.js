@@ -409,8 +409,8 @@ function clearLoadScreen(header) {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
   }, 300);
-  console.info(header.style.zIndex);
-  header.style.display = block;
+  
+  //header.style.display = block;
   document.body.style.transition = 'background-color 0.3s, color 0.3s';
 }
 
