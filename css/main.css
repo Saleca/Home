@@ -152,6 +152,12 @@ h3+.focus {
     margin: 0 5px;
 }
 
+hr {
+    width: 90%;
+    margin: 0 auto;
+    background: var(--light-secondary);
+}
+
 /* region theme */
 #dark:checked~.toggle label[for="dark"] {
     background-color: var(--light);
@@ -192,6 +198,10 @@ html:has(#dark:checked) {
         border: 1px solid var(--light);
     }
 
+    hr {
+        background: var(--dark-secondary);
+    }
+
     #device:checked~.toggle label[for="device"],
     #pt:checked~.toggle label[for="pt"],
     #en:checked~.toggle label[for="en"] {
@@ -227,6 +237,10 @@ html:has(#dark:checked) {
             border: 1px solid var(--light);
         }
 
+        hr {
+            background: var(--light-secondary);
+        }
+
         #device:checked~.toggle label[for="device"],
         #pt:checked~.toggle label[for="pt"],
         #en:checked~.toggle label[for="en"] {
@@ -250,7 +264,7 @@ html[lang="en"] .en {
 }
 
 @media (min-width: 768px) {
-    p {
+    p, hr {
         width: 70ch;
     }
 }
