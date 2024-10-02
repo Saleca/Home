@@ -350,6 +350,7 @@ async function loadResources() {
 function addPagePath() {
   const pagePathElement = document.getElementById('page-path');
   const home = document.createElement('a');
+  home.href = "";
   home.textContent = 'saleca';
   pagePathElement.appendChild(home);
   pagePathElement.appendChild(document.createTextNode(':\\'));
@@ -360,16 +361,15 @@ function addPagePath() {
   parts.forEach((part, index) => {
     currentPath += part;
     const link = document.createElement('a');
-    link.href = currentPath;
     link.textContent = part;
     pagePathElement.appendChild(link);
     if (index < parts.length - 1) {
+      link.href = currentPath;
       pagePathElement.appendChild(document.createTextNode('\\'));
       currentPath += '/';
     }
   });
   pagePathElement.appendChild(document.createTextNode('>'));
-
 }
 
 function waitEvent(event) {
