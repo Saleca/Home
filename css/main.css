@@ -1,8 +1,8 @@
 :root {
-    --dark: rgb(0,0,0);
-    --dark-seconday: rgb(50,50,50);
-    --light: rgb(200,200,200);
-    --light-secondary: rgb(150,150,150);
+    --dark: rgb(0, 0, 0);
+    --dark-seconday: rgb(50, 50, 50);
+    --light: rgb(200, 200, 200);
+    --light-secondary: rgb(150, 150, 150);
     --dark-link: cornflowerblue;
     --dark-link-visited: mediumslateblue;
 }
@@ -57,6 +57,12 @@ body {
     flex-grow: 1;
 }
 
+header,
+main,
+footer {
+    padding-bottom: 2em;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -79,11 +85,13 @@ header {
     text-decoration-line: underline;
     text-decoration-style: dotted;
     text-decoration-color: var(--light-secondary);
+    text-decoration-thickness: 1px;
 }
 
 #page-path a:hover {
     color: inherit;
     background: var(--dark-seconday);
+    text-decoration: none;
 }
 
 #page-path a:visited {
@@ -189,7 +197,7 @@ html:has(#dark:checked) {
     #page-path a {
         text-decoration-color: var(--dark-secondary);
     }
-    
+
     #page-path a:hover {
         background: var(--light-seconday);
     }
@@ -228,7 +236,7 @@ html:has(#dark:checked) {
         #page-path a {
             text-decoration-color: var(--dark-secondary);
         }
-        
+
         #page-path a:hover {
             background: var(--light-seconday);
         }
@@ -249,6 +257,7 @@ html:has(#dark:checked) {
         }
     }
 }
+
 /* endregion theme */
 .pt,
 .en {
@@ -264,7 +273,9 @@ html[lang="en"] .en {
 }
 
 @media (min-width: 768px) {
-    p, hr {
+
+    p,
+    hr {
         width: 70ch;
     }
 }
