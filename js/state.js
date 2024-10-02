@@ -61,8 +61,9 @@ function navigationManager() {
         const path = getPath();
         const referrer = document.referrer;
         const currentDomain = window.location.origin;
-        if ((!referrer || referrer === '')
-          || (referrer && !referrer.startsWith(currentDomain))) {
+        if (!referrer
+          || referrer === ''
+          || !referrer.startsWith(currentDomain)) {
           return externalNavigation(path);
         }
 
@@ -89,7 +90,7 @@ function getPath() {
   if (path.includes('saleca.github.io/PrivacyPolicy/')) {
     path = path.replace(/^.*saleca.github.io\/PrivacyPolicy\//, '');
   }
-  //* live server
+  /* live server
   if (path.includes('127.0.0.1:5500/')) {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
@@ -131,7 +132,7 @@ function getAllNavigationItems() {
     navigationStack = JSON.parse(localStorage.getItem('navigation-stack'));
   }
 
-  //*
+  /*
   console.info('navigationStack:\n' + navigationStack.join('\n') + '\n----------------');
   //*/
 
@@ -225,9 +226,10 @@ function formatInputPath(dir, input) {
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
-    console.info(path + ' = ' + input);
   } else if (input.includes(dir)) { //forward navigation
     input = input.replace(dir + '\\', '');
+  } else {
+    input = '\\' + input;
   }
 
   return 'cd ' + input;
