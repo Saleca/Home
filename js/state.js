@@ -176,13 +176,11 @@ async function loadingAnimation(loadType, signal) {
     if (navigationStack.length > 1) {
       const previousPath = navigationStack[navigationStack.length - 2];
       let currentPath = navigationStack[navigationStack.length - 1];
-
-      if (previousPath.includes(currentPath)) { // back navigation
-        console.info(currentPath);
-        currentPath.replace(previousPath, '');
-        console.info(currentPath);
+      if (previousPath[0] === '\\') { // back navigation to root
         currentPath = formatBackwardsNavigationPath(currentPath);
-        console.info(currentPath);
+      } else if (previousPath.includes(currentPath)) { // back navigation
+        currentPath.replace(previousPath, '');
+        currentPath = formatBackwardsNavigationPath(currentPath);
       } else if (currentPath.includes(previousPath)) { //forward navigation
         currentPath = currentPath.replace(previousPath + '\\', '');
       }
