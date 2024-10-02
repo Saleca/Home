@@ -44,12 +44,11 @@ function applyState() {
 
 const NavigationType = {
   RELOAD: 'reload',
-  EXTERNAL: 'external',
-  INTERNAL: 'internal'
+  NAVIGATION: 'navigation'
 };
 
-/** Manages the navigation-stack used for the animation */
-function navigationManager() {
+/** Analizes navigation type */
+function navigationAnalizer() {
   const navEntries = performance.getEntriesByType('navigation');
 
   if (navEntries.length > 0) {
@@ -58,32 +57,15 @@ function navigationManager() {
         return NavigationType.RELOAD;
       case 'back_forward':
       case 'navigate':
-        const path = getPath();
-        const referrer = document.referrer;
-        const origin = window.location.origin;
-        console.info(`referrer: ${referrer}\norigin: ${origin}.`)
-        if (!referrer
-          || referrer === ''
-          || !referrer.startsWith(origin)) {
-          //return externalNavigation(path);
-        }
-
-        return internalNavigation(path);
+        return manageNavigation();
     }
   }
 }
 
-/** Manages navigation from external origins */
-function externalNavigation(path) {
-  clearNavigationStack();
-  addPathToNavigationStack(path);
-  return NavigationType.EXTERNAL;
-}
-
-/** Manages navigation from internal origins */
-function internalNavigation(path) {
-  addPathToNavigationStack(path);
-  return NavigationType.INTERNAL;
+/** Manages navigation */
+function manageNavigation() {
+  addPathToNavigationStack(getPath());
+  return NavigationType.NAVIGATION;
 }
 
 function getPath() {
@@ -140,11 +122,6 @@ function getAllNavigationItems() {
   return navigationStack;
 }
 
-/** Clears navigation stack. */
-function clearNavigationStack() {
-  sessionStorage.removeItem('navigation-stack');
-  //console.info('Navigation stack cleared.');
-}
 /* #endregion */
 
 /* #region Animation */
@@ -156,12 +133,13 @@ const writeHoldMS = 200;
 const cursorSpeedMS = 400;
 
 /** Manages the loading animation. */
-async function loadingAnimation(loadType, signal) {
+async function loadingAnimation(navigationType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
   startConsole(loadScreenElement);
   const navigationStack = getAllNavigationItems();
+  
   if (navigationStack.length > 1) {
-    if (loadType === NavigationType.RELOAD) {
+    if (navigationType === NavigationType.RELOAD) {
       generateConsoleHistory(navigationStack, loadScreenElement);
     } else {
       generateConsoleHistory(navigationStack.slice(0, navigationStack.length - 1), loadScreenElement);
@@ -174,29 +152,27 @@ async function loadingAnimation(loadType, signal) {
   currentConsoleLine.append(dirElement, document.createTextNode('>'), inputElement);
   loadScreenElement.append(currentConsoleLine);
 
-  if (loadType === NavigationType.INTERNAL) {
-    if (navigationStack.length > 1) {
-      const previousPath = navigationStack[navigationStack.length - 2];
-      let currentPath = navigationStack[navigationStack.length - 1];
-      let input = formatInputPath(previousPath, currentPath);
-      dirElement.textContent = formatDirectoryPath(previousPath);
-      await animateText(input, inputElement, signal);
-    } else {
-      loadPage(navigationStack, dirElement, inputElement, signal);
-    }
-  }
-  else { //external or reload
+  if (navigationType === NavigationType.RELOAD) {
     loadPage(navigationStack, dirElement, inputElement, signal);
+    return;
   }
+
+  if (navigationStack.length > 1) {
+    const previousPath = navigationStack[navigationStack.length - 2];
+    let currentPath = navigationStack[navigationStack.length - 1];
+    let input = formatInputPath(previousPath, currentPath);
+    dirElement.textContent = formatDirectoryPath(previousPath);
+    await animateText(input, inputElement, signal);
+    return;
+  }
+
+  loadPage(navigationStack, dirElement, inputElement, signal);
 }
 
-function loadPage(navigationStack, dirElement, inputElement, signal)
-{
+function loadPage(navigationStack, dirElement, inputElement, signal) {
   if (navigationStack.length > 0) {
     dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 1]);
     threeDotsAnimation(inputElement, signal);
-  } else {
-    console.error('Load page requires stack with at least one path.');
   }
 }
 
@@ -227,12 +203,15 @@ function formatDirectoryPath(path) {
 }
 
 function formatInputPath(dir, input) {
-  if (input[0] === '\\') { // back navigation to root
+  console.info(input);
+  if (input === '\\') { // back navigation to root
     input = formatBackwardsNavigationPath(dir);
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
-  } else if (input.includes(dir)) { //forward navigation
+  } else if(dir === '\\') { //forward navigation from root
+    //do nothing
+  } else if (input.includes(dir)) { //rest of forward navigation
     input = input.replace(dir + '\\', '');
   } else {
     input = '\\' + input;
@@ -347,14 +326,8 @@ async function loadResources() {
   //*/
 
   const controller = new AbortController();
-  const loadType = navigationManager();
-  const loadingPromise = loadingAnimation(loadType, controller.signal);
-
-  /* mobile only (test)
-  if(IsMobile()) {
-    window.addEventListener('popstate', forceReload);
-  }
-  //*/
+  const navigationType = navigationAnalizer();
+  const loadingPromise = loadingAnimation(navigationType, controller.signal);
 
   const stateFormAdded = waitEvent('state-form-added');
   window.dispatchEvent(new Event('add-state-form'));
@@ -372,30 +345,6 @@ async function loadResources() {
   controller.abort();
   clearLoadScreen();
 }
-
-/* mobile only (test)
-function forceReload() {
-    const url = window.location.href.split('?')[0];
-    window.location.href = `${url}?cache_bust=1`;
-}
-
-function isMobile() {
-  return /Mobi/i.test(navigator.userAgent);
-}
-//*/
-
-/* live server
-function cleanUrl() {
-  let url = window.location.pathname;
-  if (url.endsWith('.html')) {
-    url = url.replace('.html', '');
-    if (url.includes('index')) {
-      url = url.replace('index', '');
-    }
-    history.replaceState(null, '', url);
-  }
-}
-//*/
 
 function waitEvent(event) {
   return new Promise((resolve) => {
