@@ -122,6 +122,11 @@ function getAllNavigationItems() {
   return navigationStack;
 }
 
+function getCurrentPath() {
+  const navigationItems = getAllNavigationItems();
+  return navigationItems[navigationItems.length - 1];
+}
+
 /* #endregion */
 
 /* #region Animation */
@@ -137,7 +142,7 @@ async function loadingAnimation(navigationType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
   startConsole(loadScreenElement);
   const navigationStack = getAllNavigationItems();
-  
+
   if (navigationStack.length > 1) {
     if (navigationType === NavigationType.RELOAD) {
       generateConsoleHistory(navigationStack, loadScreenElement);
@@ -209,7 +214,7 @@ function formatInputPath(dir, input) {
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
-  } else if(dir === '\\') { //forward navigation from root
+  } else if (dir === '\\') { //forward navigation from root
     //do nothing
   } else if (input.includes(dir)) { //rest of forward navigation
     input = input.replace(dir + '\\', '');
@@ -320,11 +325,6 @@ function blinkCursor(inputElement) {
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
   const startTime = Date.now();
-
-  /* live server
-  cleanUrl();
-  //*/
-
   const controller = new AbortController();
   const navigationType = navigationAnalizer();
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
@@ -336,6 +336,7 @@ async function loadResources() {
   window.dispatchEvent(new Event('add-header'));
   applyState();
   await headerAdded;
+  addPagePath();
   await loadingPromise;
 
   if (Date.now() - startTime < 2000) {
@@ -344,6 +345,31 @@ async function loadResources() {
 
   controller.abort();
   clearLoadScreen();
+}
+
+function addPagePath() {
+  const pagePathElement = document.getElementById('page-path');
+  const home = document.createElement('a');
+  home.textContent = 'saleca';
+  pagePathElement.appendChild(home);
+  pagePathElement.appendChild(document.createTextNode(':\\'));
+  const path = getCurrentPath();
+  const parts = path.split('\\');
+  let currentPath = '';
+
+  parts.forEach((part, index) => {
+    currentPath += part;
+    const link = document.createElement('a');
+    link.href = currentPath;
+    link.textContent = part;
+    pagePathElement.appendChild(link);
+    if (index < parts.length - 1) {
+      pagePathElement.appendChild(document.createTextNode('\\'));
+      currentPath += '/';
+    }
+  });
+  pagePathElement.appendChild(document.createTextNode('>'));
+
 }
 
 function waitEvent(event) {
