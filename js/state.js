@@ -331,10 +331,15 @@ async function loadResources() {
   const stateFormAdded = waitEvent('state-form-added');
   window.dispatchEvent(new Event('add-state-form'));
   await stateFormAdded;
+
   const headerAdded = waitEvent('header-added');
   window.dispatchEvent(new Event('add-header'));
   applyState();
   await headerAdded;
+
+  const header = document.getElementById('header');
+  header.scrollIntoView({ behavior: 'instant' });
+
   addPagePath();
   await loadingPromise;
 

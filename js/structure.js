@@ -9,12 +9,12 @@ function addHeader() {
 
 function addComponent(component) {
     fetch(`components/${component}.html`)
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById(component).innerHTML = data;
-        window.dispatchEvent(new Event(`${component}-added`));
-    })
-    .catch(error => console.error(`Error fetching ${component}:`, error));
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(component).innerHTML = data;
+            window.dispatchEvent(new Event(`${component}-added`));
+        })
+        .catch(error => console.error(`Error fetching ${component}:`, error));
 }
 
 window.addEventListener('add-state-form', addStateForm);
