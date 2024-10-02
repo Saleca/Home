@@ -351,7 +351,7 @@ async function loadResources() {
   }
 
   controller.abort();
-  clearLoadScreen(header);
+  clearLoadScreen();
 }
 
 function addPagePath() {
@@ -398,10 +398,8 @@ function waitEvent(event) {
   });
 }
 
-/** When loading is complete clears the loading screen. 
- * @param {HtmlElement} header
-*/
-function clearLoadScreen(header) {
+/** When loading is complete clears the loading screen. */
+function clearLoadScreen() {
   const loadScreen = document.getElementById('load-screen');
   loadScreen.style.background = `transparent`;
   loadScreen.style.color = 'transparent';
@@ -410,7 +408,6 @@ function clearLoadScreen(header) {
     document.body.style.overflow = 'auto';
   }, 300);
   
-  //header.style.display = block;
   document.body.style.transition = 'background-color 0.3s, color 0.3s';
 }
 

@@ -1,6 +1,8 @@
 :root {
-    --dark: black;
-    --light: gray;
+    --dark: rgb(0,0,0);
+    --dark-seconday: rgb(50,50,50);
+    --light: rgb(200,200,200);
+    --light-secondary: rgb(150,150,150);
     --dark-link: cornflowerblue;
     --dark-link-visited: mediumslateblue;
 }
@@ -35,6 +37,32 @@
     line-height: 1em;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+body {
+    /*loading*/
+    overflow: hidden;
+    /**/
+
+    display: flex;
+    flex-direction: column;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 #page-path {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -48,37 +76,18 @@
 
 #page-path a {
     color: inherit !important;
-    text-decoration: none;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--light-secondary);
 }
 
 #page-path a:hover {
-    color:inherit;
-    background: rgba(128, 128, 128, 0.5);
+    color: inherit;
+    background: var(--dark-seconday);
 }
+
 #page-path a:visited {
-    color:inherit !important;
-}
-html, body {
-    height: 100%;
-}
-body {
-    /*loading*/
-    overflow: hidden;
-
-    display:flex;
-    flex-direction: column;
-}
-
-#page-container{
-    display:flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-header {
-    position: sticky;
-    top:0;
-    z-index: 100;
+    color: inherit !important;
 }
 
 main {
@@ -86,7 +95,7 @@ main {
 }
 
 footer {
-    margin-top:auto;
+    margin-top: auto;
 }
 
 h1,
@@ -143,6 +152,7 @@ h3+.focus {
     margin: 0 5px;
 }
 
+/* region theme */
 #dark:checked~.toggle label[for="dark"] {
     background-color: var(--light);
     color: var(--dark);
@@ -168,6 +178,14 @@ html:has(#dark:checked) {
 
     a:visited {
         color: var(--dark-link-visited);
+    }
+
+    #page-path a {
+        text-decoration-color: var(--dark-secondary);
+    }
+    
+    #page-path a:hover {
+        background: var(--light-seconday);
     }
 
     .toggle label {
@@ -197,6 +215,14 @@ html:has(#dark:checked) {
             color: var(--dark-link-visited);
         }
 
+        #page-path a {
+            text-decoration-color: var(--dark-secondary);
+        }
+        
+        #page-path a:hover {
+            background: var(--light-seconday);
+        }
+
         .toggle label {
             border: 1px solid var(--light);
         }
@@ -209,7 +235,7 @@ html:has(#dark:checked) {
         }
     }
 }
-
+/* endregion theme */
 .pt,
 .en {
     display: none;
