@@ -410,7 +410,7 @@ function clearLoadScreen(header) {
     document.body.style.overflow = 'auto';
   }, 300);
   console.info(header.style.zIndex);
-  header.style.zIndex = 100;
+  header.style.display = block;
   document.body.style.transition = 'background-color 0.3s, color 0.3s';
 }
 
