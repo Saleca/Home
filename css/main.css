@@ -90,7 +90,7 @@ header {
 
 #page-path a:hover {
     color: inherit;
-    background: var(--dark-secondary);
+    background-color: var(--dark-secondary);
     text-decoration: none;
 }
 
