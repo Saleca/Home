@@ -62,6 +62,29 @@
 body {
     /*loading*/
     overflow: hidden;
+
+    display:flex;
+    flex-direction: column;
+}
+
+#page-container{
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+header {
+    position: sticky;
+    top:0;
+    z-index: 100;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer {
+    margin-top:auto;
 }
 
 h1,

@@ -330,17 +330,20 @@ async function loadResources() {
 
   const stateFormAdded = waitEvent('state-form-added');
   window.dispatchEvent(new Event('add-state-form'));
-  await stateFormAdded;
-
   const headerAdded = waitEvent('header-added');
   window.dispatchEvent(new Event('add-header'));
-  applyState();
-  await headerAdded;
+  const footerAdded = waitEvent('footer-added');
+  window.dispatchEvent(new Event('add-footer'));
 
+  await stateFormAdded;
+  applyState();
+
+  await headerAdded;
   const header = document.getElementById('header');
   header.scrollIntoView({ behavior: 'instant', block: 'start' });
-
   addPagePath();
+
+  await footerAdded;
   await loadingPromise;
 
   if (Date.now() - startTime < 2000) {
@@ -348,7 +351,7 @@ async function loadResources() {
   }
 
   controller.abort();
-  clearLoadScreen();
+  clearLoadScreen(header);
 }
 
 function addPagePath() {
@@ -395,8 +398,10 @@ function waitEvent(event) {
   });
 }
 
-/** When loading is complete clears the loading screen. */
-function clearLoadScreen() {
+/** When loading is complete clears the loading screen. 
+ * @param {HtmlElement} header
+*/
+function clearLoadScreen(header) {
   const loadScreen = document.getElementById('load-screen');
   loadScreen.style.background = `transparent`;
   loadScreen.style.color = 'transparent';
@@ -404,6 +409,8 @@ function clearLoadScreen() {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
   }, 300);
+  console.info(header.style.zIndex);
+  header.style.zIndex = 100;
   document.body.style.transition = 'background-color 0.3s, color 0.3s';
 }
 
