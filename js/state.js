@@ -225,7 +225,7 @@ function formatInputPath(dir, input) {
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
-    console.info(path + ' = ' + currentPath);
+    console.info(path + ' = ' + input);
   } else if (input.includes(dir)) { //forward navigation
     input = input.replace(dir + '\\', '');
   }
