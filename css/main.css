@@ -12,7 +12,7 @@
     width: 100vw;
     height: 100vh;
     padding: 20px;
-
+    z-index: 1000;
     color: var(--light);
     background: var(--dark);
     font-family: 'Courier New', Courier, monospace;
