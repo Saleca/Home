@@ -43,9 +43,9 @@ function applyState() {
 /* #region Navigation Management*/
 
 const NavigationType = {
+  RELOAD: 'reload',
   EXTERNAL: 'external',
-  INTERNAL: 'internal',
-  RELOAD: 'reload'
+  INTERNAL: 'internal'
 };
 
 /** Manages the navigation-stack used for the animation */
@@ -58,27 +58,29 @@ function navigationManager() {
         return NavigationType.RELOAD;
       case 'back_forward':
       case 'navigate':
+        const path = getPath();
         const referrer = document.referrer;
         const currentDomain = window.location.origin;
         if ((!referrer || referrer === '')
           || (referrer && !referrer.startsWith(currentDomain))) {
-          return externalNavigation();
+          return externalNavigation(path);
         }
-        return internalNavigation();
+
+        return internalNavigation(path);
     }
   }
 }
 
 /** Manages navigation from external origins */
-function externalNavigation() {
+function externalNavigation(path) {
   clearNavigationStack();
-  addPathToNavigationStack(getPath());
+  addPathToNavigationStack(path);
   return NavigationType.EXTERNAL;
 }
 
 /** Manages navigation from internal origins */
-function internalNavigation() {
-  addPathToNavigationStack(getPath());
+function internalNavigation(path) {
+  addPathToNavigationStack(path);
   return NavigationType.INTERNAL;
 }
 
@@ -116,17 +118,9 @@ function getPath() {
 /** Adds path to navigation stack. */
 function addPathToNavigationStack(path = '\\') {
   let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
-
   navigationStack.push(path);
-
   localStorage.setItem('navigation-stack', JSON.stringify(navigationStack));
   //console.info('Navigation stack updated.');
-}
-
-/** Clears navigation stack. */
-function clearNavigationStack() {
-  localStorage.removeItem('navigation-stack');
-  //console.info('Navigation stack cleared.');
 }
 
 /** @returns All items from the navigation stack. */
@@ -134,7 +128,7 @@ function getAllNavigationItems() {
   let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
   if (navigationStack.length === 0) {
     addPathToNavigationStack();
-    navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
+    navigationStack = JSON.parse(localStorage.getItem('navigation-stack'));
   }
 
   //*
@@ -144,6 +138,11 @@ function getAllNavigationItems() {
   return navigationStack;
 }
 
+/** Clears navigation stack. */
+function clearNavigationStack() {
+  localStorage.removeItem('navigation-stack');
+  //console.info('Navigation stack cleared.');
+}
 /* #endregion */
 
 /* #region Animation */
@@ -161,27 +160,35 @@ async function loadingAnimation(loadType, signal) {
   const navigationStack = getAllNavigationItems();
   if (navigationStack.length > 1) {
     if (loadType === NavigationType.RELOAD) {
-      generateNavigationHistory(navigationStack, loadScreenElement);
+      generateConsoleHistory(navigationStack, loadScreenElement);
     } else {
-      generateNavigationHistory(navigationStack.slice(0, navigationStack.length - 1), loadScreenElement);
+      generateConsoleHistory(navigationStack.slice(0, navigationStack.length - 1), loadScreenElement);
     }
   }
 
   const currentConsoleLine = document.createElement('p');
   const dirElement = document.createElement('span');
-  const navElement = document.createElement('span');
-  currentConsoleLine.append(dirElement, document.createTextNode('>'), navElement);
+  const inputElement = document.createElement('span');
+  currentConsoleLine.append(dirElement, document.createTextNode('>'), inputElement);
   loadScreenElement.append(currentConsoleLine);
 
   if (loadType === NavigationType.INTERNAL) {
     if (navigationStack.length > 1) {
       const previousPath = navigationStack[navigationStack.length - 2];
       let currentPath = navigationStack[navigationStack.length - 1];
-      if(currentPath.includes(previousPath)) {
-        currentPath = currentPath.replace(previousPath+'\\', '');
+
+      if (previousPath.includes(currentPath)) { // back navigation
+        console.info(currentPath);
+        currentPath.replace(previousPath, '');
+        console.info(currentPath);
+        currentPath = formatBackwardsNavigationPath(currentPath);
+        console.info(currentPath);
+      } else if (currentPath.includes(previousPath)) { //forward navigation
+        currentPath = currentPath.replace(previousPath + '\\', '');
       }
+
       dirElement.textContent = formatDirectoryPath(previousPath);
-      await animateText(formatNavigationPath(currentPath), navElement, signal);
+      await animateText(formatInputPath(currentPath), inputElement, signal);
     } else {
       console.error('Internal navigation requires stack with more than one path.');
     }
@@ -189,7 +196,7 @@ async function loadingAnimation(loadType, signal) {
   else { //external or reload
     if (navigationStack.length > 0) {
       dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 1]);
-      threeDotsAnimation(navElement, signal);
+      threeDotsAnimation(inputElement, signal);
     } else {
       console.error('External navigation or reload requires stack with at least one path.');
     }
@@ -202,68 +209,76 @@ function startConsole(loadScreenElement) {
   loadScreenElement.append(start);
 }
 
-function generateNavigationHistory(navigationStack, loadScreenElement) {
+function generateConsoleHistory(navigationStack, loadScreenElement) {
   for (let i = 1; i < navigationStack.length; i++) {
-    const dir = document.createElement('p');
-    dir.textContent = formatDirectoryPath(navigationStack[i - 1]) + '>' + formatNavigationPath(navigationStack[i]);
-    loadScreenElement.append(dir);
+    const consoleLine = document.createElement('p');
+    consoleLine.textContent = generateConsoleLine(navigationStack[i - 1], navigationStack[i]);
+    loadScreenElement.append(consoleLine);
   }
+}
+
+function formatBackwardsNavigationPath(path) {
+  return path.replace(/(?:'[^']*'|[^\\]+)/g, '..');
+}
+
+function generateConsoleLine(dir, input) {
+  return formatDirectoryPath(dir) + '>' + formatInputPath(input);
 }
 
 function formatDirectoryPath(path) {
   return `saleca:\\${path === '\\' ? '' : path}`;
 }
 
-function formatNavigationPath(path) {
+function formatInputPath(path) {
   return `cd ${path === '\\' ? '..' : path}`;
 }
 
-async function animateText(text, navElement, signal) {
-  await animateCursor(navElement, 3);
-  for (let i = 0; i < text.length; i++) {
-    const character = text[i];
-    if (navElement.textContent.includes(cursorChar)) {
-      navElement.textContent = navElement.textContent.replace(cursorChar, '');
+async function animateText(input, inputElement, signal) {
+  await animateCursor(inputElement, 3);
+  for (let i = 0; i < input.length; i++) {
+    const character = input[i];
+    if (inputElement.textContent.includes(cursorChar)) {
+      inputElement.textContent = inputElement.textContent.replace(cursorChar, '');
     }
-    navElement.textContent += character + cursorChar;
+    inputElement.textContent += character + cursorChar;
     if (character === '\\') {
-      await animateCursor(navElement, 1);
+      await animateCursor(inputElement, 1);
     } else {
       await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
     }
   }
-  await animateCursor(navElement, 3);
-  animateCursorIndefinetely(navElement, signal);
+  await animateCursor(inputElement, 3);
+  animateCursorIndefinetely(inputElement, signal);
 }
 
 /** Helper function to animate three dots. 
  * @async
  * @param {AbortSignal} signal - The signal to control the abortion of the animation.
  */
-async function threeDotsAnimation(navElement, signal, navText = '') {
+async function threeDotsAnimation(inputElement, signal, previousInput = '') {
   let i = 0;
-  const navTextFormated = navText.length > 0 ? navText + ' ' : '';
+  const staticInput = previousInput.length > 0 ? previousInput + ' ' : '';
   while (!signal.aborted) {
-    let navAnimation = navTextFormated;
+    let currentInput = staticInput;
     switch (i) {
       case 0:
-        await animateCursor(navElement, 3);
-        navAnimation += '.';
+        await animateCursor(inputElement, 3);
+        currentInput += '.';
         break;
       case 1:
         await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
-        navAnimation += '..';
+        currentInput += '..';
         break;
       case 2:
         await delay(writeSpeedMS + Math.random() * writeSpeedVariationMS);
-        navAnimation += '...';
+        currentInput += '...';
         break;
       case 3:
-        await animateCursor(navElement, 4);
-        navAnimation += '';
+        await animateCursor(inputElement, 4);
+        currentInput += '';
         break;
     }
-    navElement.textContent = navAnimation + cursorChar;
+    inputElement.textContent = currentInput + cursorChar;
 
     i++
     if (i > 3) {
@@ -281,33 +296,33 @@ async function delay(ms) {
 }
 
 /** Animates the cursor
-* @param {HTMLSpanElement} navElement element where the cursor is animated. 
+* @param {HTMLSpanElement} inputElement element where the cursor is animated. 
 * @param {Number} n number of times the cursor is animated.
 */
-async function animateCursor(navElement, n) {
+async function animateCursor(inputElement, n) {
   for (let b = 0; b < n; b++) {
     await delay(cursorSpeedMS);
-    blinkCursor(navElement);
+    blinkCursor(inputElement);
   }
 }
 
 /** Animates the cursor
-* @param {HTMLSpanElement} navElement element where the cursor is animated. 
+* @param {HTMLSpanElement} inputElement element where the cursor is animated. 
 * @param {AbortSignal} signal Signal to abort execution.
 */
-async function animateCursorIndefinetely(navElement, signal) {
+async function animateCursorIndefinetely(inputElement, signal) {
   while (!signal.aborted) {
     await delay(cursorSpeedMS);
-    blinkCursor(navElement);
+    blinkCursor(inputElement);
   }
 }
 
 /** Switches the state of the cursor */
-function blinkCursor(navElement) {
-  if (navElement.textContent.includes(cursorChar)) {
-    navElement.textContent = navElement.textContent.replace(cursorChar, '');
+function blinkCursor(inputElement) {
+  if (inputElement.textContent.includes(cursorChar)) {
+    inputElement.textContent = inputElement.textContent.replace(cursorChar, '');
   } else {
-    navElement.textContent += cursorChar;
+    inputElement.textContent += cursorChar;
   }
 }
 
