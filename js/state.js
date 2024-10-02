@@ -60,11 +60,12 @@ function navigationManager() {
       case 'navigate':
         const path = getPath();
         const referrer = document.referrer;
-        const currentDomain = window.location.origin;
+        const origin = window.location.origin;
+        console.info(`referrer: ${referrer}\norigin: ${origin}.`)
         if (!referrer
           || referrer === ''
-          || !referrer.startsWith(currentDomain)) {
-          return externalNavigation(path);
+          || !referrer.startsWith(origin)) {
+          //return externalNavigation(path);
         }
 
         return internalNavigation(path);
@@ -118,18 +119,18 @@ function getPath() {
 
 /** Adds path to navigation stack. */
 function addPathToNavigationStack(path = '\\') {
-  let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
+  let navigationStack = JSON.parse(sessionStorage.getItem('navigation-stack')) || [];
   navigationStack.push(path);
-  localStorage.setItem('navigation-stack', JSON.stringify(navigationStack));
+  sessionStorage.setItem('navigation-stack', JSON.stringify(navigationStack));
   //console.info('Navigation stack updated.');
 }
 
 /** @returns All items from the navigation stack. */
 function getAllNavigationItems() {
-  let navigationStack = JSON.parse(localStorage.getItem('navigation-stack')) || [];
+  let navigationStack = JSON.parse(sessionStorage.getItem('navigation-stack')) || [];
   if (navigationStack.length === 0) {
     addPathToNavigationStack();
-    navigationStack = JSON.parse(localStorage.getItem('navigation-stack'));
+    navigationStack = JSON.parse(sessionStorage.getItem('navigation-stack'));
   }
 
   /*
@@ -141,7 +142,7 @@ function getAllNavigationItems() {
 
 /** Clears navigation stack. */
 function clearNavigationStack() {
-  localStorage.removeItem('navigation-stack');
+  sessionStorage.removeItem('navigation-stack');
   //console.info('Navigation stack cleared.');
 }
 /* #endregion */
