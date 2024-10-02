@@ -208,9 +208,8 @@ function formatDirectoryPath(path) {
 }
 
 function formatInputPath(dir, input) {
-  console.info(input);
   if (input === '\\') { // back navigation to root
-    input = formatBackwardsNavigationPath(dir);
+    input = '\\';
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
@@ -218,7 +217,7 @@ function formatInputPath(dir, input) {
     //do nothing
   } else if (input.includes(dir)) { //rest of forward navigation
     input = input.replace(dir + '\\', '');
-  } else {
+  } else { // use absolute navigation
     input = '\\' + input;
   }
 
@@ -355,20 +354,23 @@ function addPagePath() {
   pagePathElement.appendChild(home);
   pagePathElement.appendChild(document.createTextNode(':\\'));
   const path = getCurrentPath();
-  const parts = path.split('\\');
-  let currentPath = '';
+  if(path !== '\\')
+  {
+    const parts = path.split('\\');
+    let currentPath = '';
 
-  parts.forEach((part, index) => {
-    currentPath += part;
-    const link = document.createElement('a');
-    link.textContent = part;
-    pagePathElement.appendChild(link);
-    if (index < parts.length - 1) {
-      link.href = currentPath;
-      pagePathElement.appendChild(document.createTextNode('\\'));
-      currentPath += '/';
-    }
-  });
+    parts.forEach((part, index) => {
+      currentPath += part;
+      const link = document.createElement('a');
+      link.textContent = part;
+      pagePathElement.appendChild(link);
+      if (index < parts.length - 1) {
+        link.href = currentPath;
+        pagePathElement.appendChild(document.createTextNode('\\'));
+        currentPath += '/';
+      }
+    });
+  }
   pagePathElement.appendChild(document.createTextNode('>'));
 }
 
