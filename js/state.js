@@ -182,16 +182,21 @@ async function loadingAnimation(loadType, signal) {
       dirElement.textContent = formatDirectoryPath(previousPath);
       await animateText(input, inputElement, signal);
     } else {
-      console.error('Internal navigation requires stack with more than one path.');
+      loadPage(navigationStack, dirElement, inputElement, signal);
     }
   }
   else { //external or reload
-    if (navigationStack.length > 0) {
-      dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 1]);
-      threeDotsAnimation(inputElement, signal);
-    } else {
-      console.error('External navigation or reload requires stack with at least one path.');
-    }
+    loadPage(navigationStack, dirElement, inputElement, signal);
+  }
+}
+
+function loadPage(navigationStack, dirElement, inputElement, signal)
+{
+  if (navigationStack.length > 0) {
+    dirElement.textContent = formatDirectoryPath(navigationStack[navigationStack.length - 1]);
+    threeDotsAnimation(inputElement, signal);
+  } else {
+    console.error('Load page requires stack with at least one path.');
   }
 }
 
