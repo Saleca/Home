@@ -179,8 +179,9 @@ async function loadingAnimation(loadType, signal) {
       if (currentPath[0] === '\\') { // back navigation to root
         currentPath = formatBackwardsNavigationPath(previousPath);
       } else if (previousPath.includes(currentPath)) { // back navigation
-        currentPath.replace(previousPath, '');
-        currentPath = formatBackwardsNavigationPath(currentPath);
+        const path = previousPath.replace(currentPath + '\\', '');
+        currentPath = formatBackwardsNavigationPath(path);
+        console.info(path + ' = ' + currentPath);
       } else if (currentPath.includes(previousPath)) { //forward navigation
         currentPath = currentPath.replace(previousPath + '\\', '');
       }
