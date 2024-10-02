@@ -176,7 +176,7 @@ async function loadingAnimation(loadType, signal) {
     if (navigationStack.length > 1) {
       const previousPath = navigationStack[navigationStack.length - 2];
       let currentPath = navigationStack[navigationStack.length - 1];
-      if (previousPath[0] === '\\') { // back navigation to root
+      if (currentPath[0] === '\\') { // back navigation to root
         currentPath = formatBackwardsNavigationPath(previousPath);
       } else if (previousPath.includes(currentPath)) { // back navigation
         currentPath.replace(previousPath, '');
