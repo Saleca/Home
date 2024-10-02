@@ -36,6 +36,28 @@
     line-height: 1em;
 }
 
+#page-path {
+    text-align: left;
+    font-weight: bold;
+    margin: 0 1em;
+    margin-bottom: 1em;
+    text-indent: unset;
+    hyphens: none;
+    overflow: hidden;
+    white-space: pre-line;
+    line-height: 1em;
+}
+
+#page-path a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#page-path a:hover {
+    color:inherit;
+    background: rgba(128, 128, 128, 0.5);
+}
+
 body {
     /*loading*/
     overflow: hidden;

@@ -348,26 +348,32 @@ async function loadResources() {
 
 function addPagePath() {
   const pagePathElement = document.getElementById('page-path');
-  const home = document.createElement('a');
-  home.href = "";
-  home.textContent = 'saleca';
-  pagePathElement.appendChild(home);
-  pagePathElement.appendChild(document.createTextNode(':\\'));
   const path = getCurrentPath();
-  if(path !== '\\')
-  {
+  if (path !== '\\') {
+    const homeLink = document.createElement('a');
+    homeLink.href = "";
+    homeLink.textContent = 'saleca';
+    pagePathElement.appendChild(homeLink);
+  } else {
+    pagePathElement.appendChild(document.createTextNode('saleca'));
+  }
+  pagePathElement.appendChild(document.createTextNode(':\\'));
+
+  if (path !== '\\') {
     const parts = path.split('\\');
     let currentPath = '';
 
     parts.forEach((part, index) => {
       currentPath += part;
-      const link = document.createElement('a');
-      link.textContent = part;
-      pagePathElement.appendChild(link);
       if (index < parts.length - 1) {
+        const link = document.createElement('a');
+        link.textContent = part;
         link.href = currentPath;
+        pagePathElement.appendChild(link);
         pagePathElement.appendChild(document.createTextNode('\\'));
         currentPath += '/';
+      } else {
+        pagePathElement.appendChild(document.createTextNode(part));
       }
     });
   }
