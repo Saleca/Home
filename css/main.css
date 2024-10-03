@@ -47,6 +47,9 @@ body {
     overflow: hidden;
     /**/
 
+    background-color: var(--light);
+    color: var(--dark);
+
     display: flex;
     flex-direction: column;
 }
@@ -61,6 +64,7 @@ header,
 main,
 footer {
     padding-bottom: 2em;
+    background-color: var(--light);
 }
 
 header {
@@ -182,8 +186,14 @@ hr {
 
 html:has(#dark:checked) {
     body {
-        background-color: var(--dark);
         color: var(--light);
+    }
+
+    body, 
+    header, 
+    main, 
+    footer {
+        background-color: var(--dark);
     }
 
     a {
@@ -221,9 +231,15 @@ html:has(#dark:checked) {
 @media (prefers-color-scheme: dark) {
     html:has(#device:checked) {
         body {
-            background-color: var(--dark);
-            color: var(--light);
-        }
+        color: var(--light);
+    }
+
+    body, 
+    header, 
+    main, 
+    footer {
+        background-color: var(--dark);
+    }
 
         a {
             color: var(--dark-link);
