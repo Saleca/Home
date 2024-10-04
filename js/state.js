@@ -78,7 +78,9 @@ function getPath() {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
   //*/
-
+  if(path.includes('?')){
+path = path.slice(0, path.indexOf('?'));
+}
   if (path.includes('.html')) {
     path = path.replace('.html', '');
   }
