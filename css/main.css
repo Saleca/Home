@@ -61,7 +61,7 @@ body {
     flex-direction: column;
     flex-grow: 1;
     margin: 0;
-    padding; 0;
+    padding: 0;
 }
 
 header,
@@ -81,9 +81,8 @@ header {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-align: left;
-/*
-    margin: 1em 0;
-    padding: 0 5px;*/
+    margin-left: 2em;
+    margin-right: auto;
     text-indent: unset;
     hyphens: none;
     line-height: 1.5em;
@@ -156,18 +155,17 @@ h3+.focus {
 .state-form {
     display: flex;
     justify-content: space-between;
+    padding: 1em 2em;
 }
 
 .toggle {
     display: flex;
-    margin-top: 20px;
 }
 
-.toggle label {
+.toggle label { /*change toogles to radial button or div*/
     padding: 5px 5px;
     cursor: pointer;
     border: 1px solid var(--dark);
-    margin: 0 5px;
 }
 
 hr {
