@@ -112,7 +112,7 @@ h3+.focus {
 }
 
 hr {
-    background: var(--light-secondary);
+    border-color: var(--light-secondary);
     margin: 0;
 }
 
@@ -224,7 +224,7 @@ html:has(#dark:checked) {
     }
 
     hr {
-        background: var(--dark-secondary);
+        border-color: var(--dark-secondary);
     }
 
     #device:checked~.toggle label[for="device"],
@@ -269,7 +269,7 @@ html:has(#dark:checked) {
         }
 
         hr {
-            background: var(--light-secondary);
+            border-color: var(--light-secondary);
         }
 
         #device:checked~.toggle label[for="device"],
