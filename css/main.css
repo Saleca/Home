@@ -56,6 +56,14 @@ footer {
     margin-top: auto;
 }
 
+footer+p {
+ padding: 1em 0;
+ margin:0;
+ text-indent: unset;
+ hyphens: unset;
+ text-align: left;
+}
+
 h1,
 h2,
 h3,
@@ -110,8 +118,7 @@ h3+.focus {
 
 hr {
     background: var(--light-secondary);
-    margin-top: 0;
-    margin-bottom: 1em;
+    margin: 0;
 }
 
 #page-path {
@@ -124,6 +131,7 @@ hr {
     hyphens: none;
     word-break: break-all;
     line-height: 1em;
+    padding: 1em 0;
 }
 
 #page-path a {
