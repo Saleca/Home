@@ -110,6 +110,7 @@ h3+.focus {
 
 hr {
     background: var(--light-secondary);
+    margin-top: 0;
     margin-bottom: 1em;
 }
 
