@@ -208,13 +208,11 @@ function formatDirectoryPath(path) {
 }
 
 function formatInputPath(dir, input) {
-  if (input === '\\') { // back navigation to root
-    input = '\\';
+  if (input === '\\' || dir === '\\') { // back navigation to root or forward navigation from root
+    //do nothing
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
-  } else if (dir === '\\') { //forward navigation from root
-    //do nothing
   } else if (input.includes(dir)) { //rest of forward navigation
     input = input.replace(dir + '\\', '');
   } else { // use absolute navigation
