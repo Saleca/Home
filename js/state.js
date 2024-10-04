@@ -308,10 +308,10 @@ async function animateCursorIndefinetely(inputElement, signal) {
 
 /** Switches the state of the cursor */
 function blinkCursor(inputElement) {
-  if (inputElement.textContent.endsWidth(cursorChar)) {
-    inputElement.textContent = inputElement.textContent.replace(cursorChar, ' ');
-  } else if (inputElement.textContent.endsWidth(' ')) {
-    inputElement.textContent = inputElement.textContent.replace(' ', cursorChar);
+  if (inputElement. textContent.endsWith(cursorChar)) {
+    inputElement.textContent = inputElement. textContent.replace(cursorChar, ' ');
+  } else if (inputElement. textContent.endsWith(' ')) {
+    inputElement.textContent = inputElement. textContent.replace(' ', cursorChar);
   } else {
     inputElement.textContent += cursorChar;
   }
