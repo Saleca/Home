@@ -10,8 +10,6 @@
 html,
 body {
     height: 100%;
-    margin:0;
-    padding:0;
 }
 
 body {
@@ -19,6 +17,7 @@ body {
     overflow: hidden;
     /**/
 
+    margin: 1em;
     background-color: var(--light);
     color: var(--dark);
 
@@ -27,11 +26,9 @@ body {
 }
 
 #page-container {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    margin: 0;
-    padding: 0;
 }
 
 header,
@@ -44,7 +41,6 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    margin:0;
 }
 
 main,
@@ -71,9 +67,7 @@ h6 {
 }
 
 p {
-    max-width: 90%;
     margin: 0 auto;
-    padding: 0 2em;
     text-align: justify;
     text-indent: 4ch;
     hyphens: auto;
@@ -101,7 +95,6 @@ h3+.focus {
 .state-form {
     display: flex;
     justify-content: space-between;
-    padding: 1em 2em;
 }
 
 .toggle {
@@ -109,15 +102,12 @@ h3+.focus {
 }
 
 .toggle label { /*change toogles to radial button or div*/
-    padding: 5px 5px;
+    padding: .25em;
     cursor: pointer;
     border: 1px solid var(--dark);
 }
 
 hr {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 0 2em;
     background: var(--light-secondary);
 }
 
@@ -157,7 +147,6 @@ hr {
     left: 0;
     width: 100vw;
     height: 100vh;
-    padding: 1em 2em;
     z-index: 1000;
     color: var(--light);
     background: var(--dark);
@@ -302,8 +291,7 @@ html[lang="en"] .en {
 
 @media (min-width: 768px) {
 
-    p,
-    hr {
+    #page-content {
         max-width: 70ch;
     }
 }
