@@ -127,8 +127,9 @@ h6 {
 }
 
 p {
-    width: 90%;
+    max-width: 90%;
     margin: 0 auto;
+    padding: 0 2em;
     text-align: justify;
     text-indent: 4ch;
     hyphens: auto;
