@@ -95,7 +95,7 @@ h3+.focus {
 .state-form {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 2 em;
+    padding-bottom: 2em;
 }
 
 .toggle {
