@@ -7,37 +7,6 @@
     --dark-link-visited: mediumslateblue;
 }
 
-#load-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 1em 2em;
-    z-index: 1000;
-    color: var(--light);
-    background: var(--dark);
-    font-family: 'Courier New', Courier, monospace;
-
-    display: flex;
-    flex-direction: column;
-
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#load-screen p {
-    text-align: left;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 1em;
-    padding:0;
-    text-indent: unset;
-    hyphens: none;
-    overflow: hidden;
-    white-space: pre-line;
-    line-height: 1em;
-}
-
 html,
 body {
     height: 100%;
@@ -78,34 +47,9 @@ header {
     margin:0;
 }
 
-#page-path {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    text-align: left;
-    margin-left: 0;
-    margin-right: auto;
-    text-indent: unset;
-    hyphens: none;
-    word-break: break-all;
-    line-height: 1em;
-}
-
-#page-path a {
-    color: inherit !important;
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    text-decoration-color: var(--light-secondary);
-    text-decoration-thickness: 1px;
-}
-
-#page-path a:hover {
-    color: inherit;
-    background-color: var(--dark-secondary);
-    text-decoration: none;
-}
-
-#page-path a:visited {
-    color: inherit !important;
+main,
+footer {
+    padding-bottom: 2em;
 }
 
 main {
@@ -114,7 +58,6 @@ main {
 
 footer {
     margin-top: auto;
-    padding-bottom: 2em;
 }
 
 h1,
@@ -176,6 +119,67 @@ hr {
     margin: 0 auto;
     padding: 0 2em;
     background: var(--light-secondary);
+}
+
+#page-path {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+    text-indent: unset;
+    hyphens: none;
+    word-break: break-all;
+    line-height: 1em;
+}
+
+#page-path a {
+    color: inherit !important;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--light-secondary);
+    text-decoration-thickness: 1px;
+}
+
+#page-path a:hover {
+    color: inherit;
+    background-color: var(--dark-secondary);
+    text-decoration: none;
+}
+
+#page-path a:visited {
+    color: inherit !important;
+}
+
+#load-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 1em 2em;
+    z-index: 1000;
+    color: var(--light);
+    background: var(--dark);
+    font-family: 'Courier New', Courier, monospace;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#load-screen p {
+    text-align: left;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 1em;
+    padding:0;
+    text-indent: unset;
+    hyphens: none;
+    overflow: hidden;
+    white-space: pre-line;
+    line-height: 1em;
 }
 
 /* region theme */
