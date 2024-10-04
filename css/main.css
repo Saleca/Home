@@ -30,6 +30,7 @@
     font-weight: bold;
     margin: 0;
     margin-bottom: 1em;
+    padding:0;
     text-indent: unset;
     hyphens: none;
     overflow: hidden;
@@ -81,7 +82,7 @@ header {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-align: left;
-    margin-left: 2em;
+    margin-left: 0;
     margin-right: auto;
     text-indent: unset;
     hyphens: none;
