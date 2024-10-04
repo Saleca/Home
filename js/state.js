@@ -230,7 +230,7 @@ async function animateText(input, inputElement, signal) {
   await animateCursor(inputElement, 3);
   for (let i = 0; i < input.length; i++) {
     const character = input[i];
-    if (inputElement.textContent.endsWith(cursorChar)) {
+    if (inputElement.textContent.endsWith(cursorChar) || inputElement.textContent.endsWith(' ')) {
       inputElement.textContent = inputElement.textContent.slice(0,-1);
     }
     inputElement.textContent += character + cursorChar;
