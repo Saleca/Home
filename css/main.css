@@ -171,8 +171,9 @@ h3+.focus {
 }
 
 hr {
-    width: 90%;
+    max-width: 90%;
     margin: 0 auto;
+    padding: 0 2em;
     background: var(--light-secondary);
 }
 
@@ -298,6 +299,6 @@ html[lang="en"] .en {
 
     p,
     hr {
-        width: 70ch;
+        max-width: 70ch;
     }
 }
