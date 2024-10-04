@@ -85,7 +85,8 @@ header {
     margin-right: auto;
     text-indent: unset;
     hyphens: none;
-    line-height: 1.5em;
+    word-break: break-all;
+    line-height: 1em;
 }
 
 #page-path a {
