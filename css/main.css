@@ -13,7 +13,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    padding: 2em;
+    padding: 1em 2em;
     z-index: 1000;
     color: var(--light);
     background: var(--dark);
