@@ -154,9 +154,10 @@ hr {
     width: 100vw;
     height: 100vh;
     z-index: 1000;
+
     color: var(--light);
     background: var(--dark);
-    font-family: 'Courier New', Courier, monospace;
+    
     padding:1em;
     display: flex;
     flex-direction: column;
@@ -166,15 +167,19 @@ hr {
 
 #load-screen p {
     text-align: left;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    margin: 0;
+    line-height: 1em;
+    word-break: break-all;
+
+    margin-top: 0;
     margin-bottom: 1em;
     padding:0;
+
     text-indent: unset;
     hyphens: none;
     overflow: hidden;
-    white-space: pre-line;
-    line-height: 1em;
+    
 }
 
 /* region theme */
