@@ -78,7 +78,9 @@ function getPath() {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
   //*/
-
+  if(path.includes('?')){
+path = path.slice(0, path.indexOf('?'));
+}
   if (path.includes('.html')) {
     path = path.replace('.html', '');
   }
@@ -209,14 +211,14 @@ function formatDirectoryPath(path) {
 
 function formatInputPath(dir, input) {
   if (input === '\\') { // back navigation to root
-    input = '\\';
+    //do nothing
   } else if (dir.includes(input)) { // rest of back navigations
     const path = dir.replace(input + '\\', '');
     input = formatBackwardsNavigationPath(path);
-  } else if (dir === '\\') { //forward navigation from root
-    //do nothing
   } else if (input.includes(dir)) { //rest of forward navigation
     input = input.replace(dir + '\\', '');
+  } else if (dir === '\\') { // forward navigation from root
+    //do nothing
   } else { // use absolute navigation
     input = '\\' + input;
   }
@@ -228,8 +230,8 @@ async function animateText(input, inputElement, signal) {
   await animateCursor(inputElement, 3);
   for (let i = 0; i < input.length; i++) {
     const character = input[i];
-    if (inputElement.textContent.includes(cursorChar)) {
-      inputElement.textContent = inputElement.textContent.replace(cursorChar, '');
+    if (inputElement.textContent.endsWith(cursorChar) || inputElement.textContent.endsWith(' ')) {
+      inputElement.textContent = inputElement.textContent.slice(0,-1);
     }
     inputElement.textContent += character + cursorChar;
     if (character === '\\') {
@@ -310,10 +312,10 @@ async function animateCursorIndefinetely(inputElement, signal) {
 
 /** Switches the state of the cursor */
 function blinkCursor(inputElement) {
-  if (inputElement.textContent.includes(cursorChar)) {
-    inputElement.textContent = inputElement.textContent.replace(cursorChar, ' ');
+  if (inputElement. textContent.endsWith(cursorChar)) {
+    inputElement.textContent = inputElement. textContent.slice(0,-1) + ' ';
   } else {
-    inputElement.textContent += cursorChar;
+    inputElement.textContent = inputElement. textContent.slice(0, -1) + cursorChar;
   }
 }
 

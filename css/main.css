@@ -7,42 +7,9 @@
     --dark-link-visited: mediumslateblue;
 }
 
-#load-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 1em 2em;
-    z-index: 1000;
-    color: var(--light);
-    background: var(--dark);
-    font-family: 'Courier New', Courier, monospace;
-
-    display: flex;
-    flex-direction: column;
-
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#load-screen p {
-    text-align: left;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 1em;
-    padding:0;
-    text-indent: unset;
-    hyphens: none;
-    overflow: hidden;
-    white-space: pre-line;
-    line-height: 1em;
-}
-
 html,
 body {
     height: 100%;
-    margin:0;
-    padding:0;
 }
 
 body {
@@ -50,6 +17,7 @@ body {
     overflow: hidden;
     /**/
 
+    margin: 1em;
     background-color: var(--light);
     color: var(--dark);
 
@@ -58,11 +26,9 @@ body {
 }
 
 #page-container {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    margin: 0;
-    padding: 0;
 }
 
 header,
@@ -75,7 +41,79 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    margin:0;
+}
+
+main,
+footer {
+    padding-bottom: 2em;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-align: center;
+    text-wrap: balance;
+}
+
+p {
+    margin: 0 auto;
+    text-align: justify;
+    text-indent: 4ch;
+    hyphens: auto;
+    line-height: 1.5em;
+}
+
+.details {
+    hyphens: unset;
+    text-align: left;
+ padding: 1em 0; 
+ margin:0;
+ text-indent: unset;
+}
+
+.focus {
+    hyphens: unset;
+    text-indent: unset;
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+h1+.focus,
+h2+.focus,
+h3+.focus {
+    margin-top: -1em;
+}
+
+.state-form {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+.toggle {
+    display: flex;
+}
+
+.toggle label { /*change toogles to radial button or div*/
+    padding: .25em;
+    cursor: pointer;
+    border: 1px solid var(--dark);
+}
+
+hr {
+    border-color: var(--light-secondary);
+    margin: 0;
 }
 
 #page-path {
@@ -88,6 +126,7 @@ header {
     hyphens: none;
     word-break: break-all;
     line-height: 1em;
+    padding: 1em 0;
 }
 
 #page-path a {
@@ -108,74 +147,41 @@ header {
     color: inherit !important;
 }
 
-main {
-    flex-grow: 1;
+#load-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+
+    color: var(--light);
+    background: var(--dark);
+    
+    padding:1em;
+    display: flex;
+    flex-direction: column;
+
+    transition: background-color 0.3s, color 0.3s;
 }
 
-footer {
-    margin-top: auto;
-    padding-bottom: 2em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    text-align: center;
-    text-wrap: balance;
-}
-
-p {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 0 2em;
-    text-align: justify;
-    text-indent: 4ch;
-    hyphens: auto;
-    line-height: 1.5em;
-}
-
-.details {
-    hyphens: unset;
+#load-screen p {
     text-align: left;
-}
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    line-height: 1em;
+    word-break: break-all;
 
-.focus {
-    hyphens: unset;
+    margin-top: 0;
+    margin-left:0;
+    margin-right:auto;
+    margin-bottom: 1em;
+    padding:0;
+
     text-indent: unset;
-    text-align: center;
-    margin-bottom: 1.5em;
-}
-
-h1+.focus,
-h2+.focus,
-h3+.focus {
-    margin-top: -1em;
-}
-
-.state-form {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em 2em;
-}
-
-.toggle {
-    display: flex;
-}
-
-.toggle label { /*change toogles to radial button or div*/
-    padding: 5px 5px;
-    cursor: pointer;
-    border: 1px solid var(--dark);
-}
-
-hr {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 0 2em;
-    background: var(--light-secondary);
+    hyphens: none;
+    overflow: hidden;
+    
 }
 
 /* region theme */
@@ -225,7 +231,7 @@ html:has(#dark:checked) {
     }
 
     hr {
-        background: var(--dark-secondary);
+        border-color: var(--dark-secondary);
     }
 
     #device:checked~.toggle label[for="device"],
@@ -270,7 +276,7 @@ html:has(#dark:checked) {
         }
 
         hr {
-            background: var(--light-secondary);
+            border-color: var(--light-secondary);
         }
 
         #device:checked~.toggle label[for="device"],
@@ -298,8 +304,7 @@ html[lang="en"] .en {
 
 @media (min-width: 768px) {
 
-    p,
-    hr {
+    #page-content {
         max-width: 70ch;
     }
 }
