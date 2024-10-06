@@ -185,7 +185,7 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
 
 function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = 'Saleca Development [Version 0.1]\n(c) Saleca. All rights reserved.';
+  start.textContent = 'Saleca Development [Version 0.2]\n(c) Saleca. All rights reserved.';
   loadScreenElement.append(start);
 }
 
