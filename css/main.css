@@ -295,6 +295,7 @@ html:has(#dark:checked) {
 }
 
 /* endregion theme */
+
 .pt,
 .en {
     display: none;
@@ -309,8 +310,9 @@ html[lang="en"] .en {
 }
 
 @media (min-width: 768px) {
-
     main, footer {
+        min-width:70ch;
+        width: 70ch;
         max-width: 70ch;
     }
 }
