@@ -20,15 +20,20 @@ body {
 
     background-color: var(--light);
     color: var(--dark);
+}
 
-    display: flex;
-    flex-direction: column;
+#hidden-content {
+padding-top:1em;
+padding-left:1em;
+padding-right:1em;
 }
 
 #page-container {
     min-height: 100vh;
   display: flex;
   flex-direction: column;
+padding-left:1em;
+padding-right:1em;
 }
 
 header,
@@ -82,13 +87,13 @@ p {
     hyphens: unset;
     text-indent: unset;
     text-align: center;
-    margin-bottom: 1.5em;
+    padding-bottom: 1.5em;
 }
 
 h1+.focus,
 h2+.focus,
 h3+.focus {
-    margin-top: -1em;
+    padding-top: -1em;
 }
 
 .state-form {
