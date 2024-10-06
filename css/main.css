@@ -175,7 +175,8 @@ margin-bottom: 0;
     font-weight: bold;
     line-height: 1em;
     word-break: break-all;
-
+    white-space: break-spaces;
+    
     margin-top: 0;
     margin-left:0;
     margin-right:auto;
