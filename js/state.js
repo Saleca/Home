@@ -321,6 +321,136 @@ function blinkCursor(inputElement) {
 
 /* #endregion */
 
+/* #region Manage footer */
+let hiddenContentElement;
+let hiddenContentHeight;
+let headerElement;
+let headerHeight;
+let mainElement;
+let mainHeight;
+let footerElement;
+let footerHeight;
+
+let maxMainBottomPosition;
+let smallMaxThreshold;
+let largeMinThreshold;
+
+let cooldownTime = 100;
+let isSticky = false;
+let isScrollEvent = true;
+
+function setUpFooterLogic() {
+  hiddenContentElement = document.getElementById("hidden-content");
+  headerElement = document.querySelector("header");
+  mainElement = document.querySelector("main");
+  footerElement = document.querySelector("footer");
+
+  hiddenContentHeight = hiddenContentElement.offsetHeight;
+  headerHeight = headerElement.offsetHeight;
+  footerHeight = footerElement.offsetHeight;
+
+  calcProportions();
+}
+
+function calcProportions() {
+  if (!footerHeight || !headerHeight || !hiddenContentHeight) {
+    setUpFooterLogic();
+  }
+
+  maxMainBottomPosition = window.innerHeight - footerHeight;
+  largeMinThreshold = maxMainBottomPosition - headerHeight;
+  smallMaxThreshold = largeMinThreshold - hiddenContentHeight;
+
+  if (mainHeight <= smallMaxThreshold || mainHeight >= largeMinThreshold) {
+    if (isScrollEvent) {
+      window.removeEventListener("scroll", debounceAdjustFooter, {
+        passive: true
+      });
+      isScrollEvent = false;
+    }
+  } else {
+    if (!isScrollEvent) {
+      window.addEventListener("scroll", debounceAdjustFooter, {
+        passive: true
+      });
+      isScrollEvent = true;
+    }
+  }
+
+  adjustFooter();
+}
+
+function adjustFooter() {
+  if (!mainElement || !maxMainBottomPosition || !footerElement) {
+    setUpFooterLogic();
+  }
+
+  const mainBottom = mainElement.getBoundingClientRect().bottom;
+  if (mainBottom >= maxMainBottomPosition) {
+    if (isSticky) {
+      footerElement.style.position = "relative";
+      footerElement.style.marginTop = "0";
+
+      isSticky = false;
+    }
+  } else {
+    if (!isSticky) {
+      footerElement.style.position = "sticky";
+      footerElement.style.marginTop = "auto";
+      isSticky = true;
+    }
+  }
+}
+
+let isCalcProportionsRequest = false;
+let isCalcProportionsCooldown = false;
+function debounceCalcProportions() {
+  if (isCalcProportionsCooldown) {
+    if (!isCalcProportionsRequest) {
+      isCalcProportionsRequest = true;
+    }
+    return;
+  }
+
+  calcProportions();
+
+  isCalcProportionsCooldown = true;
+  setTimeout(() => {
+    isCalcProportionsCooldown = false;
+    if (isCalcProportionsRequest) {
+      isCalcProportionsRequest = false;
+      debounceCalcProportions();
+    }
+  }, cooldownTime);
+}
+
+let isAdjustFooterRequest = false;
+let isAdjustFooterCooldown = false;
+function debounceAdjustFooter() {
+  if (isAdjustFooterCooldown) {
+    if (!isAdjustFooterRequest) {
+      isAdjustFooterRequest = true;
+    }
+    return;
+  }
+
+  adjustFooter();
+
+  isAdjustFooterCooldown = true;
+  setTimeout(() => {
+    isAdjustFooterCooldown = false;
+    if (isAdjustFooterRequest) {
+      isAdjustFooterRequest = false;
+      debounceAdjustFooter();
+    }
+  }, cooldownTime);
+}
+
+window.addEventListener("resize", debounceCalcProportions, { passive: true });
+window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
+
+/* #endregion */
+
 /* #region Load Page */
 
 /** Main function to load resources and managing loading screen. @async */
@@ -346,6 +476,8 @@ async function loadResources() {
   addPagePath();
 
   await footerAdded;
+  setUpFooterLogic();
+
   await loadingPromise;
 
   if (Date.now() - startTime < 2000) {
@@ -416,3 +548,4 @@ function clearLoadScreen() {
 document.addEventListener('DOMContentLoaded', loadResources);
 
 /* #endregion */
+
