@@ -308,7 +308,7 @@ html[lang="en"] .en {
 
 @media (min-width: 768px) {
 
-    #page-container {
+    main, footer {
         max-width: 70ch;
     }
 }
