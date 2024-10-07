@@ -361,19 +361,19 @@ function calcProportions() {
   largeMinThreshold = maxMainBottomPosition - headerHeight;
   smallMaxThreshold = largeMinThreshold - hiddenContentHeight;
 
-  if (mainHeight <= smallMaxThreshold || mainHeight >= largeMinThreshold) {
-    if (isScrollEvent) {
+  if (isScrollEvent) {
+    if (mainHeight <= smallMaxThreshold || mainHeight >= largeMinThreshold) {
       if (isMobi) {
-        document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true});
+        document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true });
       } else {
         window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
       }
       isScrollEvent = false;
     }
   } else {
-    if (!isScrollEvent) {
+    if (mainHeight > smallMaxThreshold || mainHeight < largeMinThreshold) {
       if (isMobi) {
-        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true});
+        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
       } else {
         window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
       }
@@ -450,9 +450,6 @@ function debounceAdjustFooter() {
   }, cooldownTime);
 }
 
-window.addEventListener("resize", debounceCalcProportions, { passive: true });
-window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
-
 /* #endregion */
 
 /* #region Load Page */
@@ -485,7 +482,8 @@ async function loadResources() {
 
   await footerAdded;
   setUpFooterLogic();
-
+  window.addEventListener("resize", debounceCalcProportions, { passive: true });
+  
   //end Loading
   await loadingPromise;
   if (Date.now() - startTime < 2000) {
