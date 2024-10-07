@@ -35,6 +35,7 @@ function addBaseElements() {
     const loadScreenElement = document.createElement('div');
     loadScreenElement.id = 'load-screen';
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
+    window.dispatchEvent(new Event(`load-screen-added`));
 
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.id = 'hidden-content';
