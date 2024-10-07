@@ -473,7 +473,6 @@ async function loadResources() {
 
   isMobile();
 
-
   await stateFormAdded;
   applyState();
 

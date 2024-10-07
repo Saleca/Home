@@ -27,11 +27,6 @@ function addBaseElements() {
     stateScript.defer = true;
     head.appendChild(stateScript);
 
-    const structureScript = document.createElement('script');
-    structureScript.src = "js/structure.js";
-    structureScript.defer = true;
-    head.appendChild(structureScript);
-
     const loadScreenElement = document.createElement('div');
     loadScreenElement.id = 'load-screen';
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
