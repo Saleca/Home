@@ -98,7 +98,7 @@ h3+.focus {
     padding-top: -1em;
 }
 
-.state-form {
+#state-form {
     display: flex;
     justify-content: space-between;
     padding-bottom: 1em;

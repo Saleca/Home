@@ -35,8 +35,48 @@ function addBaseElements() {
     const loadScreenElement = document.createElement('div');
     loadScreenElement.id = 'load-screen';
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
-    
 
+    const hiddenContentElement = document.createElement('div');
+    hiddenContentElement.id = 'hidden-content';
+
+    const stateFormElement = document.createElement('div');
+    stateFormElement.id = 'state-form';
+    addContent('state-form', stateFormElement);
+    hiddenContentElement.appendChild(stateFormElement);
+
+    const dividerElement = document.createElement('hr');
+    hiddenContentElement.appendChild(dividerElement);
+
+    document.body.insertBefore(hiddenContentElement, document.body.children[1]);
+
+    const pageContainerElement = document.createElement('div');
+    pageContainerElement.id = 'page-container';
+
+    const headerElement = document.createElement('header');
+    addContent('header', headerElement);
+    pageContainerElement.appendChild(headerElement);
+
+    pageContainerElement.appendChild(document.querySelector('main'));
+
+    const footerElement = document.createElement('footer');
+    addContent('footer', footerElement);
+    pageContainerElement.appendChild(footerElement);
+
+    document.body.appendChild(pageContainerElement);
 }
 
 /*<meta name="document" content="true">*/
+
+/** Adds the content of the file `components/${name}.html` to the element with the ID `name` at start up.
+ *  dispatches an event with name `${name}-added` when completes successfully.
+ * @param {string} name 
+ * */
+function addContent(name, element) {
+    fetch(`components/${name}.html`)
+        .then(response => response.text())
+        .then(data => {
+            element.innerHTML = data;
+            window.dispatchEvent(new Event(`${name}-added`));
+        })
+        .catch(error => console.error(`Error fetching ${name}:`, error));
+}

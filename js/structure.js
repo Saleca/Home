@@ -2,7 +2,7 @@
  *  dispatches an event with name `${name}-added` when completes successfully.
  * @param {string} name 
  * */
-function addComponent(name) {
+function addContent(name) {
     fetch(`components/${name}.html`)
         .then(response => response.text())
         .then(data => {
@@ -13,15 +13,15 @@ function addComponent(name) {
 }
 
 function addStateForm() {
-    addComponent('state-form');
+    addContent('state-form');
 }
 
 function addHeader() {
-    addComponent('header');
+    addContent('header');
 }
 
 function addFooter() {
-    addComponent('footer');
+    addContent('footer');
 }
 
 window.addEventListener('add-state-form', addStateForm);
