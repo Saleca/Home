@@ -363,8 +363,8 @@ function calcProportions() {
 
   if (mainHeight <= smallMaxThreshold || mainHeight >= largeMinThreshold) {
     if (isScrollEvent) {
-      if (isMobile) {
-        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
+      if (isMobi) {
+        document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true});
       } else {
         window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
       }
@@ -372,10 +372,10 @@ function calcProportions() {
     }
   } else {
     if (!isScrollEvent) {
-      if (isMobile) {
-        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
+      if (isMobi) {
+        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true});
       } else {
-        window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
+        window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
       }
       isScrollEvent = true;
     }
@@ -456,7 +456,7 @@ window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
 /* #endregion */
 
 /* #region Load Page */
-let isMobile = false;
+let isMobi = false;
 
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
@@ -532,7 +532,7 @@ function addPagePath() {
 
 function isMobile() {
   if (/Mobi/i.test(navigator.userAgent)) {
-    isMobile = true;
+    isMobi = true;
   }
 }
 function waitEvent(event) {
