@@ -468,7 +468,7 @@ async function loadResources() {
 
   await loadScreenAdded;
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
-
+ console.info('start-loading');
   //start loading
 
   isMobile();
@@ -484,6 +484,8 @@ async function loadResources() {
   await footerAdded;
   setUpFooterLogic();
   window.addEventListener("resize", debounceCalcProportions, { passive: true });
+
+ console.info('end-loading');
 
   //end Loading
   await loadingPromise;
