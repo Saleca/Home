@@ -559,7 +559,6 @@ function clearLoadScreen() {
   document.body.style.transition = 'background-color 0.3s, color 0.3s';
 }
 
-document.addEventListener('DOMContentLoaded', loadResources);
-
+loadResources();
 /* #endregion */
 
