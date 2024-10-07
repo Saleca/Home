@@ -561,3 +561,4 @@ function clearLoadScreen() {
 
 /* #endregion */
 
+loadResources();
