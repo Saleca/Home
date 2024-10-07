@@ -81,3 +81,5 @@ function addContent(name, element) {
         })
         .catch(error => console.error(`Error fetching ${name}:`, error));
 }
+
+document.addEventListener('DOMContentLoaded', addBaseElements);
