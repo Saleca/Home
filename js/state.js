@@ -78,9 +78,9 @@ function getPath() {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
   //*/
-  if(path.includes('?')){
-path = path.slice(0, path.indexOf('?'));
-}
+  if (path.includes('?')) {
+    path = path.slice(0, path.indexOf('?'));
+  }
   if (path.includes('.html')) {
     path = path.replace('.html', '');
   }
@@ -231,7 +231,7 @@ async function animateText(input, inputElement, signal) {
   for (let i = 0; i < input.length; i++) {
     const character = input[i];
     if (inputElement.textContent.endsWith(cursorChar) || inputElement.textContent.endsWith(' ')) {
-      inputElement.textContent = inputElement.textContent.slice(0,-1);
+      inputElement.textContent = inputElement.textContent.slice(0, -1);
     }
     inputElement.textContent += character + cursorChar;
     if (character === '\\') {
@@ -312,10 +312,10 @@ async function animateCursorIndefinetely(inputElement, signal) {
 
 /** Switches the state of the cursor */
 function blinkCursor(inputElement) {
-  if (inputElement. textContent.endsWith(cursorChar)) {
-    inputElement.textContent = inputElement. textContent.slice(0,-1) + ' ';
+  if (inputElement.textContent.endsWith(cursorChar)) {
+    inputElement.textContent = inputElement.textContent.slice(0, -1) + ' ';
   } else {
-    inputElement.textContent = inputElement. textContent.slice(0, -1) + cursorChar;
+    inputElement.textContent = inputElement.textContent.slice(0, -1) + cursorChar;
   }
 }
 
@@ -363,16 +363,20 @@ function calcProportions() {
 
   if (mainHeight <= smallMaxThreshold || mainHeight >= largeMinThreshold) {
     if (isScrollEvent) {
-      window.removeEventListener("scroll", debounceAdjustFooter, {
-        passive: true
-      });
+      if (isMobile) {
+        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
+      } else {
+        window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
+      }
       isScrollEvent = false;
     }
   } else {
     if (!isScrollEvent) {
-      window.addEventListener("scroll", debounceAdjustFooter, {
-        passive: true
-      });
+      if (isMobile) {
+        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
+      } else {
+        window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
+      }
       isScrollEvent = true;
     }
   }
@@ -452,6 +456,7 @@ window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
 /* #endregion */
 
 /* #region Load Page */
+let isMobile = false;
 
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
@@ -460,6 +465,9 @@ async function loadResources() {
   const navigationType = navigationAnalizer();
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
 
+  //start loading
+
+  isMobile();
   const stateFormAdded = waitEvent('state-form-added');
   window.dispatchEvent(new Event('add-state-form'));
   const headerAdded = waitEvent('header-added');
@@ -478,8 +486,8 @@ async function loadResources() {
   await footerAdded;
   setUpFooterLogic();
 
+  //end Loading
   await loadingPromise;
-
   if (Date.now() - startTime < 2000) {
     await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
   }
@@ -522,6 +530,11 @@ function addPagePath() {
   pagePathElement.appendChild(document.createTextNode('>'));
 }
 
+function isMobile() {
+  if (/Mobi/i.test(navigator.userAgent)) {
+    isMobile = true;
+  }
+}
 function waitEvent(event) {
   return new Promise((resolve) => {
     const eventHandler = () => {
@@ -541,7 +554,7 @@ function clearLoadScreen() {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
   }, 300);
-  
+
   document.body.style.transition = 'background-color 0.3s, color 0.3s';
 }
 
