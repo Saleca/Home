@@ -358,7 +358,7 @@ function calcProportions() {
     setUpFooterLogic();
   }
 
-  maxMainBottomPosition = window.outerHeight - footerHeight;
+  maxMainBottomPosition = window.innerHeight - footerHeight;
   largeMinThreshold = maxMainBottomPosition - headerHeight;
   smallMaxThreshold = largeMinThreshold - hiddenContentHeight;
 
