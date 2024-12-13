@@ -346,18 +346,9 @@ function setUpFooterLogic() {
   mainElement = document.querySelector("main");
   footerElement = document.getElementById("footer");
 
-  console.log(hiddenContentElement);
-  console.log(headerElement);
-  console.log(mainElement);
-  console.log(footerElement);
-
   hiddenContentHeight = hiddenContentElement.offsetHeight;
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
-
-  console.log(hiddenContentHeight);
-  console.log(headerHeight);
-  console.log(footerHeight);
 
   calcProportions();
 }
@@ -494,8 +485,6 @@ async function loadResources() {
   addPagePath();
 
   await footerAdded;
-  setUpFooterLogic();
-  window.addEventListener("resize", debounceCalcProportions, { passive: true });
 
   //end Loading
   await loadingPromise;
@@ -567,7 +556,8 @@ function clearLoadScreen() {
   }, 300);
 
   document.body.style.display = 'flex';
-// transituon = 'background-color 0.3s, color 0.3s';
+  setUpFooterLogic();
+  window.addEventListener("resize", debounceCalcProportions, { passive: true });
 }
 
 /* #endregion */
