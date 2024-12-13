@@ -50,7 +50,6 @@ const NavigationType = {
 /** Analizes navigation type */
 function navigationAnalizer() {
   const navEntries = performance.getEntriesByType('navigation');
-  console.log("analize path");
 
   if (navEntries.length > 0) {
     switch (navEntries[0].type) {
@@ -71,7 +70,6 @@ function manageNavigation() {
 
 function getPath() {
   let path = window.location.href;
-  console.log(path);
   if (path.includes('saleca.github.io/Home/')) {
     path = path.replace(/^.*saleca.github.io\/Home\//, '');
   }
