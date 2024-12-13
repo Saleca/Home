@@ -71,6 +71,7 @@ function manageNavigation() {
 function getPath() {
   let path = window.location.href;
   if (path.includes('saleca.github.io/Home/')) {
+    console.log(path);
     path = path.replace(/^.*saleca.github.io\/Home\//, '');
   }
   /* live server
