@@ -8,6 +8,8 @@ async function addBaseElements() {
     base.href = `/${repo}/`;
     head.appendChild(base);
 
+const initialStyle = head.querySelector(”link");
+
     const link = document.createElement('link');
     link.rel = "stylesheet";
     link.type = "text/css";
@@ -32,9 +34,8 @@ async function addBaseElements() {
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
     window.dispatchEvent(new Event(`load-screen-added`));
 
-var initialStyle = document.querySelector(”link[href="css/init-black.css"]");
 initialStyle.disabled = true;
-initialStyle.parentNode.removeChild(initialStyle);
+head.removeChild(initialStyle);
 
 
     const hiddenContentElement = document.createElement('div');
