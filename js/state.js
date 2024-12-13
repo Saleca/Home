@@ -350,10 +350,6 @@ function setUpFooterLogic() {
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
 
-  console.log(headerHeight);
-  console.log(document.body.style.overflow);
-  console.log(document.body.style.display);
-
   calcProportions();
 }
 
@@ -489,7 +485,7 @@ async function loadResources() {
   header.scrollIntoView({ behavior: 'instant', block: 'start' });
   addPagePath();
 
-  //await footerAdded;
+  await footerAdded;
   await pageContainerAdded;
   setUpFooterLogic();
   window.addEventListener("resize", debounceCalcProportions, { passive: true });
