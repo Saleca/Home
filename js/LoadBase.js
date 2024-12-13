@@ -25,7 +25,6 @@ async function addBaseElements() {
     const stateScript = document.createElement('script');
     stateScript.src = "js/state.js";
     head.appendChild(stateScript);
-
     await waitEvent('state-loaded');
 
     const loadScreenElement = document.createElement('div');
@@ -38,8 +37,8 @@ async function addBaseElements() {
 
     const stateFormElement = document.createElement('div');
     stateFormElement.id = 'state-form';
-    addContent('state-form', stateFormElement);
     hiddenContentElement.appendChild(stateFormElement);
+    addContent('state-form', stateFormElement);
 
     const dividerElement = document.createElement('hr');
     hiddenContentElement.appendChild(dividerElement);
@@ -50,14 +49,14 @@ async function addBaseElements() {
     pageContainerElement.id = 'page-container';
 
     const headerElement = document.createElement('header');
-    addContent('header', headerElement);
     pageContainerElement.appendChild(headerElement);
+    addContent('header', headerElement);
 
     pageContainerElement.appendChild(document.querySelector('main'));
 
     const footerElement = document.createElement('footer');
-    addContent('footer', footerElement);
     pageContainerElement.appendChild(footerElement);
+    addContent('footer', footerElement);
 
     document.body.appendChild(pageContainerElement);
 }
