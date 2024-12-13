@@ -480,6 +480,7 @@ async function loadResources() {
 
   await headerAdded;
   const header = document.getElementById('header');
+  
   header.scrollIntoView({ behavior: 'instant', block: 'start' });//crash
   addPagePath();
 

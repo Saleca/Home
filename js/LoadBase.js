@@ -36,7 +36,7 @@ async function addBaseElements() {
     hiddenContentElement.id = 'hidden-content';
 
     const stateFormElement = document.createElement('div');
-    stateFormElement.id = 'state-form';
+    //stateFormElement.id = 'state-form';
     hiddenContentElement.appendChild(stateFormElement);
     addContent('state-form', stateFormElement);
 
@@ -49,6 +49,7 @@ async function addBaseElements() {
     pageContainerElement.id = 'page-container';
 
     const headerElement = document.createElement('header');
+    //headerElement.id = "header";
     pageContainerElement.appendChild(headerElement);
     addContent('header', headerElement);
 
@@ -71,6 +72,7 @@ function addContent(name, element) {
     fetch(`components/${name}.html`)
         .then(response => response.text())
         .then(data => {
+            element.id = name;
             element.innerHTML = data;
             window.dispatchEvent(new Event(`${name}-added`));
         })
