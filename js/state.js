@@ -553,11 +553,10 @@ function clearLoadScreen() {
   setTimeout(() => {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
+    document.body.style.display = 'flex';
+    setUpFooterLogic();
+    window.addEventListener("resize", debounceCalcProportions, { passive: true });
   }, 300);
-
-  document.body.style.display = 'flex';
-  setUpFooterLogic();
-  window.addEventListener("resize", debounceCalcProportions, { passive: true });
 }
 
 /* #endregion */
