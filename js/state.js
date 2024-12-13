@@ -346,6 +346,11 @@ function setUpFooterLogic() {
   mainElement = document.querySelector("main");
   footerElement = document.getElementById("footer");
 
+  console.log(hiddenContentElement);
+  console.log(headerElement);
+  console.log(mainElement);
+  console.log(footerElement);
+
   hiddenContentHeight = hiddenContentElement.offsetHeight;
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
