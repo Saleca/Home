@@ -343,14 +343,13 @@ let debug = 0;
 function setUpFooterLogic() {
   hiddenContentElement = document.getElementById("hidden-content");
   headerElement = document.getElementById('header');
+  console.log(header);
   mainElement = document.querySelector("main");
   footerElement = document.getElementById("footer");
-
   hiddenContentHeight = hiddenContentElement.offsetHeight;
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
 
-  console.log(debug++ + " heights:\nhidden content:" + hiddenContentHeight + "\nheader: " + headerHeight + "\nfooter: " + footerHeight + "\n")
   calcProportions();
 }
 
@@ -482,9 +481,10 @@ async function loadResources() {
 
   await headerAdded;
   const header = document.getElementById('header');
-  console.log("header added");
-  
-  header.scrollIntoView({ behavior: 'instant', block: 'start' });//crash
+  console.log(header);
+  console.log(document.baseURI);
+
+  header.scrollIntoView({ behavior: 'instant', block: 'start' });
   addPagePath();
 
   await footerAdded;
