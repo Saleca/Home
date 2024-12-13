@@ -25,6 +25,7 @@ function addBaseElements() {
     const stateScript = document.createElement('script');
     stateScript.src = "js/state.js";
     head.appendChild(stateScript);
+    
 
     const loadScreenElement = document.createElement('div');
     loadScreenElement.id = 'load-screen';

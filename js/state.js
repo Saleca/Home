@@ -466,6 +466,8 @@ async function loadResources() {
   const controller = new AbortController();
   const navigationType = navigationAnalizer();
 
+   console.info('wait load screen');
+
   await loadScreenAdded;
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
  console.info('start-loading');
