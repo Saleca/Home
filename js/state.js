@@ -557,7 +557,8 @@ function clearLoadScreen() {
     document.body.style.overflow = 'auto';
   }, 300);
 
-  //document.body.style.transition = 'background-color 0.3s, color 0.3s';
+  document.body.style.display = 'flex';
+// transituon = 'background-color 0.3s, color 0.3s';
 }
 
 /* #endregion */
