@@ -46,6 +46,7 @@ async function addBaseElements() {
 
     const pageContainerElement = document.createElement('div');
     pageContainerElement.id = 'page-container';
+    pageContainerElement.style.display = 'flex';
 
     const headerElement = document.createElement('header');
     pageContainerElement.appendChild(headerElement);
@@ -58,6 +59,7 @@ async function addBaseElements() {
     addContent('footer', footerElement);
 
     document.body.appendChild(pageContainerElement);
+    window.dispatchEvent(new Event(`page-container-added`));
 }
 
 /*<meta name="document" content="true">*/

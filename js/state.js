@@ -468,6 +468,7 @@ async function loadResources() {
   const stateFormAdded = waitEvent('state-form-added');
   const headerAdded = waitEvent('header-added');
   const footerAdded = waitEvent('footer-added');
+  const pageContainerAdded = waitEvent('page-container-added');
 
   const startTime = Date.now();
   const controller = new AbortController();
@@ -488,7 +489,10 @@ async function loadResources() {
   header.scrollIntoView({ behavior: 'instant', block: 'start' });
   addPagePath();
 
-  await footerAdded;
+  //await footerAdded;
+  await pageContainerAdded;
+  setUpFooterLogic();
+  window.addEventListener("resize", debounceCalcProportions, { passive: true });
 
   //end Loading
   await loadingPromise;
@@ -557,10 +561,9 @@ function clearLoadScreen() {
   setTimeout(() => {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
-    document.body.style.display = 'flex';
-    setUpFooterLogic();
-    window.addEventListener("resize", debounceCalcProportions, { passive: true });
+
   }, 300);
+  
 }
 
 /* #endregion */
