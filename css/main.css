@@ -34,13 +34,13 @@ body {
     padding-left: 1em;
     padding-right: 1em;
 
-    transition: inherit;
+    transition:inherit !important;
 }
 
 header,
 main,
 footer {
-    transition: inherit;
+    transition: inherit !important;
     background-color: var(--light);
 }
 
@@ -81,7 +81,7 @@ p {
 }
 
 a {
-    transition: inherit;
+    transition: inherit !important;
 }
 
 .details {
