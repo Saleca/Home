@@ -70,8 +70,8 @@ function manageNavigation() {
 
 function getPath() {
   let path = window.location.href;
-  if (path.includes('saleca.github.io/PrivacyPolicy/')) {
-    path = path.replace(/^.*saleca.github.io\/PrivacyPolicy\//, '');
+  if (path.includes('saleca.github.io/Home/')) {
+    path = path.replace(/^.*saleca.github.io\/Home\//, '');
   }
   /* live server
   if (path.includes('127.0.0.1:5500/')) {
@@ -480,7 +480,7 @@ async function loadResources() {
 
   await headerAdded;
   const header = document.getElementById('header');
-  
+
   header.scrollIntoView({ behavior: 'instant', block: 'start' });//crash
   addPagePath();
 
