@@ -458,6 +458,8 @@ let isMobi = false;
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
   const loadScreenAdded = waitEvent('load-screen-added');
+  window.dispatchEvent(new Event(`state-loaded`));
+
   const stateFormAdded = waitEvent('state-form-added');
   const headerAdded = waitEvent('header-added');
   const footerAdded = waitEvent('footer-added');
@@ -466,11 +468,9 @@ async function loadResources() {
   const controller = new AbortController();
   const navigationType = navigationAnalizer();
 
-   console.info('wait load screen');
-
   await loadScreenAdded;
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
- console.info('start-loading');
+  console.info('start-loading');
   //start loading
 
   isMobile();
@@ -487,7 +487,7 @@ async function loadResources() {
   setUpFooterLogic();
   window.addEventListener("resize", debounceCalcProportions, { passive: true });
 
- console.info('end-loading');
+  console.info('end-loading');
 
   //end Loading
   await loadingPromise;

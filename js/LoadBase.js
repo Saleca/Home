@@ -1,6 +1,6 @@
 const repo = 'Home';
 
-function addBaseElements() {
+async function addBaseElements() {
     const head = document.head;
     const isDocument = document.querySelector('meta[name="document"]');
 
@@ -26,11 +26,12 @@ function addBaseElements() {
     stateScript.src = "js/state.js";
     head.appendChild(stateScript);
 
+    await waitEvent('state-loaded');
+
     const loadScreenElement = document.createElement('div');
     loadScreenElement.id = 'load-screen';
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
     window.dispatchEvent(new Event(`load-screen-added`));
-    console.info('fired load screen event');
 
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.id = 'hidden-content';
@@ -76,5 +77,16 @@ function addContent(name, element) {
         })
         .catch(error => console.error(`Error fetching ${name}:`, error));
 }
+
+//abstract into a tools script
+function waitEvent(event) {
+    return new Promise((resolve) => {
+      const eventHandler = () => {
+        window.removeEventListener(event, eventHandler);
+        resolve();
+      };
+      window.addEventListener(event, eventHandler);
+    });
+  }
 
 document.addEventListener('DOMContentLoaded', addBaseElements);
