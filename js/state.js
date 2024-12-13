@@ -351,6 +351,8 @@ function setUpFooterLogic() {
   footerHeight = footerElement.offsetHeight;
 
   console.log(headerHeight);
+  console.log(document.body.style.overflow);
+  console.log(document.body.style.display);
 
   calcProportions();
 }
