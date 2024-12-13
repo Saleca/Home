@@ -273,7 +273,7 @@ async function threeDotsAnimation(inputElement, signal, previousInput = '') {
     }
     inputElement.textContent = currentInput + cursorChar;
 
-    i++
+    i++;
     if (i > 3) {
       i = 0;
     }
