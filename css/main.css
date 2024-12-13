@@ -19,6 +19,7 @@ body {
     margin: 0;
     background-color: var(--light);
     color: var(--dark);
+    /*try transition*/
 }
 
 #hidden-content {
@@ -34,13 +35,12 @@ body {
     padding-left: 1em;
     padding-right: 1em;
 
-    transition:inherit !important;
 }
 
 header,
 main,
 footer {
-    transition: inherit !important;
+    transition: color 0.3s;
     background-color: var(--light);
 }
 
@@ -81,7 +81,7 @@ p {
 }
 
 a {
-    transition: inherit !important;
+    transition: color 0.3s;
 }
 
 .details {
@@ -218,10 +218,7 @@ html:has(#dark:checked) {
         color: var(--light);
     }
 
-    body,
-    header,
-    main,
-    footer {
+    body {
         background-color: var(--dark);
     }
 
