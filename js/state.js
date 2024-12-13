@@ -557,9 +557,9 @@ function clearLoadScreen() {
   setTimeout(() => {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
-
+    document.body.style.backgroundColor = 'var(--dark)';
   }, 300);
-  
+
 }
 
 /* #endregion */

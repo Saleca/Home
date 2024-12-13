@@ -59,7 +59,7 @@ async function addBaseElements() {
     addContent('footer', footerElement);
 
     document.body.appendChild(pageContainerElement);
-    window.dispatchEvent(new Event(`page-container-added`));
+    window.dispatchEvent(new Event('page-container-added'));
 }
 
 /*<meta name="document" content="true">*/

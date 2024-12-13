@@ -17,7 +17,7 @@ body {
     /**/
 
     margin: 0;
-    background-color: var(--light);
+    background-color: var(--dark);
     color: var(--dark);
     transition: background-color 0.3s;
 }
