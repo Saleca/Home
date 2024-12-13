@@ -339,6 +339,7 @@ let cooldownTime = 100;
 let isSticky = false;
 let isScrollEvent = true;
 
+let debug = 0;
 function setUpFooterLogic() {
   hiddenContentElement = document.getElementById("hidden-content");
   headerElement = document.querySelector("header");
@@ -348,7 +349,7 @@ function setUpFooterLogic() {
   hiddenContentHeight = hiddenContentElement.offsetHeight;
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
-
+  console.log(debug++ + " heights:\nhidden content:" + hiddenContentHeight + "\nheader: " + headerHeight + "\nfooter: " + footerHeight + "\n")
   calcProportions();
 }
 
