@@ -80,12 +80,12 @@ function addContent(name, element) {
 //abstract into a tools script
 function waitEvent(event) {
     return new Promise((resolve) => {
-      const eventHandler = () => {
-        window.removeEventListener(event, eventHandler);
-        resolve();
-      };
-      window.addEventListener(event, eventHandler);
+        const eventHandler = () => {
+            window.removeEventListener(event, eventHandler);
+            resolve();
+        };
+        window.addEventListener(event, eventHandler);
     });
-  }
+}
 
 document.addEventListener('DOMContentLoaded', addBaseElements);

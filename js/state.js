@@ -345,9 +345,7 @@ function setUpFooterLogic() {
   headerElement = document.getElementById('header');
   mainElement = document.querySelector("main");
   footerElement = document.getElementById("footer");
-  
-  console.log(header);
-  
+
   hiddenContentHeight = hiddenContentElement.offsetHeight;
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
@@ -473,7 +471,6 @@ async function loadResources() {
 
   await loadScreenAdded;
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
-  console.info('start-loading');
   //start loading
 
   isMobile();
@@ -492,8 +489,6 @@ async function loadResources() {
   await footerAdded;
   setUpFooterLogic();
   window.addEventListener("resize", debounceCalcProportions, { passive: true });
-
-  console.info('end-loading');
 
   //end Loading
   await loadingPromise;
