@@ -343,9 +343,11 @@ let debug = 0;
 function setUpFooterLogic() {
   hiddenContentElement = document.getElementById("hidden-content");
   headerElement = document.getElementById('header');
-  console.log(header);
   mainElement = document.querySelector("main");
   footerElement = document.getElementById("footer");
+  
+  console.log(header);
+  
   hiddenContentHeight = hiddenContentElement.offsetHeight;
   headerHeight = headerElement.offsetHeight;
   footerHeight = footerElement.offsetHeight;
