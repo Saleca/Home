@@ -19,7 +19,7 @@ body {
     margin: 0;
     background-color: var(--light);
     color: var(--dark);
-    /*try transition*/
+    transition: background-color 0.3s;
 }
 
 #hidden-content {
@@ -41,7 +41,7 @@ header,
 main,
 footer {
     transition: color 0.3s;
-    background-color: var(--light);
+    background-color: inherit;
 }
 
 header {
