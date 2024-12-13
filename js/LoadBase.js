@@ -32,6 +32,11 @@ async function addBaseElements() {
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
     window.dispatchEvent(new Event(`load-screen-added`));
 
+var initialStyle = document.querySelector(”link[href="css/init-black.css"]");
+initialStyle.disabled = true;
+initialStyle.parentNode.removeChild(initialStyle);
+
+
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.id = 'hidden-content';
 
