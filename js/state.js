@@ -322,21 +322,21 @@ function blinkCursor(inputElement) {
 /* #endregion */
 
 /* #region Manage footer */
+const cooldownTime = 10;
+
 let hiddenContentElement;
-let hiddenContentHeight;
 let headerElement;
-let headerHeight;
 let mainElement;
-let mainHeight;
 let footerElement;
+
+let hiddenContentHeight;
+let headerHeight;
+let mainHeight;
 let footerHeight;
 
 let lowerThreshold;
 
-let cooldownTime = 100;
-let isSticky = false;
-
-let debug = 0;
+// to execute at start up
 function setUpFooterLogic() {
   hiddenContentElement = document.getElementById("hidden-content");
   headerElement = document.getElementById('header');
@@ -350,6 +350,7 @@ function setUpFooterLogic() {
   calcProportions();
 }
 
+// to execute at window height change (or contents)
 function calcProportions() {
   if (!footerHeight || !headerHeight || !hiddenContentHeight) {
     setUpFooterLogic();
@@ -378,6 +379,7 @@ function calcProportions() {
   adjustFooter();
 }
 
+//to execute if needed when scrolling
 function adjustFooter() {
   if (!mainElement || !lowerThreshold || !footerElement) {
     setUpFooterLogic();
@@ -385,18 +387,11 @@ function adjustFooter() {
 
   const mainBottom = mainElement.getBoundingClientRect().bottom;
   if (mainBottom >= lowerThreshold) {
-    if (isSticky) {
-      footerElement.style.position = "relative";
-      footerElement.style.marginTop = "0";
-
-      isSticky = false;
-    }
+    footerElement.style.position = "relative";
+    footerElement.style.marginTop = "0";
   } else {
-    if (!isSticky) {
-      footerElement.style.position = "sticky";
-      footerElement.style.marginTop = "auto";
-      isSticky = true;
-    }
+    footerElement.style.position = "sticky";
+    footerElement.style.marginTop = "auto";
   }
 }
 
