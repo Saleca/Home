@@ -424,7 +424,7 @@ async function loadResources() {
   await footerAdded;
   await pageContainerAdded;
   setUpFooterLogic();
-  window.addEventListener("resize", debounceCalcProportions, { passive: true });
+  window.addEventListener("resize", calcProportions, { passive: true });
 
   //end Loading
   await loadingPromise;
