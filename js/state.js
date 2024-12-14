@@ -331,13 +331,10 @@ let mainHeight;
 let footerElement;
 let footerHeight;
 
-let maxMainBottomPosition;
-let smallMaxThreshold;
-let largeMinThreshold;
+let mainMaxBottomPosition;
 
 let cooldownTime = 100;
 let isSticky = false;
-let isScrollEvent = true;
 
 let debug = 0;
 function setUpFooterLogic() {
@@ -358,27 +355,23 @@ function calcProportions() {
     setUpFooterLogic();
   }
 
-  maxMainBottomPosition = window.innerHeight - footerHeight;
-  largeMinThreshold = maxMainBottomPosition - headerHeight;
-  smallMaxThreshold = largeMinThreshold - hiddenContentHeight;
+  mainMaxBottomPosition = window.innerHeight - footerHeight;
 
-  if (isScrollEvent) {
-    if (mainHeight <= smallMaxThreshold || mainHeight >= largeMinThreshold) {
-      if (isMobi) {
-        document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true });
-      } else {
-        window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
-      }
-      isScrollEvent = false;
+  const fixedElementsHeight = mainHeight + headerHeight;
+  const upperThreshold = mainMaxBottomPosition - hiddenContentHeight;
+
+  if (fixedElementsHeight >= upperThreshold || fixedElementsHeight <= mainMaxBottomPosition) {
+    if (isMobi) {
+      document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true });
+    } else {
+      window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
     }
-  } else {
-    if (mainHeight > smallMaxThreshold || mainHeight < largeMinThreshold) {
-      if (isMobi) {
-        document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
-      } else {
-        window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
-      }
-      isScrollEvent = true;
+  }
+  else if (fixedElementsHeight > upperThreshold || fixedElementsHeight < mainMaxBottomPosition) {
+    if (isMobi) {
+      document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
+    } else {
+      window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
     }
   }
 
@@ -386,12 +379,12 @@ function calcProportions() {
 }
 
 function adjustFooter() {
-  if (!mainElement || !maxMainBottomPosition || !footerElement) {
+  if (!mainElement || !mainMaxBottomPosition || !footerElement) {
     setUpFooterLogic();
   }
 
   const mainBottom = mainElement.getBoundingClientRect().bottom;
-  if (mainBottom >= maxMainBottomPosition) {
+  if (mainBottom >= mainMaxBottomPosition) {
     if (isSticky) {
       footerElement.style.position = "relative";
       footerElement.style.marginTop = "0";
