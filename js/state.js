@@ -557,7 +557,7 @@ function clearLoadScreen() {
   setTimeout(() => {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
-    document.body.style.backgroundColor = 'var(--dark)';
+    //document.body.style.backgroundColor = 'var(--light)';
   }, 300);
 
 }
