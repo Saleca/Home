@@ -34,9 +34,9 @@ const initialStyle = document.styleSheets[0];
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
     window.dispatchEvent(new Event(`load-screen-added`));
 
+if(initialStyle){
 initialStyle.disabled = true;
-//head.removeChild(initialStyle);
-
+}
 
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.id = 'hidden-content';
