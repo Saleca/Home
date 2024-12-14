@@ -8,7 +8,7 @@ async function addBaseElements() {
     base.href = `/${repo}/`;
     head.appendChild(base);
 
-const initialStyle = head.querySelector(”link");
+const initialStyle = document.styleSheets[0];
 
     const link = document.createElement('link');
     link.rel = "stylesheet";
@@ -35,7 +35,7 @@ const initialStyle = head.querySelector(”link");
     window.dispatchEvent(new Event(`load-screen-added`));
 
 initialStyle.disabled = true;
-head.removeChild(initialStyle);
+//head.removeChild(initialStyle);
 
 
     const hiddenContentElement = document.createElement('div');
