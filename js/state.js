@@ -331,7 +331,7 @@ let mainHeight;
 let footerElement;
 let footerHeight;
 
-let mainMaxBottomPosition;
+let lowerThreshold;
 
 let cooldownTime = 100;
 let isSticky = false;
@@ -355,19 +355,19 @@ function calcProportions() {
     setUpFooterLogic();
   }
 
-  mainMaxBottomPosition = window.innerHeight - footerHeight;
+  lowerThreshold = window.innerHeight - footerHeight;
 
   const fixedElementsHeight = mainHeight + headerHeight;
-  const upperThreshold = mainMaxBottomPosition - hiddenContentHeight;
+  const upperThreshold = lowerThreshold - hiddenContentHeight;
 
-  if (fixedElementsHeight >= upperThreshold || fixedElementsHeight <= mainMaxBottomPosition) {
+  if (fixedElementsHeight >= upperThreshold || fixedElementsHeight <= lowerThreshold) {
     if (isMobi) {
       document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true });
     } else {
       window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
     }
   }
-  else if (fixedElementsHeight > upperThreshold || fixedElementsHeight < mainMaxBottomPosition) {
+  else {
     if (isMobi) {
       document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
     } else {
@@ -379,12 +379,12 @@ function calcProportions() {
 }
 
 function adjustFooter() {
-  if (!mainElement || !mainMaxBottomPosition || !footerElement) {
+  if (!mainElement || !lowerThreshold || !footerElement) {
     setUpFooterLogic();
   }
 
   const mainBottom = mainElement.getBoundingClientRect().bottom;
-  if (mainBottom >= mainMaxBottomPosition) {
+  if (mainBottom >= lowerThreshold) {
     if (isSticky) {
       footerElement.style.position = "relative";
       footerElement.style.marginTop = "0";
