@@ -322,8 +322,6 @@ function blinkCursor(inputElement) {
 /* #endregion */
 
 /* #region Manage footer */
-const cooldownTime = 10;
-
 let hiddenContentElement;
 let headerElement;
 let mainElement;
@@ -362,18 +360,12 @@ function calcProportions() {
   const upperThreshold = lowerThreshold - hiddenContentHeight;
 
   if (fixedElementsHeight >= upperThreshold || fixedElementsHeight <= lowerThreshold) {
-    if (isMobi) {
-      document.removeEventListener('touchmove', debounceAdjustFooter, { passive: true });
-    } else {
-      window.removeEventListener("scroll", debounceAdjustFooter, { passive: true });
-    }
+      document.removeEventListener('touchmove', adjustFooter, { passive: true });
+      document.removeEventListener("scroll", adjustFooter, { passive: true });
   }
   else {
-    if (isMobi) {
-      document.addEventListener('touchmove', debounceAdjustFooter, { passive: true });
-    } else {
-      window.addEventListener("scroll", debounceAdjustFooter, { passive: true });
-    }
+      document.addEventListener('touchmove', adjustFooter, { passive: true });
+      document.addEventListener("scroll", adjustFooter, { passive: true });
   }
 
   adjustFooter();
@@ -393,50 +385,6 @@ function adjustFooter() {
     footerElement.style.position = "sticky";
     footerElement.style.marginTop = "auto";
   }
-}
-
-let isCalcProportionsRequest = false;
-let isCalcProportionsCooldown = false;
-function debounceCalcProportions() {
-  if (isCalcProportionsCooldown) {
-    if (!isCalcProportionsRequest) {
-      isCalcProportionsRequest = true;
-    }
-    return;
-  }
-
-  calcProportions();
-
-  isCalcProportionsCooldown = true;
-  setTimeout(() => {
-    isCalcProportionsCooldown = false;
-    if (isCalcProportionsRequest) {
-      isCalcProportionsRequest = false;
-      debounceCalcProportions();
-    }
-  }, cooldownTime);
-}
-
-let isAdjustFooterRequest = false;
-let isAdjustFooterCooldown = false;
-function debounceAdjustFooter() {
-  if (isAdjustFooterCooldown) {
-    if (!isAdjustFooterRequest) {
-      isAdjustFooterRequest = true;
-    }
-    return;
-  }
-
-  adjustFooter();
-
-  isAdjustFooterCooldown = true;
-  setTimeout(() => {
-    isAdjustFooterCooldown = false;
-    if (isAdjustFooterRequest) {
-      isAdjustFooterRequest = false;
-      debounceAdjustFooter();
-    }
-  }, cooldownTime);
 }
 
 /* #endregion */
