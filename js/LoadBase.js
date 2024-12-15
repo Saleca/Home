@@ -52,7 +52,7 @@ async function addBaseElements() {
 
     const pageContainerElement = document.createElement('div');
     pageContainerElement.id = 'page-container';
-    pageContainerElement.style.display = 'flex';
+    pageContainerElement.style.visibility = 'visible';
 
     const headerElement = document.createElement('header');
     pageContainerElement.appendChild(headerElement);

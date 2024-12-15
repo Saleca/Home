@@ -30,7 +30,8 @@ body {
 
 #page-container {
     min-height: 100vh;
-    display: none;
+    visibility: hidden;
+    display: flex;
     flex-direction: column;
     padding-left: 1em;
     padding-right: 1em;
