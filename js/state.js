@@ -207,7 +207,7 @@ function generateConsoleLine(dir, input) {
 }
 
 function formatDirectoryPath(path) {
-  return `C:\\${path === '\\' ? '' : path} `;
+  return `C:\\${path === '\\' ? '' : path}`;
 }
 
 function formatInputPath(dir, input) {
