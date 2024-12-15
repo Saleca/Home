@@ -7,6 +7,7 @@ async function addBaseElements() {
     const base = document.createElement('base');
     base.href = `/${repo}/`;
     head.appendChild(base);
+    console.log("base ref added");
 
     const initialStyle = document.styleSheets[0];
 
@@ -15,6 +16,7 @@ async function addBaseElements() {
     link.type = "text/css";
     link.href = "css/main.css";
     head.appendChild(link);
+    console.log("main.css added");
 
     if (isDocument) {
         const print = document.createElement('link');
@@ -22,12 +24,15 @@ async function addBaseElements() {
         print.type = "text/css";
         print.href = "css/print.css";
         head.appendChild(print);
+    console.log("print style added");
+
     }
 
     const stateScript = document.createElement('script');
     stateScript.src = "js/state.js";
     head.appendChild(stateScript);
     await waitEvent('state-loaded');
+    console.log("state added");
 
     const loadScreenElement = document.createElement('div');
     loadScreenElement.id = 'load-screen';
