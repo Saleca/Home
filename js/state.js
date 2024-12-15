@@ -395,9 +395,8 @@ let isMobi = false;
 
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
-  console.log("start loading resources");
   const loadScreenAdded = waitEvent('load-screen-added');
-  window.dispatchEvent(new Event(`state - loaded`));
+  window.dispatchEvent(new Event(`state-loaded`));
 
   const stateFormAdded = waitEvent('state-form-added');
   const headerAdded = waitEvent('header-added');
@@ -407,7 +406,6 @@ async function loadResources() {
   const startTime = Date.now();
   const controller = new AbortController();
   const navigationType = navigationAnalizer();
-  console.log("waiting for load screen");
 
   await loadScreenAdded;
   const loadingPromise = loadingAnimation(navigationType, controller.signal);
