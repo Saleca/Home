@@ -186,7 +186,7 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
 
 function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = 'Saleca Portfolio [Version ' + version + ']';
+  start.textContent = `Saleca Portfolio [Version ${version}]`;
   loadScreenElement.append(start);
 }
 
@@ -207,7 +207,7 @@ function generateConsoleLine(dir, input) {
 }
 
 function formatDirectoryPath(path) {
-  return `C: \\${path === '\\' ? '' : path} `;
+  return `C:\\${path === '\\' ? '' : path} `;
 }
 
 function formatInputPath(dir, input) {
