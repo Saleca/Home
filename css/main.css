@@ -216,9 +216,6 @@ hr {
 html:has(#dark:checked) {
     body {
         color: var(--light);
-    }
-
-    body {
         background-color: var(--dark);
     }
 
@@ -258,12 +255,6 @@ html:has(#dark:checked) {
     html:has(#device:checked) {
         body {
             color: var(--light);
-        }
-
-        body,
-        header,
-        main,
-        footer {
             background-color: var(--dark);
         }
 
