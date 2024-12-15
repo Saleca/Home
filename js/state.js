@@ -70,17 +70,17 @@ function manageNavigation() {
 
 function getPath() {
   let path = window.location.href;
-  if (path.includes('saleca.github.io/PrivacyPolicy/')) {
-    path = path.replace(/^.*saleca.github.io\/PrivacyPolicy\//, '');
+  if (path.includes('saleca.github.io/Home/')) {
+    path = path.replace(/^.*saleca.github.io\/Home\//, '');
   }
   /* live server
   if (path.includes('127.0.0.1:5500/')) {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
   //*/
-  if(path.includes('?')){
-path = path.slice(0, path.indexOf('?'));
-}
+  if (path.includes('?')) {
+    path = path.slice(0, path.indexOf('?'));
+  }
   if (path.includes('.html')) {
     path = path.replace('.html', '');
   }
@@ -133,6 +133,7 @@ function getCurrentPath() {
 
 /* #region Animation */
 
+const version = '0.3';
 const cursorChar = '█';
 const writeSpeedMS = 50;
 const writeSpeedVariationMS = 150;
@@ -185,7 +186,7 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
 
 function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = 'Saleca Development [Version 0.1]\n(c) Saleca. All rights reserved.';
+  start.textContent = 'Saleca Portfolio [Version ' + version + ']';
   loadScreenElement.append(start);
 }
 
@@ -206,7 +207,7 @@ function generateConsoleLine(dir, input) {
 }
 
 function formatDirectoryPath(path) {
-  return `saleca:\\${path === '\\' ? '' : path}`;
+  return `C: \\${path === '\\' ? '' : path} `;
 }
 
 function formatInputPath(dir, input) {
@@ -231,7 +232,7 @@ async function animateText(input, inputElement, signal) {
   for (let i = 0; i < input.length; i++) {
     const character = input[i];
     if (inputElement.textContent.endsWith(cursorChar) || inputElement.textContent.endsWith(' ')) {
-      inputElement.textContent = inputElement.textContent.slice(0,-1);
+      inputElement.textContent = inputElement.textContent.slice(0, -1);
     }
     inputElement.textContent += character + cursorChar;
     if (character === '\\') {
@@ -273,7 +274,7 @@ async function threeDotsAnimation(inputElement, signal, previousInput = '') {
     }
     inputElement.textContent = currentInput + cursorChar;
 
-    i++
+    i++;
     if (i > 3) {
       i = 0;
     }
@@ -312,42 +313,122 @@ async function animateCursorIndefinetely(inputElement, signal) {
 
 /** Switches the state of the cursor */
 function blinkCursor(inputElement) {
-  if (inputElement. textContent.endsWith(cursorChar)) {
-    inputElement.textContent = inputElement. textContent.slice(0,-1) + ' ';
+  if (inputElement.textContent.endsWith(cursorChar)) {
+    inputElement.textContent = inputElement.textContent.slice(0, -1) + ' ';
   } else {
-    inputElement.textContent = inputElement. textContent.slice(0, -1) + cursorChar;
+    inputElement.textContent = inputElement.textContent.slice(0, -1) + cursorChar;
+  }
+}
+
+/* #endregion */
+
+/* #region Manage footer */
+let hiddenContentElement;
+let headerElement;
+let mainElement;
+let footerElement;
+
+let hiddenContentHeight;
+let headerHeight;
+let mainHeight;
+let footerHeight;
+
+let lowerThreshold;
+
+// to execute at start up
+function setUpFooterLogic() {
+  hiddenContentElement = document.getElementById("hidden-content");
+  headerElement = document.getElementById('header');
+  mainElement = document.querySelector("main");
+  footerElement = document.getElementById("footer");
+
+  hiddenContentHeight = hiddenContentElement.offsetHeight;
+  headerHeight = headerElement.offsetHeight;
+  footerHeight = footerElement.offsetHeight;
+
+  calcProportions();
+}
+
+// to execute at window height change (or contents)
+function calcProportions() {
+  if (!footerHeight || !headerHeight || !hiddenContentHeight) {
+    setUpFooterLogic();
+  }
+
+  lowerThreshold = window.innerHeight - footerHeight;
+
+  const fixedElementsHeight = mainHeight + headerHeight;
+  const upperThreshold = lowerThreshold - hiddenContentHeight;
+
+  if (fixedElementsHeight >= upperThreshold || fixedElementsHeight <= lowerThreshold) {
+    document.removeEventListener('touchmove', adjustFooter, { passive: true });
+    document.removeEventListener("scroll", adjustFooter, { passive: true });
+  }
+  else {
+    document.addEventListener('touchmove', adjustFooter, { passive: true });
+    document.addEventListener("scroll", adjustFooter, { passive: true });
+  }
+
+  adjustFooter();
+}
+
+//to execute if needed when scrolling
+function adjustFooter() {
+  if (!mainElement || !lowerThreshold || !footerElement) {
+    setUpFooterLogic();
+  }
+
+  const mainBottom = mainElement.getBoundingClientRect().bottom;
+  if (mainBottom >= lowerThreshold) {
+    footerElement.style.position = "relative";
+    footerElement.style.marginTop = "0";
+  } else {
+    footerElement.style.position = "sticky";
+    footerElement.style.marginTop = "auto";
   }
 }
 
 /* #endregion */
 
 /* #region Load Page */
+let isMobi = false;
 
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
+  const loadScreenAdded = waitEvent('load-screen-added');
+  window.dispatchEvent(new Event(`state - loaded`));
+
+  const stateFormAdded = waitEvent('state-form-added');
+  const headerAdded = waitEvent('header-added');
+  const footerAdded = waitEvent('footer-added');
+  const pageContainerAdded = waitEvent('page-container-added');
+
   const startTime = Date.now();
   const controller = new AbortController();
   const navigationType = navigationAnalizer();
-  const loadingPromise = loadingAnimation(navigationType, controller.signal);
 
-  const stateFormAdded = waitEvent('state-form-added');
-  window.dispatchEvent(new Event('add-state-form'));
-  const headerAdded = waitEvent('header-added');
-  window.dispatchEvent(new Event('add-header'));
-  const footerAdded = waitEvent('footer-added');
-  window.dispatchEvent(new Event('add-footer'));
+  await loadScreenAdded;
+  const loadingPromise = loadingAnimation(navigationType, controller.signal);
+  //start loading
+
+  isMobile();
 
   await stateFormAdded;
   applyState();
 
   await headerAdded;
   const header = document.getElementById('header');
+
   header.scrollIntoView({ behavior: 'instant', block: 'start' });
   addPagePath();
 
   await footerAdded;
-  await loadingPromise;
+  await pageContainerAdded;
+  setUpFooterLogic();
+  window.addEventListener("resize", calcProportions, { passive: true });
 
+  //end Loading
+  await loadingPromise;
   if (Date.now() - startTime < 2000) {
     await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
   }
@@ -390,6 +471,11 @@ function addPagePath() {
   pagePathElement.appendChild(document.createTextNode('>'));
 }
 
+function isMobile() {
+  if (/Mobi/i.test(navigator.userAgent)) {
+    isMobi = true;
+  }
+}
 function waitEvent(event) {
   return new Promise((resolve) => {
     const eventHandler = () => {
@@ -408,11 +494,11 @@ function clearLoadScreen() {
   setTimeout(() => {
     loadScreen.style.display = 'none';
     document.body.style.overflow = 'auto';
+    //document.body.style.backgroundColor = 'var(--light)';
   }, 300);
-  
-  document.body.style.transition = 'background-color 0.3s, color 0.3s';
+
 }
 
-document.addEventListener('DOMContentLoaded', loadResources);
-
 /* #endregion */
+
+loadResources();

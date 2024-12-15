@@ -1,0 +1,12 @@
+body {
+background-color:black; 
+color:black;
+}
+
+a {
+ color: black;
+ }
+
+ a:visited {
+ color:black
+ }
