@@ -8,7 +8,7 @@ async function addBaseElements() {
     base.href = `/${repo}/`;
     head.appendChild(base);
 
-const initialStyle = document.styleSheets[0];
+    const initialStyle = document.styleSheets[0];
 
     const link = document.createElement('link');
     link.rel = "stylesheet";
@@ -33,10 +33,11 @@ const initialStyle = document.styleSheets[0];
     loadScreenElement.id = 'load-screen';
     document.body.insertBefore(loadScreenElement, document.body.firstChild);
     window.dispatchEvent(new Event(`load-screen-added`));
+    console.log("load screen added");
 
-if(initialStyle){
-initialStyle.disabled = true;
-}
+    if (initialStyle) {
+        initialStyle.disabled = true;
+    }
 
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.id = 'hidden-content';
