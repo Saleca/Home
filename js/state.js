@@ -133,6 +133,7 @@ function getCurrentPath() {
 
 /* #region Animation */
 
+const version = '0.3';
 const cursorChar = '█';
 const writeSpeedMS = 50;
 const writeSpeedVariationMS = 150;
@@ -185,7 +186,7 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
 
 function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = 'Saleca Development [Version 0.2]\n(c) Saleca. All rights reserved.';
+  start.textContent = 'Saleca Portfolio [Version ' + version + ']';
   loadScreenElement.append(start);
 }
 
@@ -206,7 +207,7 @@ function generateConsoleLine(dir, input) {
 }
 
 function formatDirectoryPath(path) {
-  return `saleca:\\${path === '\\' ? '' : path}`;
+  return `C: \\${path === '\\' ? '' : path} `;
 }
 
 function formatInputPath(dir, input) {
@@ -360,12 +361,12 @@ function calcProportions() {
   const upperThreshold = lowerThreshold - hiddenContentHeight;
 
   if (fixedElementsHeight >= upperThreshold || fixedElementsHeight <= lowerThreshold) {
-      document.removeEventListener('touchmove', adjustFooter, { passive: true });
-      document.removeEventListener("scroll", adjustFooter, { passive: true });
+    document.removeEventListener('touchmove', adjustFooter, { passive: true });
+    document.removeEventListener("scroll", adjustFooter, { passive: true });
   }
   else {
-      document.addEventListener('touchmove', adjustFooter, { passive: true });
-      document.addEventListener("scroll", adjustFooter, { passive: true });
+    document.addEventListener('touchmove', adjustFooter, { passive: true });
+    document.addEventListener("scroll", adjustFooter, { passive: true });
   }
 
   adjustFooter();
@@ -395,7 +396,7 @@ let isMobi = false;
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
   const loadScreenAdded = waitEvent('load-screen-added');
-  window.dispatchEvent(new Event(`state-loaded`));
+  window.dispatchEvent(new Event(`state - loaded`));
 
   const stateFormAdded = waitEvent('state-form-added');
   const headerAdded = waitEvent('header-added');
