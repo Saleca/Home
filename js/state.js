@@ -129,6 +129,16 @@ function getCurrentPath() {
   return navigationItems[navigationItems.length - 1];
 }
 
+function displayAnimation() {
+  const navigationStack = getAllNavigationItems();
+  if (navigationStack.length == 1) {
+    const isDocument = document.querySelector('meta[name="document"]');
+    if (isDocument) {
+      return false;
+    }
+  }
+  return true;
+}
 /* #endregion */
 
 /* #region Animation */
@@ -395,6 +405,8 @@ let isMobi = false;
 
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
+  const displayAnimation = displayAnimation();
+
   const loadScreenAdded = waitEvent('load-screen-added');
   window.dispatchEvent(new Event(`state-loaded`));
 
@@ -404,11 +416,19 @@ async function loadResources() {
   const pageContainerAdded = waitEvent('page-container-added');
 
   const startTime = Date.now();
-  const controller = new AbortController();
+  let controller;
   const navigationType = navigationAnalizer();
-
+  let loadingPromise;
   await loadScreenAdded;
-  const loadingPromise = loadingAnimation(navigationType, controller.signal);
+  if (displayAnimation) {
+    controller = new AbortController();
+    loadingPromise = loadingAnimation(navigationType, controller.signal);
+  }
+  else {
+    document.body.style.overflow = 'auto';
+    document.getElementById('load-screen').style.display = 'none';
+  }
+
   //start loading
 
   isMobile();
@@ -428,13 +448,15 @@ async function loadResources() {
   window.addEventListener("resize", calcProportions, { passive: true });
 
   //end Loading
-  await loadingPromise;
-  if (Date.now() - startTime < 2000) {
-    await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
-  }
 
-  controller.abort();
-  clearLoadScreen();
+  if (displayAnimation) {
+    await loadingPromise;
+    if (Date.now() - startTime < 2000) {
+      await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
+    }
+    controller.abort();
+    clearLoadScreen();
+  }
 }
 
 function addPagePath() {
