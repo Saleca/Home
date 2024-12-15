@@ -129,7 +129,7 @@ function getCurrentPath() {
   return navigationItems[navigationItems.length - 1];
 }
 
-function displayAnimation() {
+function CheckDisplayAnimation() {
   const navigationStack = getAllNavigationItems();
   if (navigationStack.length == 1) {
     const isDocument = document.querySelector('meta[name="document"]');
@@ -405,7 +405,7 @@ let isMobi = false;
 
 /** Main function to load resources and managing loading screen. @async */
 async function loadResources() {
-  const displayAnimation = displayAnimation();
+  const displayAnimation = CheckDisplayAnimation();
 
   const loadScreenAdded = waitEvent('load-screen-added');
   window.dispatchEvent(new Event(`state-loaded`));
