@@ -3,16 +3,25 @@
         size: A4;
         margin: 20mm;
     }
+
     body {
         background-color: white;
         color: black;
     }
+
     a {
         text-decoration: none;
     }
-    a, a:visited {
+
+    a::after {
+        content: " (" attr(href) ")";
+    }
+
+    a,
+    a:visited {
         color: black !important;
     }
+
     .no-print {
         display: none;
     }
