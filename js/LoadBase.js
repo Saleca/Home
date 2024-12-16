@@ -40,6 +40,7 @@ async function addBaseElements() {
 
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.id = 'hidden-content';
+    hiddenContentElement.className = 'no-print';
 
     const stateFormElement = document.createElement('div');
     hiddenContentElement.appendChild(stateFormElement);
@@ -55,12 +56,16 @@ async function addBaseElements() {
     pageContainerElement.style.visibility = 'visible';
 
     const headerElement = document.createElement('header');
+    headerElement.className = 'no-print';
+
     pageContainerElement.appendChild(headerElement);
     addContent('header', headerElement);
 
     pageContainerElement.appendChild(document.querySelector('main'));
 
     const footerElement = document.createElement('footer');
+    footerElement.className = 'no-print';
+
     pageContainerElement.appendChild(footerElement);
     addContent('footer', footerElement);
 
