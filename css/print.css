@@ -17,6 +17,10 @@
         content: " (" attr(href) ")";
     }
 
+    a[href^="mailto"]:after {
+        content: none;
+    }
+
     a,
     a:visited {
         color: black !important;
