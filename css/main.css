@@ -8,7 +8,7 @@
 }
 
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 body {
@@ -199,6 +199,13 @@ hr {
 
 }
 
+#itch-embed {
+    display: none;
+}
+
+/* add note regarding samll screens or mobile */
+
+
 /* region theme */
 #dark:checked~.toggle label[for="dark"] {
     background-color: var(--light);
@@ -314,4 +321,16 @@ html[lang="en"] .en {
         width: 70ch;
         max-width: 70ch;
     }
+
+    #itch-embed {
+        display: block;
+        width: 90vw;
+        margin-top: 5vh;
+        position: relative;
+        right: calc((100vw - 70ch) / 2 - 5vw);
+        height: 90vh;
+    }
+
+    /* hide notice regarding small screens/mobiles */
+
 }
