@@ -199,6 +199,13 @@ hr {
 
 }
 
+#unity-canvas {
+    width: 96vw;
+    height: 60vw;
+    margin-top: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* region theme */
 #dark:checked~.toggle label[for="dark"] {
@@ -322,7 +329,5 @@ html[lang="en"] .en {
         margin-top: 2vw;
         position: relative;
         right: calc((100vw - 70ch) / 2 - 2vw);
-        background: rgb(35, 31, 32);
-        cursor: default;
     }
 }
