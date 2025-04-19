@@ -1,13 +1,13 @@
-const repo = 'Home';
+//const repo = 'Home';
 
 async function addBaseElements() {
     const head = document.head;
     const isDocument = document.querySelector('meta[name="document"]');
-
+/*
     const base = document.createElement('base');
     base.href = `/${repo}/`;
     head.appendChild(base);
-
+*/
     const initialStyle = document.styleSheets[0];
 
     const link = document.createElement('link');
