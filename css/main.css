@@ -199,12 +199,6 @@ hr {
 
 }
 
-#itch-embed {
-    display: none;
-}
-
-/* add note regarding samll screens or mobile */
-
 
 /* region theme */
 #dark:checked~.toggle label[for="dark"] {
@@ -322,13 +316,14 @@ html[lang="en"] .en {
         max-width: 70ch;
     }
 
-    #itch-embed {
-        display: block;
-        width: 90vw;
-        margin-top: 5vh;
+    #unity-canvas {
+        width: 96vw;
+        height: 60vw;
+        margin-top: 2vw;
         position: relative;
-        right: calc((100vw - 70ch) / 2 - 5vw);
-        height: 90vh;
+        right: calc((100vw - 70ch) / 2 - 2vw);
+        background: rgb(35, 31, 32);
+        cursor: default;
     }
 
     /* hide notice regarding small screens/mobiles */
