@@ -11,18 +11,46 @@
 
 <body>
     <main>
+        <canvas id="unity-canvas" width=960 height=600 tabindex="-1"
+            style="width: 960px; height: 600px; background: #231F20"></canvas>
+        <script src="../snake-explorer/Build/Builds.loader.js"></script>
+        <script>
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                // Mobile device style: fill the whole browser client area with the game canvas:
+                var meta = document.createElement('meta');
+                meta.name = 'viewport';
+                meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+                document.getElementsByTagName('head')[0].appendChild(meta);
+
+                var canvas = document.querySelector("#unity-canvas");
+                canvas.style.width = "100%";
+                canvas.style.height = "100%";
+                canvas.style.position = "fixed";
+
+                document.body.style.textAlign = "left";
+            }
+
+            var baseUrl = "../snake-explorer/";
+            createUnityInstance(document.querySelector("#unity-canvas"), {
+                arguments: [],
+                dataUrl: baseURl + "Build/Builds.data",
+                frameworkUrl: baseURl + "Build/Builds.framework.js",
+                codeUrl: baseURl + "Build/Builds.wasm",
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "saleca",
+                productName: "Snake Explorer",
+                productVersion: "0.1",
+                // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+                // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+            });
+        </script>
         <!--
-            position: absolute;
-            left: 5vw;
-            width: 90vw;
-            margin-top: 5vh;
-            height: 90vh;
-            -->
         <iframe id="itch-embed"
-            allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated; web-share"
-            scrolling="no" allowtransparency="true" webkitallowfullscreen="true" msallowfullscreen="true"
-            frameborder="0" allowfullscreen="true" mozallowfullscreen="true"
-            src="https://html-classic.itch.zone/html/13429614/index.html"></iframe>
+        allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated; web-share"
+        scrolling="no" allowtransparency="true" webkitallowfullscreen="true" msallowfullscreen="true"
+        frameborder="0" allowfullscreen="true" mozallowfullscreen="true"
+        src="https://html-classic.itch.zone/html/13429614/index.html"></iframe>
+        -->
     </main>
 </body>
 
