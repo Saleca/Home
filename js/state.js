@@ -70,9 +70,15 @@ function manageNavigation() {
 
 function getPath() {
   let path = window.location.href;
+ 
+  if (path.includes('saleca.im')) {
+    path = path.replace(/^.*saleca.im\//, '');
+  }
+  /* gitbub pages default url
   if (path.includes('saleca.github.io/Home/')) {
     path = path.replace(/^.*saleca.github.io\/Home\//, '');
   }
+  //*/
   /* live server
   if (path.includes('127.0.0.1:5500/')) {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
@@ -81,6 +87,11 @@ function getPath() {
   if (path.includes('?')) {
     path = path.slice(0, path.indexOf('?'));
   }
+
+  if (path.includes('wwww.')) {
+    path = path.replace(/^.*www./, '');
+  }
+  
   if (path.includes('.html')) {
     path = path.replace('.html', '');
   }
