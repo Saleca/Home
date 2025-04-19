@@ -324,10 +324,10 @@ html[lang="en"] .en {
     }
 
     #unity-canvas {
-        width: 96vw;
-        height: 60vw;
-        margin-top: 2vw;
+        width: min(96vh,96vw);
+        height: min(60vh, 60vw);
+        margin-top: min(2vh,2vw);
         position: relative;
-        right: calc((100vw - 70ch) / 2 - 2vw);
+        right: calc((min(100vh,100vw) - 70ch) / 2 - min(2vh, 2vw));
     }
 }
