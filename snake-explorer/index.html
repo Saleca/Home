@@ -12,49 +12,73 @@
 <body>
     <main>
         <h1>Snake Explorer</h1>
-        
+
         <div class="en">
-            <p>Unity webGL demo</p>
+            <h2>Unity webGL demo</h2>
+            <h3>Controls</h3>
+            <p>"Esc" key or "3 quick taps" on touch screen to pause</p>
+            <p class="focus">Classic Mode</p>
+            <p>"W A S D" and "↑ ↓ ← →" keys or "↑ ↓ ← →" swipe gestures on touch screens turn the snake around just like the classic version.</p>
+            <p>Moving in the same direction the snake is already going will make it sprint.</p>
+            <p class="focus">Explore Mode</p>
+            <p>"A D" and "← →" keys or "← →" swipe gestures on touch screens will move the snake relative to its direction.</p>
+            <p>"W" and "↑" key or "↑" swipe gesture will make the snake sprint</p>
         </div>
 
         <div class="pt">
-            <p>Unity webGL demo</p>
+            <h2>Unity webGL demo</h2>
+            <h3>Controlos</h3>
+            <p>Tecla "Esc" ou "3 toques rapidos" em ecras tacteis</p>
+            <p class="focus">Modo Classico</p>
+            <p>Teclas "W A S D" e "↑ ↓ ← →" ou gestos "↑ ↓ ← →" "swipe" em ecras tacteis direcionam a cobra como no jogo classico.</p>
+            <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere</p>
+            <p class="focus">Modo de Exploracao</p>
+            <p>Teclas "A D" e setas "← →" ou gestos "← →" "swipe" em ecras tacteis fazem a cobra virar relativamente a sua direcao.</p>
+            <p>Tecla "W" e "cima" ou gesto "↑" "swipe" faz com que a cobra acelere</p>
         </div>
 
         <canvas id="unity-canvas" tabindex="-1"></canvas>
-        <script src="../snake-explorer/Build/Builds.loader.js"></script>
-        <script>
-            /*
-            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-                // Mobile device style: fill the whole browser client area with the game canvas:
-                var meta = document.createElement('meta');
-                meta.name = 'viewport';
-                meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-                document.getElementsByTagName('head')[0].appendChild(meta);
 
-                var canvas = document.querySelector("#unity-canvas");
-                canvas.style.width = "100%";
-                canvas.style.height = "100%";
-                canvas.style.position = "fixed";
+        <div class="en">
+            <p><a href="../snake-explorer/snake-explorer.exe">Download</a> for windows</p>
+        </div>
 
-                document.body.style.textAlign = "left";
-            }
-            //*/
-            var baseUrl = "../snake-explorer/";
-            createUnityInstance(document.querySelector("#unity-canvas"), {
-                arguments: [],
-                dataUrl: baseUrl + "Build/Builds.data",
-                frameworkUrl: baseUrl + "Build/Builds.framework.js",
-                codeUrl: baseUrl + "Build/Builds.wasm",
-                streamingAssetsUrl: "StreamingAssets",
-                companyName: "saleca",
-                productName: "Snake Explorer",
-                productVersion: "0.1",
-                // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-                // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-            });
-        </script>
+        <div class="pt">
+            <p><a href="../snake-explorer/snake-explorer.exe">Transferir</a> para windows</p>
+
+        </div>
     </main>
-</body>
+    <script src="../snake-explorer/Build/Builds.loader.js"></script>
+    <script>
+        /*
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            // Mobile device style: fill the whole browser client area with the game canvas:
+            var meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.getElementsByTagName('head')[0].appendChild(meta);
 
+            var canvas = document.querySelector("#unity-canvas");
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.position = "fixed";
+
+            document.body.style.textAlign = "left";
+        }
+        //*/
+        var baseUrl = "../snake-explorer/";
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            arguments: [],
+            dataUrl: baseUrl + "Build/Builds.data",
+            frameworkUrl: baseUrl + "Build/Builds.framework.js",
+            codeUrl: baseUrl + "Build/Builds.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "saleca",
+            productName: "Snake Explorer",
+            productVersion: "0.1",
+            // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+            // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+        });
+    </script>
+</body>
 </html>
