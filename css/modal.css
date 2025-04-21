@@ -15,9 +15,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fffa;
+    background-color: #111;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px #0005;
     z-index: 11;
   }
