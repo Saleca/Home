@@ -7,6 +7,7 @@
     <title>Snake Explorer</title>
     <link rel="stylesheet" type="text/css" href="../css/init-black.css">
     <script src="../js/LoadBase.js" defer></script>
+    <script src="../js/modal-manager.js" defer></script>
 </head>
 
 <body>
@@ -14,29 +15,65 @@
         <h1>Snake Explorer</h1>
 
         <div class="en">
-            <h3>Controls</h3>
-            <p>"Esc" key or "3 quick taps" on touch screen to pause</p>
-            <h4>Classic Mode</h4>
-            <p>"W A S D" and "↑ ↓ ← →" keys or swipe gestures on touch screens turn the snake around just like the classic version.</p>
-            <p>Moving in the same direction the snake is already going will make it sprint.</p>
-            <h4>Explore Mode</h4>
-            <p>"A D" and "← →" keys or swipe gestures on touch screens will move the snake relative to its direction.</p>
-            <p>"W" and "↑" key or swipe gesture will make the snake sprint</p>
+
         </div>
 
         <div class="pt">
-            <h3>Controlos</h3>
-            <p>Tecla "Esc" ou "3 toques rapidos" em ecras tacteis</p>
-            <h4>Modo Classico</h4>
-            <p>Teclas "W A S D" e "↑ ↓ ← →" ou gestos "swipe" em ecras tacteis direcionam a cobra como no jogo classico.</p>
-            <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere</p>
-            <h4>Modo de Exploracao</h4>
-            <p>Teclas "A D" e setas "← →" ou gestos "swipe" em ecras tacteis fazem a cobra virar relativamente a sua direcao.</p>
-            <p>Tecla "W" e "↑" ou gesto "swipe" faz com que a cobra acelere</p>
+
         </div>
 
         <h2>WebGL demo</h2>
         <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+        <button class="modal-button" data-modal-target="modal-1">
+            <div class="en">
+                Back
+            </div>
+            <div class="pt">
+                Voltar
+            </div>
+        </button>
+
+        <div id="modal-1" class="modal">
+            <img src="../resources/icons/VerticalSwipeAnimation.svg" alt="Vertical swipe gesture" />
+            <img src="../resources/icons/HorizontalSwipeAnimation.svg" alt="Vertical swipe gesture" />
+            <div class="en">
+                <h3>Controls</h3>
+                <p>"Esc" key or "3 quick taps" on touch screen to pause</p>
+                <h4>Classic Mode</h4>
+                <p>"W A S D" and "↑ ↓ ← →" keys or swipe gestures on touch screens turn the snake around just like the
+                    classic version.</p>
+                <p>Moving in the same direction the snake is already going will make it sprint.</p>
+                <h4>Explore Mode</h4>
+                <p>"A D" and "← →" keys or swipe gestures on touch screens will move the snake relative to its
+                    direction.
+                </p>
+                <p>"W" and "↑" key or swipe gesture will make the snake sprint</p>
+            </div>
+
+            <div class="pt">
+                <h3>Controlos</h3>
+                <p>Tecla "Esc" ou "3 toques rapidos" em ecras tacteis</p>
+                <h4>Modo Classico</h4>
+                <p>Teclas "W A S D" e "↑ ↓ ← →" ou gestos "swipe" em ecras tacteis direcionam a cobra como no jogo
+                    classico.
+                </p>
+                <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere</p>
+                <h4>Modo de Exploracao</h4>
+                <p>Teclas "A D" e setas "← →" ou gestos "swipe" em ecras tacteis fazem a cobra virar relativamente a sua
+                    direcao.</p>
+                <p>Tecla "W" e "↑" ou gesto "swipe" faz com que a cobra acelere</p>
+            </div>
+
+            <button class="close-modal">
+                <div class="en">
+                    Back
+                </div>
+                <div class="pt">
+                    Voltar
+                </div>
+            </button>
+        </div>
 
         <div class="en">
             <p><a href="../snake-explorer/Snake_Explorer_Windows_Installer.exe">Download</a> for windows</p>
@@ -80,4 +117,5 @@
         });
     </script>
 </body>
+
 </html>
