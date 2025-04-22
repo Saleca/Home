@@ -1,0 +1,71 @@
+:root {
+    --key-color1: #333;
+    --key-color2: #2a2a2a;
+    --key-color3: #222;
+    --text-color: #bbb;
+    --key-width: 45px;
+    --horizontal-margin: 4px;
+    --border-width: 4px;
+    --vertical-margin: 3px;
+    --calc-key-width: calc(var(--horizontal-margin) * 2 + var(--key-width) + var(--border-width) * 2);
+}
+
+.key {
+    float: left;
+
+    width: var(--key-width);
+    height: var(--key-width);
+    margin: var(--vertical-margin) var(--horizontal-margin);
+    padding: 4px;
+
+    font-size: 18px;
+    line-height: var(--key-width);
+    text-align: center;
+
+
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 2px var(--border-width) 8px;
+    border-color: var(--key-color1) var(--key-color2) var(--key-color3);
+
+    box-shadow: 0 0 10px #000;
+
+    background: var(--key-color1);
+    background: linear-gradient(to bottom, var(--key-color3), var(--key-color1), var(--key-color2));
+}
+
+.key.special {
+    height: 25px;
+    line-height: 1;
+    font-size: 15px;
+    text-align: left;
+}
+
+.key-spacer {
+    width: var(--calc-key-width);
+    margin: var(--horizontal-margin);
+    float: left;
+}
+
+.w-offset {
+    width: calc(var(--calc-key-width) * .8);
+}
+
+.key-break {
+    clear: left;
+}
+
+.keys {
+    flex-shrink: 0;
+}
+
+.controls-set {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.key.pressed {
+    transform: scale(0.95, 0.95);
+}

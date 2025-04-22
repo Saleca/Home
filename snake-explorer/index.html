@@ -7,6 +7,7 @@
     <title>Snake Explorer</title>
     <link rel="stylesheet" type="text/css" href="../css/init-black.css">
     <link rel="stylesheet" type="text/css" href="../css/modal.css">
+    <link rel="stylesheet" type="text/css" href="../css/keys.css">
     <script src="../js/LoadBase.js" defer></script>
     <script src="../js/modal-manager.js" defer></script>
 </head>
@@ -16,11 +17,11 @@
         <h1>Snake Explorer</h1>
 
         <div class="en">
-
+            <p>brief description</p>
         </div>
 
         <div class="pt">
-
+            <p>breve descricao</p>
         </div>
 
         <h2>WebGL demo</h2>
@@ -35,37 +36,70 @@
             </div>
         </button>
         
-        <div id="overlay"/>
+        <div id="overlay"></div>
         <div id="modal-1" class="modal">
-            <img src="../resources/icons/VerticalSwipeAnimation.svg" alt="Vertical swipe gesture" />
-            <img src="../resources/icons/HorizontalSwipeAnimation.svg" alt="Vertical swipe gesture" />
-            <div class="en">
-                <h3>Controls</h3>
-                <p>"Esc" key or "3 quick taps" on touch screen to pause</p>
-                <h4>Classic Mode</h4>
-                <p>"W A S D" and "↑ ↓ ← →" keys or swipe gestures on touch screens turn the snake around just like the
-                    classic version.</p>
-                <p>Moving in the same direction the snake is already going will make it sprint.</p>
-                <h4>Explore Mode</h4>
-                <p>"A D" and "← →" keys or swipe gestures on touch screens will move the snake relative to its
-                    direction.
-                </p>
-                <p>"W" and "↑" key or swipe gesture will make the snake sprint</p>
-            </div>
+            <!--separate by touch screen or keyboard-->
+            <table>
+                <tr>
+                    <td>
+                        <div class="key special kc-27">Esc</div>
+                    </td>
+                    <td>
+                        <div class="en">
+                            <p>or "3 quick taps" to pause</p>
+                        </div>
+                        <div class="pt">
+                            <p>ou "3 toques rapidos" para pausa</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="controls-set">
+                            <div class="keys">
+                                <div class="key-break"></div>
+                                <div class="key-spacer w-offset"></div>
+                                <div class="key kc-87">W</div>
+                                <div class="key-break"></div>
+                                <div class="key kc-65">A</div>
+                                <div class="key kc-83">S</div>
+                                <div class="key kc-68">D</div>
+                            </div>
 
-            <div class="pt">
-                <h3>Controlos</h3>
-                <p>Tecla "Esc" ou "3 toques rapidos" em ecras tacteis</p>
-                <h4>Modo Classico</h4>
-                <p>Teclas "W A S D" e "↑ ↓ ← →" ou gestos "swipe" em ecras tacteis direcionam a cobra como no jogo
-                    classico.
-                </p>
-                <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere</p>
-                <h4>Modo de Exploracao</h4>
-                <p>Teclas "A D" e setas "← →" ou gestos "swipe" em ecras tacteis fazem a cobra virar relativamente a sua
-                    direcao.</p>
-                <p>Tecla "W" e "↑" ou gesto "swipe" faz com que a cobra acelere</p>
-            </div>
+                            <div class="keys">
+                                <div class="key-spacer"></div>
+                                <div class="key kc-38">↑</div>
+                                <div class="key-break"></div>
+                                <div class="key kc-37">←</div>
+                                <div class="key kc-40">↓</div>
+                                <div class="key kc-39">→</div>
+                            </div>
+                            <img src="../resources/icons/VerticalSwipeAnimation.svg" alt="Vertical swipe gesture" />
+                            <img src="../resources/icons/HorizontalSwipeAnimation.svg" alt="Horizontal swipe gesture" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="en">
+                            <h4>Classic Mode</h4>
+                            <p>Turn the snake around just like the classic version.</p>
+                            <p>Moving in the same direction the snake is already going will make it sprint.</p>
+                            <h4>Explore Mode</h4>
+                            <p>"A D" and "← →" keys or "horizontal swipe gestures" will move the snake relative to its
+                                direction. </p>
+                            <p>"W" and "↑" key or "upward swipe gesture" will make the snake sprint</p>
+                        </div>
+                        <div class="pt">
+                            <h4>Modo Classico</h4>
+                            <p>Direcionam a cobra como no jogo classico. </p>
+                            <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere</p>
+                            <h4>Modo de Exploracao</h4>
+                            <p>Teclas "A D" e setas "← →" ou "gestos horizontais" fazem a cobra virar relativamente a
+                                sua direcao.</p>
+                            <p>Tecla "W" e "↑" ou "gesto para cima" faz com que a cobra acelere</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
             <button class="close-modal">
                 <div class="en">
@@ -83,12 +117,11 @@
 
         <div class="pt">
             <p><a href="../snake-explorer/Snake_Explorer_Windows_Installer.exe">Transferir</a> para windows</p>
-
         </div>
     </main>
     <script src="../snake-explorer/Build/Builds.loader.js"></script>
     <script>
-        /*
+        //*
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             // Mobile device style: fill the whole browser client area with the game canvas:
             var meta = document.createElement('meta');
@@ -101,7 +134,7 @@
             canvas.style.height = "100%";
             canvas.style.position = "fixed";
 
-            document.body.style.textAlign = "left";
+            //document.body.style.textAlign = "left";
         }
         //*/
         var baseUrl = "../snake-explorer/";
