@@ -1,8 +1,12 @@
 :root {
-    --dark: rgb(0, 0, 0);
-    --dark-seconday: rgb(50, 50, 50);
-    --light: rgb(200, 200, 200);
-    --light-secondary: rgb(150, 150, 150);
+    --dark: #111;
+    --dark-seconday: #333;
+    --darker: #0008;
+
+    --light: #bbb;
+    --light-secondary: #999;
+    --lighter: #fff8;
+
     --dark-link: cornflowerblue;
     --dark-link-visited: mediumslateblue;
 }
