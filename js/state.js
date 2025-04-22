@@ -70,7 +70,7 @@ function manageNavigation() {
 
 function getPath() {
   let path = window.location.href;
- 
+
   if (path.includes('saleca.im')) {
     path = path.replace(/^.*saleca.im\//, '');
   }
@@ -91,7 +91,7 @@ function getPath() {
   if (path.includes('wwww.')) {
     path = path.replace(/^.*www./, '');
   }
-  
+
   if (path.includes('.html')) {
     path = path.replace('.html', '');
   }
@@ -162,6 +162,34 @@ const writeHoldMS = 200;
 const cursorSpeedMS = 400;
 
 /** Manages the loading animation. */
+function commitMessage() {
+  const versionLabel = document.getElementById('version-label'); // Assuming you have an element with this ID
+
+  if (!versionLabel) {
+    console.error("Element with ID 'version-label' not found.");
+    return;
+  }
+
+  fetch(`https://api.github.com/repos/saleca/home/commits?per_page=1`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.length > 0) {
+        const lastCommit = data[0];
+        return lastCommit.commit.message;
+      } else {
+        console.warn("No commits found in the repository.");
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching last commit:", error);
+    });
+}
+
 async function loadingAnimation(navigationType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
   startConsole(loadScreenElement);
@@ -207,7 +235,7 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
 
 function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = `Saleca Portfolio [Version ${version}]`;
+  start.textContent = `Saleca Portfolio [Version ${version}] | ` + commitMessage();
   loadScreenElement.append(start);
 }
 

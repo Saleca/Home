@@ -286,6 +286,9 @@ html:has(#dark:checked) {
     tr {
         border-bottom: solid var(--light-secondary);
     }
+    tr:last-child {
+        border-bottom: none;
+    }
 
     button {
         background: var(--light-secondary);
@@ -333,6 +336,9 @@ html:has(#dark:checked) {
 
         tr {
             border-bottom: solid var(--light-secondary);
+        }
+        tr:last-child {
+            border-bottom: none;
         }
 
         button {
