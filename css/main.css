@@ -112,6 +112,9 @@ h2+.focus,
 h3+.focus {
     padding-top: -1em;
 }
+button+.focus {
+    padding: .25em;
+}
 
 #state-form {
     display: flex;
