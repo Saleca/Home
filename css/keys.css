@@ -59,7 +59,7 @@
     flex-shrink: 0;
 }
 
-.controls-set {
+.controls {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
