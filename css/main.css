@@ -123,6 +123,11 @@ h3+.focus {
     margin: 0;
 }
 
+button {
+    background: var(--dark-secondary);
+    color: var(--light-secondary);
+}
+
 hr {
     border-color: var(--light-secondary);
     margin: 0;
@@ -249,6 +254,11 @@ html:has(#dark:checked) {
 
     hr {
         border-color: var(--dark-secondary);
+    }
+
+    button {
+        background: var(--light-secondary);
+        color: var(--dark-secondary);
     }
 
     #device:checked~.toggle label[for="device"],
