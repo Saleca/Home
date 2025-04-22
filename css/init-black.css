@@ -1,12 +1,16 @@
 body {
-background-color:black; 
-color:black;
+    background-color: black;
+    color: black;
 }
 
 a {
- color: black;
- }
+    color: black;
+}
 
- a:visited {
- color:black
- }
+a:visited {
+    color: black
+}
+
+button {
+    display: block;
+}
