@@ -109,6 +109,12 @@ h3+.focus {
     padding-top: -1em;
 }
 
+button+.focus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #state-form {
     display: flex;
     justify-content: space-between;
@@ -128,7 +134,10 @@ h3+.focus {
 }
 
 button {
-    background: var(--dark-secondary);
+    padding: .25em;
+    cursor: pointer;
+    border: 1px solid var(--dark);
+    background: var(--dark);
     color: var(--light);
 }
 
@@ -150,7 +159,7 @@ tr:last-child {
 }
 
 /*align non-text elements horizontally*/
-td > * {
+td>* {
     /*for column orientation*/
     margin: 0 auto;
     /**/
@@ -276,7 +285,13 @@ html:has(#dark:checked) {
     }
 
     .toggle label {
-        border: 1px solid var(--light);
+        border-color:var(--light);
+    }
+
+    button {
+        border-color: var(--light);
+        background: var(--light);
+        color: var(--dark);
     }
 
     hr {
@@ -286,16 +301,12 @@ html:has(#dark:checked) {
     tr {
         border-bottom: solid var(--light-secondary);
     }
+
     tr:last-child {
         border-bottom: none;
     }
 
-    button {
-        background: var(--light-secondary);
-        color: var(--dark);
-    }
-
-    #device:checked~.toggle label[for="device"],
+        #device:checked~.toggle label[for="device"],
     #pt:checked~.toggle label[for="pt"],
     #en:checked~.toggle label[for="en"] {
         background-color: var(--light);
@@ -327,7 +338,12 @@ html:has(#dark:checked) {
         }
 
         .toggle label {
-            border: 1px solid var(--light);
+            border-color: var(--light);
+        }
+        button {
+            border-color: var(--light);
+            background: var(--light);
+            color: var(--dark);
         }
 
         hr {
@@ -337,13 +353,9 @@ html:has(#dark:checked) {
         tr {
             border-bottom: solid var(--light-secondary);
         }
+
         tr:last-child {
             border-bottom: none;
-        }
-
-        button {
-            background: var(--light-secondary);
-            color: var(--dark);
         }
 
         #device:checked~.toggle label[for="device"],
