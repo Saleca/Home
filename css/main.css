@@ -97,12 +97,6 @@ a {
 }
 
 .focus {
-    hyphens: unset;
-    text-indent: unset;
-    text-align: center;
-    padding-bottom: 1.5em;
-
-    display: block;
     margin-left: auto;
     margin-right: auto;
 }
@@ -111,6 +105,18 @@ h1+.focus,
 h2+.focus,
 h3+.focus {
     padding-top: -1em;
+}
+
+p+.focus{
+    hyphens: unset;
+    text-indent: unset;
+    text-align: center;
+    padding-bottom: 1.5em;
+}
+
+button+.focus{
+    display: block;
+   
 }
 
 #state-form {
