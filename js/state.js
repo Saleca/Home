@@ -163,7 +163,7 @@ const cursorSpeedMS = 400;
 
 /** Manages the loading animation. */
 function commitMessage() {
-  fetch(`https://api.github.com/repos/saleca/home/commits?per_page=1`)
+  return fetch(`https://api.github.com/repos/saleca/home/commits?per_page=1`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -173,19 +173,21 @@ function commitMessage() {
     .then(data => {
       if (data && data.length > 0) {
         const lastCommit = data[0];
-        return lastCommit.commit.message;
+        return lastCommit.commit.message; // Return the message to resolve the Promise
       } else {
         console.warn("No commits found in the repository.");
+        return 'Unknown Commit'; // Return a default value if no commits
       }
     })
     .catch(error => {
       console.error("Error fetching last commit:", error);
+      return 'Error fetching commit'; // Return an error message
     });
 }
 
 async function loadingAnimation(navigationType, signal) {
   const loadScreenElement = document.getElementById('load-screen');
-  startConsole(loadScreenElement);
+  await startConsole(loadScreenElement);
   const navigationStack = getAllNavigationItems();
 
   if (navigationStack.length > 1) {
@@ -226,9 +228,10 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
   }
 }
 
-function startConsole(loadScreenElement) {
+async function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  start.textContent = `Saleca Portfolio [Version ${version}] | ` + commitMessage();
+  const message = await commitMessage();
+  start.textContent = `Saleca Portfolio [Version ${version}] | ${message}`;
   loadScreenElement.append(start);
 }
 
