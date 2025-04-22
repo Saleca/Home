@@ -137,10 +137,23 @@ hr {
     margin: 0;
 }
 
+table {
+    border-collapse: collapse;
+}
+/*align non-text elements horizontally*/
+td > * { 
+    /*for column orientation*/
+    margin: 0 auto;
+    /**/
+    
+    /*for row orientation* /
+    display: inline-block;
+    /**/
+  }
+
 tr {
     border-bottom: solid var(--light-secondary);
 }
-
 tr:last-child {
     border-bottom: none;
 }
@@ -267,6 +280,7 @@ html:has(#dark:checked) {
     hr {
         border-color: var(--dark-secondary);
     }
+
     tr {
         border-bottom: solid var(--dark-secondary);
     }
@@ -314,6 +328,7 @@ html:has(#dark:checked) {
         hr {
             border-color: var(--light-secondary);
         }
+
         tr {
             border-bottom: solid var(--dark-secondary);
         }
