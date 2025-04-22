@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Explorer</title>
     <link rel="stylesheet" type="text/css" href="../css/init-black.css">
-    <link rel="stylesheet" type="text/css" href="../css/modal.css">
-    <link rel="stylesheet" type="text/css" href="../css/keys.css">
     <script src="../js/LoadBase.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../css/modal.css">
     <script src="../js/modal-manager.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../css/keys.css">
 </head>
 
 <body>
@@ -25,8 +25,6 @@
         </div>
 
         <h2>WebGL demo</h2>
-        <canvas id="unity-canvas" tabindex="-1"></canvas>
-
         <button class="modal-button" data-modal-target="modal-1">
             <div class="en">
                 Controls
@@ -35,6 +33,7 @@
                 Controlos
             </div>
         </button>
+        <canvas id="unity-canvas" tabindex="-1"></canvas>
 
         <div id="overlay"></div>
         <div id="modal-1" class="modal">
@@ -73,7 +72,7 @@
                                 <div class="key kc-40">↓</div>
                                 <div class="key kc-39">→</div>
                             </div>
-                            
+
                             <div class="key-group">
                                 <img src="../resources/icons/VerticalSwipeAnimation.svg" alt="Vertical swipe gesture" />
                             </div>

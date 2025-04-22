@@ -263,6 +263,9 @@ html:has(#dark:checked) {
     hr {
         border-color: var(--dark-secondary);
     }
+    tr {
+        border-bottom: solid var(--dark-secondary);
+    }
 
     button {
         background: var(--light-secondary);
@@ -306,6 +309,9 @@ html:has(#dark:checked) {
 
         hr {
             border-color: var(--light-secondary);
+        }
+        tr {
+            border-bottom: solid var(--dark-secondary);
         }
 
         button {
