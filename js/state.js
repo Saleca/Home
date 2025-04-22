@@ -163,13 +163,6 @@ const cursorSpeedMS = 400;
 
 /** Manages the loading animation. */
 function commitMessage() {
-  const versionLabel = document.getElementById('version-label'); // Assuming you have an element with this ID
-
-  if (!versionLabel) {
-    console.error("Element with ID 'version-label' not found.");
-    return;
-  }
-
   fetch(`https://api.github.com/repos/saleca/home/commits?per_page=1`)
     .then(response => {
       if (!response.ok) {
