@@ -125,12 +125,20 @@ h3+.focus {
 
 button {
     background: var(--dark-secondary);
-    color: var(--light-secondary);
+    color: var(--light);
 }
 
 hr {
     border-color: var(--light-secondary);
     margin: 0;
+}
+
+tr {
+    border-bottom: solid var(--light-secondary);
+}
+
+tr:last-child {
+    border-bottom: none;
 }
 
 #page-path {
@@ -258,7 +266,7 @@ html:has(#dark:checked) {
 
     button {
         background: var(--light-secondary);
-        color: var(--dark-secondary);
+        color: var(--dark);
     }
 
     #device:checked~.toggle label[for="device"],
@@ -298,6 +306,11 @@ html:has(#dark:checked) {
 
         hr {
             border-color: var(--light-secondary);
+        }
+
+        button {
+            background: var(--light-secondary);
+            color: var(--dark);
         }
 
         #device:checked~.toggle label[for="device"],
