@@ -47,7 +47,7 @@
     float: left;
 }
 
-.w-offset {
+.key-spacer.w-offset {
     width: calc(var(--calc-key-width) * .8);
 }
 
