@@ -55,6 +55,8 @@ main,
 footer {
     transition: color 0.3s;
     background-color: var(--background);
+    transition: background-color 0.3s;
+
 }
 
 header {
