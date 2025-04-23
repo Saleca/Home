@@ -12,5 +12,6 @@ a:visited {
 }
 
 button {
-    display: #111;
+    background-color: #111;
+    color: #111;
 }
