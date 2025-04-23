@@ -43,10 +43,41 @@ function setControls(controls) {
   }
 }
 
+function getUrlParameters() {
+  const params = {};
+  const search = window.location.search.substring(1); // Remove the leading '?'
+  if (search) {
+    search.split('&').forEach(pair => {
+      const parts = pair.split('=');
+      if (parts[0]) {
+        params[parts[0]] = parts[1] ? decodeURIComponent(parts[1]) : '';
+      }
+    });
+  }
+  return params;
+}
+
 /** Configures the state of the page at start up. */
 function applyState() {
-  const language = localStorage.getItem('language') || Languages.ENGLISH;
-  const theme = localStorage.getItem('theme') || Themes.DEVICE;
+  const urlParams = getUrlParameters();
+
+  let language;
+  if (urlParams.lang) {
+    language = urlParams.lang;
+    localStorage.setItem('language', language);
+  }
+  else {
+    language = localStorage.getItem('language') || Languages.ENGLISH;
+  }
+
+  let theme;
+  if (urlParams.theme) {
+    theme = urlParams.theme;
+    localStorage.setItem('theme', theme);
+  }
+  else {
+    theme = localStorage.getItem('theme') || Themes.DEVICE;
+  }
   //const controls = localStorage.getItem('controls') || Controls.KEYBOARD;
 
   document.documentElement.lang = language;
@@ -88,7 +119,7 @@ function getPath() {
   let path = window.location.href;
 
   //*
-  if (path.includes('saleca.im')) {
+  if (path.includes('saleca.im/')) {
     path = path.replace(/^.*saleca.im\//, '');
   }
   //*/
@@ -102,6 +133,11 @@ function getPath() {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }
   //*/
+
+  if (path.includes('p/')) {
+    path = path.replace(/^.*p\//, '')
+  }
+
   if (path.includes('?')) {
     path = path.slice(0, path.indexOf('?'));
   }
@@ -534,7 +570,7 @@ function addPagePath() {
       if (index < parts.length - 1) {
         const link = document.createElement('a');
         link.textContent = part;
-        link.href = '/pages/'+currentPath;
+        link.href = '/pages/' + currentPath;
         pagePathElement.appendChild(link);
         pagePathElement.appendChild(document.createTextNode('\\'));
         currentPath += '/';
