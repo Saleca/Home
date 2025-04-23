@@ -422,7 +422,7 @@ html:has(#keys:checked) {
 
 html:has(#classic:checked) {
     .classic-mode {
-        display: auto;
+        display: block;
     }
 
     tr:has(+ .explorer-mode) {
@@ -432,8 +432,11 @@ html:has(#classic:checked) {
 
 html:has(#explorer:checked) {
     .explorer-mode {
-        display: auto;
+        display: block;
     }
+tr.explorer-mode{
+display:auto;
+)
 }
 
 @media (min-width: 600px) {
