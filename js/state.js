@@ -553,7 +553,7 @@ function addPagePath() {
   const path = getCurrentPath();
   if (path !== '\\') {
     const homeLink = document.createElement('a');
-    homeLink.href = "/pages";
+    homeLink.href = "/";
     homeLink.textContent = 'saleca';
     pagePathElement.appendChild(homeLink);
   } else {
@@ -570,7 +570,7 @@ function addPagePath() {
       if (index < parts.length - 1) {
         const link = document.createElement('a');
         link.textContent = part;
-        link.href = '/pages/' + currentPath;
+        link.href = currentPath;
         pagePathElement.appendChild(link);
         pagePathElement.appendChild(document.createTextNode('\\'));
         currentPath += '/';
