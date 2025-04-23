@@ -97,7 +97,7 @@ function getPath() {
     path = path.replace(/^.*saleca.github.io\/Home\//, '');
   }
   //*/
-  /* live server
+  //* live server
   if (path.includes('127.0.0.1:5500/')) {
     path = window.location.href.replace(/^.*127\.0\.0\.1:5500\//, '');
   }

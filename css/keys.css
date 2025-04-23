@@ -1,14 +1,27 @@
 :root {
-    --key-color1: #333;
-    --key-color2: #2a2a2a;
-    --key-color3: #222;
-    --text-color: #bbb;
+    --dark-key-dark-accent: #222;
+    --dark-key: #333;
+    --dark-key-light-accent: #444;
+    --dark-key-text: #bbb;
+    --dark-key-shadow: #111;
+
+    --light-key-dark-accent: #777;
+    --light-key: #888;
+    --light-key-light-accent: #999;
+    --light-key-text: #444;
+    --light-key-shadow: #aaa;
+
+    --key: var(--light-key);
+    --key-dark-accent: var(--light-key-dark-accent);
+    --key-light-accent: var(--light-key-light-accent);
+    --key-text: var(--light-key-text);
+    --key-shadow: var(--light-key-shadow);
+
     --key-width: 45px;
     --horizontal-margin: 2px;
     --border-width: 4px;
     --vertical-margin: 3px;
 }
-
 
 .key {
     display: inline-block;
@@ -21,20 +34,20 @@
     line-height: var(--key-width);
     text-align: center;
 
-    border-radius: 7px;
+    border-radius: 10px;
     border-style: solid;
-    border-width: 2px var(--border-width) 8px;
-    border-color: var(--key-color1) var(--key-color2) var(--key-color3);
+    border-width: 2px var(--border-width) 7px;
+    border-color: var(--key-dark-accent) var(--key) var(--key-light-accent);
 
-    box-shadow: 0 0 10px #000;
+    box-shadow: 1px 0 3px 2px var(--key-shadow);
 
-    background: var(--key-color1);
-    background: linear-gradient(to bottom, var(--key-color3), var(--key-color1), var(--key-color2));
+    background: var(--key);
+    background: linear-gradient(20deg, var(--key-dark-accent), var(--key-light-accent));
 }
 
 .key.special {
     display: inline-block;
-    height: 25px;
+    height: calc(var(--key-width) * .7);
     line-height: 1;
     font-size: 15px;
     text-align: left;
@@ -62,4 +75,22 @@
 
 .key.pressed {
     transform: scale(0.95, 0.95);
+}
+
+html:has(#dark:checked) {
+    --key: var(--dark-key);
+    --key-dark-accent: var(--dark-key-dark-accent);
+    --key-light-accent: var(--dark-key-light-accent);
+    --key-text: var(--dark-key-text);
+    --key-shadow: var(--dark-key-shadow);
+}
+
+@media (prefers-color-scheme: dark) {
+    html:has(#device:checked) {
+        --key: var(--dark-key);
+        --key-dark-accent: var(--dark-key-dark-accent);
+        --key-light-accent: var(--dark-key-light-accent);
+        --key-text: var(--dark-key-text);
+        --key-shadow: var(--dark-key-shadow);
+    }
 }

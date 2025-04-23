@@ -1,16 +1,16 @@
 body {
-    background-color: black;
-    color: black;
+    background-color: #111;
+    color: #111;
 }
 
 a {
-    color: black;
+    color: #111;
 }
 
 a:visited {
-    color: black
+    color: #111;
 }
 
 button {
-    display: none;
+    display: #111;
 }

@@ -13,6 +13,7 @@ function openModal(modalId) {
         return;
     }
     currentModal = modal;
+    document.body.style.overflow = 'hidden';
     overlay.style.display = "block";
     modal.style.display = "block";
     modal.addEventListener("click", stopClickPropagation);
@@ -21,6 +22,7 @@ function openModal(modalId) {
 function closeModal() {
     overlay.style.display = "none";
     currentModal.style.display = "none";
+    document.body.style.overflow = 'auto';
     currentModal.removeEventListener("click", stopClickPropagation);
 }
 
