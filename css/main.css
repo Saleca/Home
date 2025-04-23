@@ -391,11 +391,11 @@ html:has(#dark:checked) {
 }
 
 html[lang="pt"] .pt {
-    display: block;
+    display: auto;
 }
 
 html[lang="en"] .en {
-    display: block;
+    display: auto;
 }
 
 .touch-controls,
@@ -405,13 +405,13 @@ html[lang="en"] .en {
 
 html:has(#touch:checked) {
     .touch-controls {
-        display: block;
+        display: auto;
     }
 }
 
 html:has(#keys:checked) {
     .keyboard-controls {
-        display: block;
+        display: auto;
     }
 }
 
@@ -422,7 +422,7 @@ html:has(#keys:checked) {
 
 html:has(#classic:checked) {
     .classic-mode {
-        display: block;
+        display: auto;
     }
 
     tr:has(+ .explorer-mode) {
@@ -432,7 +432,7 @@ html:has(#classic:checked) {
 
 html:has(#explorer:checked) {
     .explorer-mode {
-        display: block;
+        display: auto;
     }
 }
 
