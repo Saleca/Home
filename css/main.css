@@ -109,6 +109,7 @@ h2+.focus,
 h3+.focus {
     padding-top: -1em;
 }
+
 /*button focus*/
 button.focus {
     padding: .25em;
@@ -117,23 +118,7 @@ button.focus {
     margin-right: auto;
 }
 
-#state-form {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 1em;
-}
 
-.toggle {
-    display: flex;
-}
-
-.toggle label {
-    /*change toogles to radial button or div*/
-    padding: .25em;
-    cursor: pointer;
-    border: 1px solid var(--dark);
-    margin: 0;
-}
 
 button {
     padding: .25em;
@@ -152,10 +137,13 @@ table {
     border-collapse: collapse;
 }
 
+td{
+padding:10px;
+}
+
 tr {
     border-bottom: solid var(--dark-secondary);
 }
-
 tr:last-child {
     border-bottom: none;
 }
@@ -250,20 +238,37 @@ td>* {
     margin-right: auto;
 }
 
-/* region theme */
-#dark:checked~.toggle label[for="dark"] {
-    background-color: var(--light);
-    color: var(--dark);
+
+#state-form {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+.toggle {
+    display: flex;
+}
+
+.toggle label {
+    /*change toogles to radial button or div*/
+    padding: .25em;
+    cursor: pointer;
+    border: 1px solid var(--dark);
+    margin: 0;
 }
 
 #light:checked~.toggle label[for="light"],
-#device:checked~.toggle label[for="device"],
+#keys:checked~.toggle label[for="keys"],
+#touch:checked~.toggle label[for="touch"],
+#classic:checked~.toggle label[for="classic"],
+#explorer:checked~.toggle label[for="explorer"],
 #pt:checked~.toggle label[for="pt"],
 #en:checked~.toggle label[for="en"] {
     background-color: var(--dark);
     color: var(--light);
 }
 
+/* region theme */
 html:has(#dark:checked) {
     body {
         color: var(--light);
@@ -287,7 +292,7 @@ html:has(#dark:checked) {
     }
 
     .toggle label {
-        border-color:var(--light);
+        border-color: var(--light);
     }
 
     button {
@@ -308,7 +313,11 @@ html:has(#dark:checked) {
         border-bottom: none;
     }
 
-        #device:checked~.toggle label[for="device"],
+    #dark:checked~.toggle label[for="dark"],
+    #keys:checked~.toggle label[for="keys"],
+    #touch:checked~.toggle label[for="touch"],
+    #classic:checked~.toggle label[for="classic"],
+    #explorer:checked~.toggle label[for="explorer"],
     #pt:checked~.toggle label[for="pt"],
     #en:checked~.toggle label[for="en"] {
         background-color: var(--light);
@@ -362,6 +371,10 @@ html:has(#dark:checked) {
         }
 
         #device:checked~.toggle label[for="device"],
+        #keys:checked~.toggle label[for="keys"],
+        #touch:checked~.toggle label[for="touch"],
+        #classic:checked~.toggle label[for="classic"],
+        #explorer:checked~.toggle label[for="explorer"],
         #pt:checked~.toggle label[for="pt"],
         #en:checked~.toggle label[for="en"] {
             background-color: var(--light);
@@ -383,6 +396,44 @@ html[lang="pt"] .pt {
 
 html[lang="en"] .en {
     display: block;
+}
+
+.touch-controls,
+.keyboard-controls {
+    display: none;
+}
+
+html:has(#touch:checked) {
+    .touch-controls {
+        display: block;
+    }
+}
+
+html:has(#keys:checked) {
+    .keyboard-controls {
+        display: block;
+    }
+}
+
+.classic-mode,
+.explorer-mode {
+    display: none;
+}
+
+html:has(#classic:checked) {
+    .classic-mode {
+        display: block;
+    }
+
+    tr:has(+ .explorer-mode) {
+        border-bottom: none;
+    }
+}
+
+html:has(#explorer:checked) {
+    .explorer-mode {
+        display: block;
+    }
 }
 
 @media (min-width: 600px) {

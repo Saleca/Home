@@ -46,70 +46,177 @@
                     Controlos
                 </div>
             </h4>
-            <!--separate by touch screen or keyboard-->
-            <table>
+            <div style="display:flex">
+            <input type="radio" id="touch" name="control-type" value="touch" hidden>
+            <input type="radio" id="keys" name="control-type" value="keys" hidden checked>
+            <div class="toggle control-type">
+                <label for="touch" onclick="">
+                    <div class="en">
+                        Touch screen
+                    </div>
+                    <div class="pt">
+                        Ecra tatil
+                    </div>
+                </label>
+                <label for="keys" onclick="">
+                    <div class="en">
+                        Keyboard
+                    </div>
+                    <div class="pt">
+                        Teclado
+                    </div>
+                </label>
+            </div>
+            <div style="flex-grow: 1;"></div>
+            <input type="radio" id="classic" name="game-type" value="classic" hidden>
+            <input type="radio" id="explorer" name="game-type" value="explorer" hidden checked>
+            <div class="toggle game-type">
+                <label for="classic" onclick="">
+                    <div class="en">
+                        Classic
+                    </div>
+                    <div class="pt">
+                        Classico
+                    </div>
+                </label>
+                <label for="explorer" onclick="">
+                    <div class="en">
+                        Explorer
+                    </div>
+                    <div class="pt">
+                        Aventura
+                    </div>
+                </label>
+            </div>
+        </div>
+            <table> 
                 <tr>
                     <td>
-                        <div class="key special kc-27">Esc</div>
+                        <div class="keyboard-controls">
+                            <div class="key special kc-27">Esc</div>
+                        </div>
+                        <div class="touch-controls">
+                            <div class="en">
+                                <p>"3 quick taps"</p>
+                            </div>
+                            <div class="pt">
+                                <p>"3 toques rapidos"</p>
+                            </div>
+                        </div>
                     </td>
                     <td>
                         <div class="en">
-                            <p>or "3 quick taps" to pause</p>
+                            <p>Pause</p>
                         </div>
                         <div class="pt">
-                            <p>ou "3 toques rapidos" para pausa</p>
+                            <p>Pausa</p>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="controls">
-                            <div class="key-group">
-                                <div class="key-spacer w-offset"></div>
-                                <div class="key kc-87">W</div>
-                                <div class="key-break"></div>
-                                <div class="key kc-65">A</div>
-                                <div class="key kc-83">S</div>
-                                <div class="key kc-68">D</div>
-                            </div>
+                        <div class="classic-mode">
+                            <div class="keyboard-controls">
 
-                            <div class="key-group">
-                                <div class="key-spacer"></div>
-                                <div class="key kc-38">↑</div>
-                                <div class="key-break"></div>
-                                <div class="key kc-37">←</div>
-                                <div class="key kc-40">↓</div>
-                                <div class="key kc-39">→</div>
-                            </div>
+                                <div class="controls">
+                                    <div class="key-group">
+                                        <div class="key-spacer w-offset"></div>
+                                        <div class="key kc-87">W</div>
+                                        <div class="key-break"></div>
+                                        <div class="key kc-65">A</div>
+                                        <div class="key kc-83">S</div>
+                                        <div class="key kc-68">D</div>
+                                    </div>
 
-                            <div class="key-group">
-                                <img src="../resources/icons/VerticalSwipeAnimation.svg" alt="Vertical swipe gesture" />
+                                    <div class="key-group">
+                                        <div class="key-spacer"></div>
+                                        <div class="key kc-38">↑</div>
+                                        <div class="key-break"></div>
+                                        <div class="key kc-37">←</div>
+                                        <div class="key kc-40">↓</div>
+                                        <div class="key kc-39">→</div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="touch-controls">
+                                <div class="controls">
+                                    <div class="key-group">
+                                        <img src="../resources/icons/VerticalSwipeAnimation.svg"
+                                            alt="Vertical swipe gesture" />
+                                    </div>
+                                    <div class="key-group">
+                                        <img src="../resources/icons/HorizontalSwipeAnimation.svg"
+                                            alt="Horizontal swipe gesture" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="explorer-mode">
+                            <div class="keyboard-controls">
+                                <div class="controls">
+                                    <div class="key-group">
+                                        <div class="key kc-65">A</div>
+                                        <div class="key-spacer"></div>
+                                        <div class="key kc-68">D</div>
+                                    </div>
 
-                            <div class="key-group">
-                                <img src="../resources/icons/HorizontalSwipeAnimation.svg"
-                                    alt="Horizontal swipe gesture" />
+                                    <div class="key-group">
+                                        <div class="key kc-37">←</div>
+                                        <div class="key-spacer"></div>
+                                        <div class="key kc-39">→</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="touch-controls">
+                                <div class="controls">
+                                    <div class="key-group">
+                                        <img src="../resources/icons/HorizontalSwipeAnimation.svg"
+                                            alt="Horizontal swipe gesture" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </td>
                     <td>
+                        <div class="classic-mode">
+                            <div class="en">
+                                <h4>Classic Mode</h4>
+                                <p>Turn the snake around just like the classic version.</p>
+                                <p>Moving in the same direction the snake is already going will make it sprint.</p>
+                            </div>
+                            <div class="pt">
+                                <h4>Modo Classico</h4>
+                                <p>Direcionam a cobra como no jogo classico.</p>
+                                <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere.</p>
+                            </div>
+                        </div>
+                        <div class="explorer-mode">
+                            <div class="en">
+                                <h4>Explorer Mode</h4>
+                                <p>Turn</p>
+                            </div>
+                            <div class="pt">
+                                <h4>Modo de Aventura</h4>
+                                <p>Virar</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="explorer-mode">
+                    <td>
+                        <div class="keyboard-controls">
+                            <div class="key kc-87">W</div>
+                        </div>
+                        <div class="touch-controls">
+                            "upward swipe gesture"
+                        </div>
+                    </td>
+                    <td>
                         <div class="en">
-                            <h4>Classic Mode</h4>
-                            <p>Turn the snake around just like the classic version.</p>
-                            <p>Moving in the same direction the snake is already going will make it sprint.</p>
-                            <h4>Explore Mode</h4>
-                            <p>"A D" and "← →" keys or "horizontal swipe gestures" will move the snake relative to its
-                                direction. </p>
-                            <p>"W" and "↑" key or "upward swipe gesture" will make the snake sprint</p>
+                            <p>Sprint</p>
                         </div>
                         <div class="pt">
-                            <h4>Modo Classico</h4>
-                            <p>Direcionam a cobra como no jogo classico. </p>
-                            <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere</p>
-                            <h4>Modo de Exploracao</h4>
-                            <p>Teclas "A D" e setas "← →" ou "gestos horizontais" fazem a cobra virar relativamente a
-                                sua direcao.</p>
-                            <p>Tecla "W" e "↑" ou "gesto para cima" faz com que a cobra acelere</p>
+                            <p>Acelerar</p>
                         </div>
                     </td>
                 </tr>
@@ -152,7 +259,7 @@
                 //document.body.style.textAlign = "left";
             }
             //*/
-            
+
             var baseUrl = "../snake-explorer/";
             createUnityInstance(document.querySelector("#unity-canvas"), {
                 arguments: [],

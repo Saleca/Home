@@ -10,6 +10,11 @@ const Themes = {
   DARK: 'dark'
 };
 
+const Controls = {
+  TOUCH: 'touch',
+  KEYBOARD: 'keyboard',
+};
+
 /** Sets the language of the document. */
 function setLanguage(language) {
   if (Object.values(Languages).includes(language)) {
@@ -29,14 +34,25 @@ function setTheme(theme) {
   }
 }
 
+/** Sets the display controls. */
+function setControls(controls) {
+  if (Object.values(Controls).includes(controls)) {
+    localStorage.setItem('controls', controls);
+  } else {
+    console.error('Invalid controls');
+  }
+}
+
 /** Configures the state of the page at start up. */
 function applyState() {
   const language = localStorage.getItem('language') || Languages.ENGLISH;
   const theme = localStorage.getItem('theme') || Themes.DEVICE;
+  //const controls = localStorage.getItem('controls') || Controls.KEYBOARD;
 
   document.documentElement.lang = language;
   document.getElementById(language).checked = true;
   document.getElementById(theme).checked = true;
+  //document.getElementById(controls).checked = true;
 }
 /* #endregion */
 
@@ -71,9 +87,11 @@ function manageNavigation() {
 function getPath() {
   let path = window.location.href;
 
+  //*
   if (path.includes('saleca.im')) {
     path = path.replace(/^.*saleca.im\//, '');
   }
+  //*/
   /* gitbub pages default url
   if (path.includes('saleca.github.io/Home/')) {
     path = path.replace(/^.*saleca.github.io\/Home\//, '');
