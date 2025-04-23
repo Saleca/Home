@@ -391,11 +391,11 @@ html:has(#dark:checked) {
 }
 
 html[lang="pt"] .pt {
-    display: auto;
+    display: block;
 }
 
 html[lang="en"] .en {
-    display: auto;
+    display: block;
 }
 
 .touch-controls,
@@ -405,13 +405,13 @@ html[lang="en"] .en {
 
 html:has(#touch:checked) {
     .touch-controls {
-        display: auto;
+        display: block;
     }
 }
 
 html:has(#keys:checked) {
     .keyboard-controls {
-        display: auto;
+        display: block;
     }
 }
 
