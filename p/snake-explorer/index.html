@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="unity-game" content="true">
+    <meta name="has-modal" content="true">
+    <meta name="has-keys" content="true">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Explorer</title>
     <link rel="stylesheet" type="text/css" href="/css/init-black.css">
-    <script src="/js/LoadBase.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="/css/modal.css">
-    <script src="/js/modal-manager.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="/css/keys.css">
+    <script src="/js/load-manager.js" defer></script>
 </head>
 
 <body>
@@ -248,42 +248,5 @@
             <p><a href="/resources/files/Snake_Explorer_Windows_Installer.exe">Transferir</a> para windows</p>
         </div>
     </main>
-    <script src="/resources/files/WebGL_Snake_Explorer_Build/Builds.loader.js"></script>
-    <script>
-        function initUnityPayer() {
-            /*
-            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-                // Mobile device style: fill the whole browser client area with the game canvas:
-                var meta = document.createElement('meta');
-                meta.name = 'viewport';
-                meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-                document.getElementsByTagName('head')[0].appendChild(meta);
-
-                var canvas = document.querySelector("#unity-canvas");
-                canvas.style.width = "100%";
-                canvas.style.height = "100%";
-                canvas.style.position = "fixed";
-
-                //document.body.style.textAlign = "left";
-            }
-            //*/
-
-            var baseUrl = "/resources/files/WebGL_Snake_Explorer_Build/";
-            createUnityInstance(document.querySelector("#unity-canvas"), {
-                arguments: [],
-                dataUrl: baseUrl + "Builds.data",
-                frameworkUrl: baseUrl + "Builds.framework.js",
-                codeUrl: baseUrl + "Builds.wasm",
-                streamingAssetsUrl: "StreamingAssets",
-                companyName: "saleca",
-                productName: "Snake Explorer",
-                productVersion: "0.1",
-                // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-                // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-            });
-        }
-        document.addEventListener('DOMContentLoaded', initUnityPayer);
-    </script>
 </body>
-
 </html>

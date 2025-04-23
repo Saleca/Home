@@ -3,12 +3,15 @@
 async function addBaseElements() {
     const head = document.head;
     const isDocument = document.querySelector('meta[name="document"]');
-//*
+    const isUnityGame = document.querySelector('meta[name="unity-game"]');
+    const hasKeys = document.querySelector('meta[name="has-keys"]');
+    const hasModal = document.querySelector('meta[name="has-modal"]');
+
     const base = document.createElement('base');
     //base.href = `/${repo}/`; //to use with github pages url
     base.href = `/p/`;
     head.appendChild(base);
-//*/
+
     const initialStyle = document.styleSheets[0];
 
     const link = document.createElement('link');
@@ -72,6 +75,37 @@ async function addBaseElements() {
 
     document.body.appendChild(pageContainerElement);
     window.dispatchEvent(new Event('page-container-added'));
+
+    if (hasModal) {
+        const modalCss = document.createElement('link');
+        modalCss.rel = "stylesheet";
+        modalCss.type = "text/css";
+        modalCss.href = "/css/modal.css";
+        head.appendChild(modalCss);
+
+        const modalManager = document.createElement('script');
+        modalManager.src = "/js/modal-manager.js";
+        head.appendChild(modalManager);
+    }
+
+    if (hasKeys) {
+        const keysCss = document.createElement('link');
+        keysCss.rel = "stylesheet";
+        keysCss.type = "text/css";
+        keysCss.href = "/css/keys.css";
+        head.appendChild(keysCss);
+    }
+
+    if (isUnityGame) {
+        const unityBuildsLoader = document.createElement('script');
+        unityBuildsLoader.src = "/resources/files/WebGL_Snake_Explorer_Build/Builds.loader.js";
+        unityBuildsLoader.onload = function () {
+            const initializeUnity = document.createElement('script');
+            initializeUnity.src = "/js/initialize-unity-player.js";
+            head.appendChild(initializeUnity);
+        };
+        head.appendChild(unityBuildsLoader);
+    }
 }
 
 /*<meta name="document" content="true">*/

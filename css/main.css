@@ -28,10 +28,10 @@ body {
     /*loading*/
     overflow: hidden;
     /**/
-
-    margin: 0;
     background-color: var(--background);
     color: var(--foreground);
+
+    margin: 0;
     transition: background-color 0.3s;
 }
 
@@ -96,11 +96,20 @@ p {
 }
 
 a {
+    color:var(--link);
     transition: color 0.3s;
-    color:var(--link)
 }
-a:visited{
+
+a:visited {
     color:var(--link-visited);
+}
+
+button {
+    background: var(--background);
+    color: var(--foreground);
+    border: 1px solid var(--foreground);
+    padding: .25em;
+    cursor: pointer;
 }
 
 .details {
@@ -131,14 +140,6 @@ button.focus {
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
-
-button {
-    padding: .25em;
-    cursor: pointer;
-    background: var(--background);
-    color: var(--foreground);
-    border: 1px solid var(--foreground);
 }
 
 hr {

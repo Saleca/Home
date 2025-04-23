@@ -587,6 +587,7 @@ function isMobile() {
     isMobi = true;
   }
 }
+
 function waitEvent(event) {
   return new Promise((resolve) => {
     const eventHandler = () => {

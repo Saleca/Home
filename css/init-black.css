@@ -14,4 +14,5 @@ a:visited {
 button {
     background-color: #111;
     color: #111;
+    border:none;
 }
