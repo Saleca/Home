@@ -16,8 +16,9 @@
   z-index: 11;
   top: 10px;
   left: 10px;
+  text-align: center;
   width: calc(100% - 10px);
-  height: fit-content;
+  height:fit-content;
   padding: 10px;
   border-radius: 5px;
 }
@@ -25,7 +26,6 @@
 @media (min-width: 600px) {
   .modal {
     width: 50%;
-    height: fit-content;
     top: 50px;
     left: 50%;
     transform: translateX(-50%);

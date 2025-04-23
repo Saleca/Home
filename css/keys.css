@@ -4,15 +4,14 @@
     --key-color3: #222;
     --text-color: #bbb;
     --key-width: 45px;
-    --horizontal-margin: 4px;
+    --horizontal-margin: 2px;
     --border-width: 4px;
     --vertical-margin: 3px;
-    --calc-key-width: calc(var(--horizontal-margin) * 2 + var(--border-width) * 2 + (var(--key-width) - 15px));
 }
 
-.key {
-    float: left;
 
+.key {
+    display: inline-block;
     width: var(--key-width);
     height: var(--key-width);
     margin: var(--vertical-margin) var(--horizontal-margin);
@@ -21,7 +20,6 @@
     font-size: 18px;
     line-height: var(--key-width);
     text-align: center;
-
 
     border-radius: 7px;
     border-style: solid;
@@ -35,6 +33,7 @@
 }
 
 .key.special {
+    display: inline-block;
     height: 25px;
     line-height: 1;
     font-size: 15px;
@@ -42,28 +41,23 @@
 }
 
 .key-spacer {
-    width: var(--calc-key-width);
+    display: inline-block;
+    width: var(--key-width);
     margin: var(--horizontal-margin);
-    float: left;
 }
 
 .key-spacer.w-offset {
-    width: calc(var(--calc-key-width) * 0.8) 
+    width: calc(var(--key-width) * 0.8)
 }
 
 .key-break {
-    clear: left;
+    width: 100%;
 }
 
 .key-group {
-    flex-shrink: 0;
-}
-
-.controls {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
+    text-align: start;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .key.pressed {

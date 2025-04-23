@@ -47,49 +47,69 @@
                 </div>
             </h4>
             <div style="display:flex">
-            <input type="radio" id="touch" name="control-type" value="touch" hidden>
-            <input type="radio" id="keys" name="control-type" value="keys" hidden checked>
-            <div class="toggle control-type">
-                <label for="touch" onclick="">
-                    <div class="en">
-                        Touch screen
-                    </div>
-                    <div class="pt">
-                        Ecra tatil
-                    </div>
-                </label>
-                <label for="keys" onclick="">
-                    <div class="en">
-                        Keyboard
-                    </div>
-                    <div class="pt">
-                        Teclado
-                    </div>
-                </label>
+                <input type="radio" id="touch" name="control-type" value="touch" hidden>
+                <input type="radio" id="keys" name="control-type" value="keys" hidden checked>
+                <div class="toggle control-type">
+                    <label for="touch" onclick="">
+                        <div class="en">
+                            Touch screen
+                        </div>
+                        <div class="pt">
+                            Ecra tatil
+                        </div>
+                    </label>
+                    <label for="keys" onclick="">
+                        <div class="en">
+                            Keyboard
+                        </div>
+                        <div class="pt">
+                            Teclado
+                        </div>
+                    </label>
+                </div>
+                <div style="flex-grow: 1;"></div>
+                <input type="radio" id="classic" name="game-type" value="classic" hidden>
+                <input type="radio" id="explorer" name="game-type" value="explorer" hidden checked>
+                <div class="toggle game-type">
+                    <label for="classic" onclick="">
+                        <div class="en">
+                            Classic
+                        </div>
+                        <div class="pt">
+                            Classico
+                        </div>
+                    </label>
+                    <label for="explorer" onclick="">
+                        <div class="en">
+                            Explorer
+                        </div>
+                        <div class="pt">
+                            Aventura
+                        </div>
+                    </label>
+                </div>
             </div>
-            <div style="flex-grow: 1;"></div>
-            <input type="radio" id="classic" name="game-type" value="classic" hidden>
-            <input type="radio" id="explorer" name="game-type" value="explorer" hidden checked>
-            <div class="toggle game-type">
-                <label for="classic" onclick="">
+
+            <div class="center-childs">
+                <div class="classic-mode">
                     <div class="en">
-                        Classic
+                        <h4>Classic Mode</h4>
                     </div>
                     <div class="pt">
-                        Classico
+                        <h4>Modo Classico</h4>
                     </div>
-                </label>
-                <label for="explorer" onclick="">
+                </div>
+                <div class="explorer-mode">
                     <div class="en">
-                        Explorer
+                        <h4>Explorer Mode</h4>
                     </div>
                     <div class="pt">
-                        Aventura
+                        <h4>Modo de Aventura</h4>
                     </div>
-                </label>
+                </div>
             </div>
-        </div>
-            <table> 
+
+            <table>
                 <tr>
                     <td>
                         <div class="keyboard-controls">
@@ -97,108 +117,19 @@
                         </div>
                         <div class="touch-controls">
                             <div class="en">
-                                <p>"3 quick taps"</p>
+                                "3 quick taps"
                             </div>
                             <div class="pt">
-                                <p>"3 toques rapidos"</p>
+                                "3 toques rapidos"
                             </div>
                         </div>
                     </td>
                     <td>
                         <div class="en">
-                            <p>Pause</p>
+                            Pause
                         </div>
                         <div class="pt">
-                            <p>Pausa</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="classic-mode">
-                            <div class="keyboard-controls">
-
-                                <div class="controls">
-                                    <div class="key-group">
-                                        <div class="key-spacer w-offset"></div>
-                                        <div class="key kc-87">W</div>
-                                        <div class="key-break"></div>
-                                        <div class="key kc-65">A</div>
-                                        <div class="key kc-83">S</div>
-                                        <div class="key kc-68">D</div>
-                                    </div>
-
-                                    <div class="key-group">
-                                        <div class="key-spacer"></div>
-                                        <div class="key kc-38">↑</div>
-                                        <div class="key-break"></div>
-                                        <div class="key kc-37">←</div>
-                                        <div class="key kc-40">↓</div>
-                                        <div class="key kc-39">→</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="touch-controls">
-                                <div class="controls">
-                                    <div class="key-group">
-                                        <img src="../resources/icons/VerticalSwipeAnimation.svg"
-                                            alt="Vertical swipe gesture" />
-                                    </div>
-                                    <div class="key-group">
-                                        <img src="../resources/icons/HorizontalSwipeAnimation.svg"
-                                            alt="Horizontal swipe gesture" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="explorer-mode">
-                            <div class="keyboard-controls">
-                                <div class="controls">
-                                    <div class="key-group">
-                                        <div class="key kc-65">A</div>
-                                        <div class="key-spacer"></div>
-                                        <div class="key kc-68">D</div>
-                                    </div>
-
-                                    <div class="key-group">
-                                        <div class="key kc-37">←</div>
-                                        <div class="key-spacer"></div>
-                                        <div class="key kc-39">→</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="touch-controls">
-                                <div class="controls">
-                                    <div class="key-group">
-                                        <img src="../resources/icons/HorizontalSwipeAnimation.svg"
-                                            alt="Horizontal swipe gesture" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="classic-mode">
-                            <div class="en">
-                                <h4>Classic Mode</h4>
-                                <p>Turn the snake around just like the classic version.</p>
-                                <p>Moving in the same direction the snake is already going will make it sprint.</p>
-                            </div>
-                            <div class="pt">
-                                <h4>Modo Classico</h4>
-                                <p>Direcionam a cobra como no jogo classico.</p>
-                                <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere.</p>
-                            </div>
-                        </div>
-                        <div class="explorer-mode">
-                            <div class="en">
-                                <h4>Explorer Mode</h4>
-                                <p>Turn</p>
-                            </div>
-                            <div class="pt">
-                                <h4>Modo de Aventura</h4>
-                                <p>Virar</p>
-                            </div>
+                            Pausa
                         </div>
                     </td>
                 </tr>
@@ -213,13 +144,90 @@
                     </td>
                     <td>
                         <div class="en">
-                            <p>Sprint</p>
+                            Sprint
                         </div>
                         <div class="pt">
-                            <p>Acelerar</p>
+                            Acelerar
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <div class="classic-mode">
+                            <div class="keyboard-controls">
+                                <div class="key-group">
+                                    <div class="key-spacer w-offset"></div>
+                                    <div class="key kc-87">W</div>
+                                    <div class="key-break"></div>
+                                    <div class="key kc-65">A</div>
+                                    <div class="key kc-83">S</div>
+                                    <div class="key kc-68">D</div>
+                                </div>
+
+                                <div class="key-group">
+                                    <div class="key-spacer"></div>
+                                    <div class="key kc-38">↑</div>
+                                    <div class="key-break"></div>
+                                    <div class="key kc-37">←</div>
+                                    <div class="key kc-40">↓</div>
+                                    <div class="key kc-39">→</div>
+                                </div>
+                            </div>
+                            <div class="touch-controls">
+                                <div class="key-group">
+                                    <img src="../resources/icons/VerticalSwipeAnimation.svg"
+                                        alt="Vertical swipe gesture" />
+                                </div>
+                                <div class="key-group">
+                                    <img src="../resources/icons/HorizontalSwipeAnimation.svg"
+                                        alt="Horizontal swipe gesture" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="explorer-mode">
+                            <div class="keyboard-controls">
+                                <div class="key-group">
+                                    <div class="key kc-65">A</div>
+                                    <div class="key-spacer"></div>
+                                    <div class="key kc-68">D</div>
+                                </div>
+
+                                <div class="key-group">
+                                    <div class="key kc-37">←</div>
+                                    <div class="key-spacer"></div>
+                                    <div class="key kc-39">→</div>
+                                </div>
+                            </div>
+                            <div class="touch-controls">
+                                <div class="key-group">
+                                    <img src="../resources/icons/HorizontalSwipeAnimation.svg"
+                                        alt="Horizontal swipe gesture" />
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="classic-mode">
+                            <div class="en">
+                                <p>Turn the snake around just like the classic version.</p>
+                                <p>Moving in the same direction the snake is already going will make it sprint.</p>
+                            </div>
+                            <div class="pt">
+                                <p>Direcionam a cobra como no jogo classico.</p>
+                                <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere.</p>
+                            </div>
+                        </div>
+                        <div class="explorer-mode">
+                            <div class="en">
+                                Turn
+                            </div>
+                            <div class="pt">
+                                Virar
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
             </table>
 
             <button class="close-modal">
