@@ -3,7 +3,7 @@
 async function addBaseElements() {
     const head = document.head;
     const isDocument = document.querySelector('meta[name="document"]');
-//*
+/*
     const base = document.createElement('base');
     //base.href = `/${repo}/`; //to use with github pages url
     base.href = `/pages/`;
