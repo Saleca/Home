@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Explorer</title>
-    <link rel="stylesheet" type="text/css" href="../css/init-black.css">
-    <script src="../js/LoadBase.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../css/modal.css">
-    <script src="../js/modal-manager.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../css/keys.css">
+    <link rel="stylesheet" type="text/css" href="/css/init-black.css">
+    <script src="/js/LoadBase.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/modal.css">
+    <script src="/js/modal-manager.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/keys.css">
 </head>
 
 <body>
@@ -116,11 +116,9 @@
                             <div class="key special kc-27">Esc</div>
                         </div>
                         <div class="touch-controls">
-                            <div class="en">
-                                "3 quick taps"
-                            </div>
-                            <div class="pt">
-                                "3 toques rapidos"
+                            <div class="key-group">
+                                <img src="/resources/icons/3TapsAnimation.svg"
+                                    alt="3 tap gesture" />
                             </div>
                         </div>
                     </td>
@@ -139,7 +137,10 @@
                             <div class="key kc-87">W</div>
                         </div>
                         <div class="touch-controls">
-                            "upward swipe gesture"
+                            <div class="key-group">
+                                <img src="/resources/icons/SwipeUpAnimation.svg"
+                                    alt="Swipe up gesture" />
+                            </div>
                         </div>
                     </td>
                     <td>
@@ -175,11 +176,11 @@
                             </div>
                             <div class="touch-controls">
                                 <div class="key-group">
-                                    <img src="../resources/icons/VerticalSwipeAnimation.svg"
+                                    <img src="/resources/icons/VerticalSwipeAnimation.svg"
                                         alt="Vertical swipe gesture" />
                                 </div>
                                 <div class="key-group">
-                                    <img src="../resources/icons/HorizontalSwipeAnimation.svg"
+                                    <img src="/resources/icons/HorizontalSwipeAnimation.svg"
                                         alt="Horizontal swipe gesture" />
                                 </div>
                             </div>
@@ -200,7 +201,7 @@
                             </div>
                             <div class="touch-controls">
                                 <div class="key-group">
-                                    <img src="../resources/icons/HorizontalSwipeAnimation.svg"
+                                    <img src="/resources/icons/HorizontalSwipeAnimation.svg"
                                         alt="Horizontal swipe gesture" />
                                 </div>
                             </div>
@@ -241,14 +242,14 @@
         </div>
 
         <div class="en">
-            <p><a href="../snake-explorer/Snake_Explorer_Windows_Installer.exe">Download</a> for windows</p>
+            <p><a href="/resources/files/Snake_Explorer_Windows_Installer.exe">Download</a> for windows</p>
         </div>
 
         <div class="pt">
-            <p><a href="../snake-explorer/Snake_Explorer_Windows_Installer.exe">Transferir</a> para windows</p>
+            <p><a href="/resources/files/Snake_Explorer_Windows_Installer.exe">Transferir</a> para windows</p>
         </div>
     </main>
-    <script src="../snake-explorer/Build/Builds.loader.js"></script>
+    <script src="/resources/files/WebGL_Snake_Explorer_Build/Builds.loader.js"></script>
     <script>
         function initUnityPayer() {
             /*
@@ -268,12 +269,12 @@
             }
             //*/
 
-            var baseUrl = "../snake-explorer/";
+            var baseUrl = "/resources/files/WebGL_Snake_Explorer_Build/";
             createUnityInstance(document.querySelector("#unity-canvas"), {
                 arguments: [],
-                dataUrl: baseUrl + "Build/Builds.data",
-                frameworkUrl: baseUrl + "Build/Builds.framework.js",
-                codeUrl: baseUrl + "Build/Builds.wasm",
+                dataUrl: baseUrl + "Builds.data",
+                frameworkUrl: baseUrl + "Builds.framework.js",
+                codeUrl: baseUrl + "Builds.wasm",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "saleca",
                 productName: "Snake Explorer",

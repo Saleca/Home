@@ -3,30 +3,30 @@
 async function addBaseElements() {
     const head = document.head;
     const isDocument = document.querySelector('meta[name="document"]');
-
+//*
     const base = document.createElement('base');
     //base.href = `/${repo}/`; //to use with github pages url
-    base.href = `/`;
+    base.href = `/pages/`;
     head.appendChild(base);
-
+//*/
     const initialStyle = document.styleSheets[0];
 
     const link = document.createElement('link');
     link.rel = "stylesheet";
     link.type = "text/css";
-    link.href = "css/main.css";
+    link.href = "/css/main.css";
     head.appendChild(link);
 
     if (isDocument) {
         const print = document.createElement('link');
         print.rel = "stylesheet";
         print.type = "text/css";
-        print.href = "css/print.css";
+        print.href = "/css/print.css";
         head.appendChild(print);
     }
 
     const stateScript = document.createElement('script');
-    stateScript.src = "js/state.js";
+    stateScript.src = "/js/state.js";
     head.appendChild(stateScript);
     await waitEvent('state-loaded');
 
@@ -81,7 +81,7 @@ async function addBaseElements() {
  * @param {string} name 
  * */
 function addContent(name, element) {
-    fetch(`components/${name}.html`)
+    fetch(`/components/${name}.html`)
         .then(response => response.text())
         .then(data => {
             element.id = name;
