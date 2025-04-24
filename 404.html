@@ -1,0 +1,35 @@
+---
+title: Error 404 (Not found)
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="document" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <script src="/js/load-manager.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <div class="en">
+            <h3>Page not found</h3>
+        </div>
+
+        <div class="pt">
+            <h3>Pagina nao encontrada</h3>
+        </div>
+
+        <p id="url" class="focus"><i>url</i></p>
+        <p>test version</p>
+    </main>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlDisplay = document.getElementById('url');
+        urlDisplay.textContent = window.location.href;
+    });
+</script>
+</html>
