@@ -1,13 +1,13 @@
 :root {
     --dark: #111;
     --dark-secondary: #333;
-    --darker: #0008;
+    --dark-overlay: #0004;
     --dark-link: cornflowerblue;
     --dark-link-visited: mediumslateblue;
 
     --light: #bbb;
     --light-secondary: #999;
-    --lighter: #fff8;
+    --light-overlay: #fff4;
     --light-link: #00e;
     --light-link-visited: #518;
 
@@ -15,7 +15,8 @@
     --foreground-secondary: var(--dark-secondary);
     --background: var(--light);
     --background-secondary: var(--light-secondary);
-    --overlay: var(--lighter);
+    --background-overlay: var(--light-overlay);
+    --foreground-overlay: var(--dark-overlay);
     --link: var(--light-link);
     --link-visited: var(--light-link-visited);
 }
@@ -298,7 +299,8 @@ html:has(#dark:checked) {
     --foreground-secondary: var(--light-secondary);
     --background: var(--dark);
     --background-secondary: var(--dark-secondary);
-    --overlay: var(--darker);
+    --background-overlay: var(--dark-overlay);
+    --foreground-overlay: var(--light-overlay);
     --link: var(--dark-link);
     --link-visited: var(--dark-link-visited);
 }
@@ -309,7 +311,8 @@ html:has(#dark:checked) {
         --foreground-secondary: var(--light-secondary);
         --background: var(--dark);
         --background-secondary: var(--dark-secondary);
-        --overlay: var(--darker);
+        --background-overlay: var(--dark-overlay);
+        --foreground-overlay: var(--light-overlay);
         --link: var(--dark-link);
         --link-visited: var(--dark-link-visited);
     }

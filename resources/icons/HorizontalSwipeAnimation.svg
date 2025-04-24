@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="75">
-    <line y1="10" y2="10" stroke="var(--overlay)" stroke-width="7" stroke-linecap="round">
+    <line y1="10" y2="10" stroke="var(--foreground-overlay)" stroke-width="7" stroke-linecap="round">
         <animate attributeName="x1" values="15;65;15" dur="1.5s" attributeType="XML" repeatCount="indefinite" />
         <animate attributeName="x2" values="15;15;45;65;65;30" keyTimes="0;.2;.5;.5;.7;1" dur="1.5s" attributeType="XML"
             repeatCount="indefinite" />
