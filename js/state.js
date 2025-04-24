@@ -563,10 +563,10 @@ function addPagePath() {
 
   if (path !== '\\') {
     const parts = path.split('\\');
-    let currentPath = '';
-
+    let currentPath = '/';
     parts.forEach((part, index) => {
       currentPath += part;
+
       if (index < parts.length - 1) {
         const link = document.createElement('a');
         link.textContent = part;
