@@ -7,11 +7,12 @@ async function addBaseElements() {
     const hasKeys = document.querySelector('meta[name="has-keys"]');
     const hasModal = document.querySelector('meta[name="has-modal"]');
 
+    /*
     const base = document.createElement('base');
     //base.href = `/${repo}/`; //to use with github pages url
     base.href = `/p/`;
     head.appendChild(base);
-
+*/
     const initialStyle = document.styleSheets[0];
 
     const link = document.createElement('link');
