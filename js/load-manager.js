@@ -15,6 +15,12 @@ async function addBaseElements() {
 */
     const initialStyle = document.styleSheets[0];
 
+    const icon = document.createElement('link');
+    icon.rel = "icon";
+    icon.type = "image/svg";
+    icon.href = "/resources/icons/sun.svg";
+    head.appendChild(icon);
+
     const link = document.createElement('link');
     link.rel = "stylesheet";
     link.type = "text/css";
