@@ -51,14 +51,11 @@ async function addBaseElements() {
 
     const main = document.querySelector('main');
 
-    const page = document.createElement('div');
-    page.id = "page";
-    document.body.insertBefore(page, document.body.children[1]);
-
+    
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.className = "no-print";
     const stateSectionLoad = injectLocalSnippet(hiddenContentElement, componentPath('stateSection'), 'hidden-content');
-    page.appendChild(hiddenContentElement);
+    document.body.insertBefore(hiddenContentElement, document.body.children[1]);
 
     await stateSectionLoad;
     await stateScriptLoad;
@@ -71,7 +68,7 @@ async function addBaseElements() {
     await injectLocalSnippet(pageContainerElement, componentPath('header'));
     pageContainerElement.appendChild(main);
     const footerLoad = injectLocalSnippet(pageContainerElement, componentPath('footer'));
-    page.appendChild(pageContainerElement);
+    document.body.appendChild(pageContainerElement);
 
     const header = pageContainerElement.querySelector("header");
     header.scrollIntoView({ behavior: 'instant', block: 'start' });
