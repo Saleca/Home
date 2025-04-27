@@ -93,58 +93,56 @@ html {
 body {
     height: 100%;
     overflow: auto;
+    background-color: var(--background);
+    margin: 0;
+
+    transition:
+        background-color var(--animation-time),
+        --background-animated var(--animation-time),
+        --background-secondary-animated var(--animation-time),
+        --foreground-animated var(--animation-time);
+    ;
+}
+
+#page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    width: 75%;
+    margin: 0 auto;
+
+    padding-left: 1em;
+    padding-right: 1em;
 
     background-color: var(--background);
     color: var(--foreground);
 
-    margin: 0;
-    /*check what is inherited from transitions*/
     transition:
         background-color var(--animation-time),
         color var(--animation-time),
-        border-color var(--animation-time),
-        --background-animated var(--animation-time),
-        --background-secondary-animated var(--animation-time),
-        --foreground-animated var(--animation-time);
+        border-color var(--animation-time);
 }
 
-body::-webkit-scrollbar {
-    width: var(--scrollbar-width);
-    background-color: transparent;
+#resizable {
+    flex-grow: 1;
 }
 
-body::-webkit-scrollbar-track {
-    border-color: var(--foreground-animated);
-    border-width: var(--border-width);
-    border-style: solid;
-    border-radius: var(--border-radius);
-    margin: 50px;
-    box-shadow: inset 0 0 4px var(--foreground-overlay);
+header {
+    background: linear-gradient(var(--background-animated) 66%, #0000);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 1em 0;
 }
 
-body::-webkit-scrollbar-thumb {
-    background: var(--background-animated);
-    border-color: var(--foreground-animated);
-    border-width: var(--border-width);
-    border-style: solid;
-    border-radius: var(--border-radius);
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: var(--background-secondary-animated);
+footer {
+    flex-shrink: 0;
+    align-self: center;
 }
 
 #hidden-content {
     padding-top: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
-#page-container {
-    min-height: 100vh;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
     padding-left: 1em;
     padding-right: 1em;
 }
@@ -155,20 +153,15 @@ footer {
     transition: background-color var(--animation-time);
 
     padding-bottom: 2em;
-    align-self: center;
-
-    min-width: 100%;
+    /* min-width: 100%;*/
 }
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: linear-gradient(var(--background-animated) 66%, #0000);
+main {
+    margin: 0 auto;
 }
 
-footer {
-    bottom: 0;
+span {
+    display: inline-block;
 }
 
 h1,
@@ -263,35 +256,31 @@ tr:last-child {
     border-bottom: none;
 }
 
-/*align non-text elements horizontally*/
 td>* {
-    /*for child column orientation*/
     margin: 0 auto;
-    /**/
-
-    /*for child row orientation* /
-    display: inline-block;
-    /**/
 }
 
 .center-childs>* {
     margin: 0 auto;
 }
 
+.flex {
+    display: flex;
+}
+
+.flex-filler {
+    flex-grow: 1;
+}
+
 #page-path {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-align: left;
-    margin-left: 0;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0;
     text-indent: unset;
     hyphens: none;
     word-break: break-all;
     line-height: 1em;
-    padding: 1em 0;
-
+    vertical-align: center;
 }
 
 #page-path a {
@@ -461,4 +450,30 @@ html:has(#explorer:checked) {
         position: relative;
         right: calc((min(100vh, 100vw) - 70ch) / 2 - min(2vh, 2vw));
     }
+}
+
+body::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    background-color: transparent;
+}
+
+body::-webkit-scrollbar-track {
+    border-color: var(--foreground-animated);
+    border-width: var(--border-width);
+    border-style: solid;
+    border-radius: var(--border-radius);
+    margin: 50px;
+    box-shadow: inset 0 0 4px var(--foreground-overlay);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--background-animated);
+    border-color: var(--foreground-animated);
+    border-width: var(--border-width);
+    border-style: solid;
+    border-radius: var(--border-radius);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--background-secondary-animated);
 }

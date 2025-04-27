@@ -30,6 +30,11 @@ function commitMessage() {
     });
 }
 
+function lastDeployment() {
+  const apiUrl = `https://api.github.com/repos/saleca/Home/pages/builds/latest`;
+  //
+}
+
 async function loadingAnimation(navigationType, signal) {
   const loadScreenElement = document.createElement('div');
   loadScreenElement.id = 'load-screen';
@@ -78,8 +83,8 @@ function loadPage(navigationStack, dirElement, inputElement, signal) {
 
 async function startConsole(loadScreenElement) {
   const start = document.createElement('p');
-  const message = await commitMessage();
-  start.textContent = `Saleca Portfolio [Version ${version}] | ${message}`;
+  //const message = await commitMessage();
+  start.textContent = `Saleca Portfolio [Version ${version}]`;// | ${message}`;
   loadScreenElement.append(start);
 }
 

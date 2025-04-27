@@ -1,5 +1,28 @@
-<header id="header" class="no-print">
-    <p id="page-path"></p> 
-</header>
+<div id="hidden-content" class="no-print">
+    <div id="state-form">
+        <input type="radio" id="pt" name="lang" value="pt" hidden>
+        <input type="radio" id="en" name="lang" value="en" hidden checked>
 
-<!-- add button to scroll up to state form-->
+        <input type="radio" id="light" name="theme" value="light" hidden>
+        <input type="radio" id="device" name="theme" value="device" hidden checked>
+        <input type="radio" id="dark" name="theme" value="dark" hidden>
+
+        <div class="toggle lang">
+            <label for="pt" onclick="setLanguage(Languages.PORTUGUESE)">PT</label>
+            <label for="en" onclick="setLanguage(Languages.ENGLISH)">EN</label>
+        </div>
+
+        <div class="toggle theme">
+            <label for="light" onclick="storeItem(Themes.LIGHT)">Light</label>
+            <label for="device" onclick="storeItem(Themes.DEVICE)">Device</label>
+            <label for="dark" onclick="storeItem(Themes.DARK)">Dark</label>
+        </div>
+    </div>
+    <hr>
+</div>
+<div id="top"></div>
+<header id="header" class="flex no-print">
+    <p id="page-path"></p>
+    <div class="flex-filler"></div>
+    <a href="#hidden-content"><img src="/resources/icons/settings.svg" /></a>
+</header>

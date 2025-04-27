@@ -1,5 +1,6 @@
 const loadingEvents = {
     STATE_SCRIPT: 'state-manager.js loaded',
+    FOOTER_SCRIPT: 'footer-manager.js loaded',
     SNIPPET_SCRIPT: 'snippet-manager.js loaded',
     LOCAL_SNIPPETS_LOADED: 'local snippets loaded',
     CONSOLE_ANIM_SCRIPT: 'console-animation.js loaded'
@@ -50,31 +51,31 @@ async function addBaseElements() {
     }
 
     const main = document.querySelector('main');
-    
-    const hiddenContentElement = document.createElement('div');
-    hiddenContentElement.className = "no-print";
-    const stateSectionLoad = injectLocalSnippet(hiddenContentElement, componentPath('stateSection'), 'hidden-content');
-    document.body.insertBefore(hiddenContentElement, document.body.children[1]);
 
-    await stateSectionLoad;
+    const page = document.createElement('div');
+    page.id = "page";
+    document.body.appendChild(page);
+
+    const resizable = document.createElement('div');
+    resizable.id = 'resizable';
+    page.appendChild(resizable);
+
+    const headedLoad = injectLocalSnippet(resizable, componentPath('header'));
+    await headedLoad;
     await stateScriptLoad;
     applyState(urlParams.get("lang"), urlParams.get("theme"));
-
-    const pageContainerElement = document.createElement('div');
-    pageContainerElement.id = 'page-container';
-    pageContainerElement.style.visibility = 'visible';
-
-    await injectLocalSnippet(pageContainerElement, componentPath('header'));
-    pageContainerElement.appendChild(main);
-    const footerLoad = injectLocalSnippet(pageContainerElement, componentPath('footer'));
-    document.body.appendChild(pageContainerElement);
-
-    const header = pageContainerElement.querySelector("header");
-    header.scrollIntoView({ behavior: 'instant', block: 'start' });
     addPagePath();
 
-    await footerLoad;
+    resizable.appendChild(main);
+
+    await injectLocalSnippet(page, componentPath('footer'));
+
+    const footerScriptLoad = waitEvent(loadingEvents.FOOTER_SCRIPT);
     addScript("footer-manager.js");
+    await footerScriptLoad;
+
+    resizePage();
+    scrollToTop();
 
     if (metaHasModal) {
         addStyleSheet("modal.css");
@@ -86,11 +87,11 @@ async function addBaseElements() {
     }
 
     if (metaUnityGame) {
-        addScriptAbs("/resources/files/WebGL_Snake_Explorer_Build/Builds.loader.js",
+        addScriptAbs(
+            "/resources/files/WebGL_Snake_Explorer_Build/Builds.loader.js",
             function () {
                 addScript("initialize-unity-player.js");
             });
-
     }
 
     const snippetScriptLoad = waitEvent(loadingEvents.SNIPPET_SCRIPT);
@@ -261,12 +262,12 @@ function clearLoadScreen() {
     loadScreen.style.color = 'transparent';
     setTimeout(() => {
 
-        loadScreen.style.display = 'none';
+        document.body.removeChild(loadScreen);
         document.body.style.overflow = 'auto';
     }, 300);
 }
 
-async function injectLocalSnippet(container, path, id) {
+async function injectLocalSnippet(container, path) {
     const promise = waitEvent(path);
 
     const response = await fetch(path);
@@ -276,9 +277,6 @@ async function injectLocalSnippet(container, path, id) {
     }
     const content = await response.text();
 
-    if (id) {
-        container.id = id;
-    }
     container.innerHTML += content;
 
     window.dispatchEvent(new Event(path));
