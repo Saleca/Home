@@ -43,14 +43,13 @@ async function addBaseElements() {
 
     let loadingPromise;
     let controller;
+    const navigationType = navigationAnalizer();
     if (anim) {
         controller = new AbortController();
-        const navigationType = navigationAnalizer();
         loadingPromise = loadingAnimation(navigationType, controller.signal);
     }
 
     const main = document.querySelector('main');
-
     
     const hiddenContentElement = document.createElement('div');
     hiddenContentElement.className = "no-print";
@@ -224,6 +223,7 @@ function getCurrentPath() {
 function addPagePath() {
     const pagePathElement = document.getElementById('page-path');
     const path = getCurrentPath();
+    console.log(path);
     if (path !== '\\') {
         const homeLink = document.createElement('a');
         homeLink.href = "/";
