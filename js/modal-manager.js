@@ -14,6 +14,9 @@ function openModal(modalId) {
     }
     currentModal = modal;
     document.body.style.overflow = 'hidden';
+    const styles = window.getComputedStyle(document.documentElement);
+    const scrollWidth = styles.getPropertyValue('--scrollbar-width');
+    document.body.style.paddingRight = `${scrollWidth}`;
     overlay.style.display = "block";
     modal.style.display = "block";
     modal.addEventListener("click", stopClickPropagation);
@@ -23,6 +26,7 @@ function closeModal() {
     overlay.style.display = "none";
     currentModal.style.display = "none";
     document.body.style.overflow = 'auto';
+    document.body.style.paddingRight = '0';
     currentModal.removeEventListener("click", stopClickPropagation);
 }
 

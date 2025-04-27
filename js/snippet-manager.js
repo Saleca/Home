@@ -18,8 +18,7 @@ async function injectSnippets() {
 }
 //*/
 
-async function injectLocalSnippet(snipet) {
-    const path = snipet.dataset.path;
+async function injectLocalSnippet(snipet, path) {
     const response = await fetch(path);
     if (!response.ok) {
         console.log("failed to fech");
@@ -32,9 +31,10 @@ async function injectLocalSnippet(snipet) {
 async function injectLocalSnippets() {
     const snipets = document.querySelectorAll('[data-path]');
     for (const snipet of snipets) {
-        await injectLocalSnippet(snipet);
+        await injectLocalSnippet(snipet, snipet.dataset.path);
     };
+window.dispatchEvent(new Event(loadingEvents.LOCAL_SNIPPETS_LOADED));
+
 }
 
-injectLocalSnippets();
-//injectSnippets();
+window.dispatchEvent(new Event(loadingEvents.SNIPPET_SCRIPT));

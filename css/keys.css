@@ -19,7 +19,7 @@
 
     --key-width: 45px;
     --horizontal-margin: 2px;
-    --border-width: 4px;
+    --key-border-width: 4px;
     --vertical-margin: 3px;
 }
 
@@ -36,7 +36,7 @@
 
     border-radius: 10px;
     border-style: solid;
-    border-width: 2px var(--border-width) 7px;
+    border-width: 2px var(--key-border-width) 7px;
     border-color: var(--key-dark-accent) var(--key) var(--key-light-accent);
 
     box-shadow: 1px 0 3px 2px var(--key-shadow);

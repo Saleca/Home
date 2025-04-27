@@ -19,21 +19,119 @@
     --foreground-overlay: var(--dark-overlay);
     --link: var(--light-link);
     --link-visited: var(--light-link-visited);
+
+    --border-width: 1px;
+    --border-radius: 5px;
+    --scrollbar-width: 15px;
+
+    --animation-time: .3s;
+}
+
+html:has(#dark:checked) {
+    --foreground: var(--light);
+    --foreground-secondary: var(--light-secondary);
+    --background: var(--dark);
+    --background-secondary: var(--dark-secondary);
+    --background-overlay: var(--dark-overlay);
+    --foreground-overlay: var(--light-overlay);
+    --link: var(--dark-link);
+    --link-visited: var(--dark-link-visited);
+}
+
+html:has(#dark:checked) body {
+    --background-animated: #111;
+    --background-secondary-animated: #333;
+    --foreground-animated: #bbb;
+}
+
+@media (prefers-color-scheme: dark) {
+    html:has(#device:checked) {
+        --foreground: var(--light);
+        --foreground-secondary: var(--light-secondary);
+        --background: var(--dark);
+        --background-secondary: var(--dark-secondary);
+        --background-overlay: var(--dark-overlay);
+        --foreground-overlay: var(--light-overlay);
+        --link: var(--dark-link);
+        --link-visited: var(--dark-link-visited);
+    }
+
+    html:has(#device:checked) body {
+        --background-animated: #111;
+        --background-secondary-animated: #333;
+        --foreground-animated: #bbb;
+    }
+}
+
+@property --background-animated {
+    syntax: '<color>';
+    initial-value: #bbb;
+    inherits: true;
+}
+
+@property --background-secondary-animated {
+    syntax: '<color>';
+    initial-value: #999;
+    inherits: true;
+}
+
+@property --foreground-animated {
+    syntax: '<color>';
+    initial-value: #111;
+    inherits: true;
 }
 
 * {
     box-sizing: border-box;
 }
 
-body {
-    /*loading*/
+html {
+    height: 100%;
     overflow: hidden;
-    /**/
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+
     background-color: var(--background);
     color: var(--foreground);
 
     margin: 0;
-    transition: background-color 0.3s;
+    /*check what is inherited from transitions*/
+    transition:
+        background-color var(--animation-time),
+        color var(--animation-time),
+        border-color var(--animation-time),
+        --background-animated var(--animation-time),
+        --background-secondary-animated var(--animation-time),
+        --foreground-animated var(--animation-time);
+}
+
+body::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    background-color: transparent;
+}
+
+body::-webkit-scrollbar-track {
+    border-color: var(--foreground-animated);
+    border-width: var(--border-width);
+    border-style: solid;
+    border-radius: var(--border-radius);
+    margin: 50px;
+    box-shadow: inset 0 0 4px var(--foreground-overlay);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--background-animated);
+    border-color: var(--foreground-animated);
+    border-width: var(--border-width);
+    border-style: solid;
+    border-radius: var(--border-radius);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--background-secondary-animated);
 }
 
 #hidden-content {
@@ -51,27 +149,22 @@ body {
     padding-right: 1em;
 }
 
-header,
 main,
 footer {
-    transition: color 0.3s;
     background-color: var(--background);
-    transition: background-color 0.3s;
+    transition: background-color var(--animation-time);
 
+    padding-bottom: 2em;
+    align-self: center;
+
+    min-width: 100%;
 }
 
 header {
     position: sticky;
     top: 0;
     z-index: 10;
-}
-
-main,
-footer {
-    padding-bottom: 2em;
-    align-self: center;
-
-    min-width: 100%;
+    background: linear-gradient(var(--background-animated) 66%, #0000);
 }
 
 footer {
@@ -97,20 +190,23 @@ p {
 }
 
 a {
-    color:var(--link);
-    transition: color 0.3s;
+    color: var(--link);
+    transition: color var(--animation-time);
 }
 
 a:visited {
-    color:var(--link-visited);
+    color: var(--link-visited);
 }
 
 button {
-    background: var(--background);
+    background-color: var(--background);
     color: var(--foreground);
     border: 1px solid var(--foreground);
+    border-radius: var(--border-radius);
     padding: .25em;
     cursor: pointer;
+
+    transition: background-color var(--animation-time), color var(--animation-time), border-color var(--animation-time);
 }
 
 .details {
@@ -230,8 +326,6 @@ td>* {
     padding: 1em;
     display: flex;
     flex-direction: column;
-
-    transition: background-color 0.3s, color 0.3s;
 }
 
 #load-screen p {
@@ -292,33 +386,6 @@ td>* {
     background-color: var(--foreground);
     color: var(--background);
 }
-
-/* region theme */
-html:has(#dark:checked) {
-    --foreground: var(--light);
-    --foreground-secondary: var(--light-secondary);
-    --background: var(--dark);
-    --background-secondary: var(--dark-secondary);
-    --background-overlay: var(--dark-overlay);
-    --foreground-overlay: var(--light-overlay);
-    --link: var(--dark-link);
-    --link-visited: var(--dark-link-visited);
-}
-
-@media (prefers-color-scheme: dark) {
-    html:has(#device:checked) {
-        --foreground: var(--light);
-        --foreground-secondary: var(--light-secondary);
-        --background: var(--dark);
-        --background-secondary: var(--dark-secondary);
-        --background-overlay: var(--dark-overlay);
-        --foreground-overlay: var(--light-overlay);
-        --link: var(--dark-link);
-        --link-visited: var(--dark-link-visited);
-    }
-}
-
-/* endregion theme */
 
 .pt,
 .en {
