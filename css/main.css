@@ -22,7 +22,7 @@
 
     --border-width: 1px;
     --border-radius: 5px;
-    --scrollbar-width: 15px;
+    --scrollbar-width: 10px;
 
     --animation-time: .3s;
 }
@@ -104,16 +104,15 @@ body {
     ;
 }
 
+/*padding-left: 1em;
+    padding-right: 1em;*/
 #page {
     height: 100%;
     display: flex;
     flex-direction: column;
 
-    width: 75%;
+    width: 100%;
     margin: 0 auto;
-
-    padding-left: 1em;
-    padding-right: 1em;
 
     background-color: var(--background);
     color: var(--foreground);
@@ -153,7 +152,7 @@ footer {
     transition: background-color var(--animation-time);
 
     padding-bottom: 2em;
-    /* min-width: 100%;*/
+    min-width: 100%;
 }
 
 main {
@@ -435,6 +434,13 @@ html:has(#explorer:checked) {
 }
 
 @media (min-width: 700px) {
+    :root {
+        --scrollbar-width: 15px;
+    }
+
+    #page {
+        width: 100%
+    }
 
     main,
     footer {
