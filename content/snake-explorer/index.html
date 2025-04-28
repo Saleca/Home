@@ -43,14 +43,14 @@ title: Snake Explorer
 
         <div id="overlay"></div>
         <div id="modal-1" class="modal">
-            <h4>
+            <h3>
                 <div class="en">
                     Controls
                 </div>
                 <div class="pt">
                     Controlos
                 </div>
-            </h4>
+            </h3>
             <div style="display:flex">
                 <input type="radio" id="touch" name="control-type" value="touch" hidden>
                 <input type="radio" id="keys" name="control-type" value="keys" hidden checked>
@@ -128,10 +128,10 @@ title: Snake Explorer
                     </td>
                     <td>
                         <div class="en">
-                            Pause
+                            <label>Pause</label>
                         </div>
                         <div class="pt">
-                            Pausa
+                            <label>Pausa</label>
                         </div>
                     </td>
                 </tr>
@@ -148,10 +148,10 @@ title: Snake Explorer
                     </td>
                     <td>
                         <div class="en">
-                            Sprint
+                            <label>Sprint</label>
                         </div>
                         <div class="pt">
-                            Acelerar
+                            <label>Acelerar</label>
                         </div>
                     </td>
                 </tr>
@@ -179,7 +179,8 @@ title: Snake Explorer
                             </div>
                             <div class="touch-controls">
                                 <div class="key-group">
-                                    <div data-path="/resources/icons/VerticalSwipeAnimation.svg">Vertical swipe gesture</div>
+                                    <div data-path="/resources/icons/VerticalSwipeAnimation.svg">Vertical swipe gesture
+                                    </div>
                                 </div>
                                 <div class="key-group">
                                     <div data-path="/resources/icons/HorizontalSwipeAnimation.svg">Horizontal swipe
@@ -212,20 +213,22 @@ title: Snake Explorer
                     <td>
                         <div class="classic-mode">
                             <div class="en">
-                                <p>Turn the snake around just like the classic version.</p>
-                                <p>Moving in the same direction the snake is already going will make it sprint.</p>
+                                <label>Turn</label>
+                                <h4>Second press</h4>
+                                <label>Sprint</label>
                             </div>
                             <div class="pt">
-                                <p>Direcionam a cobra como no jogo classico.</p>
-                                <p>Mover na mesma direcao que a cobra vai faz com que a cobra acelere.</p>
+                                <label>Virar</label>
+                                <h4>Segunda vez</h4>
+                                <label>Acelerar</label>
                             </div>
                         </div>
                         <div class="explorer-mode">
                             <div class="en">
-                                Turn
+                                <label>Turn</label>
                             </div>
                             <div class="pt">
-                                Virar
+                                <label>Virar</label>
                             </div>
                         </div>
                     </td>

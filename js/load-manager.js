@@ -72,10 +72,6 @@ async function addBaseElements() {
 
     const footerScriptLoad = waitEvent(loadingEvents.FOOTER_SCRIPT);
     addScript("footer-manager.js");
-    await footerScriptLoad;
-
-    resizePage();
-    scrollToTop();
 
     if (metaHasModal) {
         addStyleSheet("modal.css");
@@ -101,6 +97,10 @@ async function addBaseElements() {
     const localSnippetsLoad = waitEvent(loadingEvents.LOCAL_SNIPPETS_LOADED);
     injectLocalSnippets();
     await localSnippetsLoad;
+
+    await footerScriptLoad;
+    resizePage();
+    scrollToTop();
 
     if (initialStyle) {
         initialStyle.disabled = true;

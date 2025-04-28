@@ -104,8 +104,6 @@ body {
     ;
 }
 
-/*padding-left: 1em;
-    padding-right: 1em;*/
 #page {
     height: 100%;
     display: flex;
@@ -113,6 +111,9 @@ body {
 
     width: 100%;
     margin: 0 auto;
+
+    padding-left: 1em;
+    padding-right: 1em;
 
     background-color: var(--background);
     color: var(--foreground);
@@ -138,12 +139,6 @@ header {
 footer {
     flex-shrink: 0;
     align-self: center;
-}
-
-#hidden-content {
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
 }
 
 main,
@@ -245,6 +240,7 @@ table {
 td {
     padding: 10px;
     width: 50%;
+    color: var(--foreground);
 }
 
 tr {
@@ -336,9 +332,9 @@ td>* {
 }
 
 #unity-canvas {
-    width: 96vw;
-    height: 60vw;
-    margin-top: 2vw;
+    width: calc(100vw - 2em - var(--scrollbar-width));
+    aspect-ratio: 1;
+    margin-top: 1em;
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
@@ -433,13 +429,13 @@ html:has(#explorer:checked) {
     }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 600px) {
     :root {
         --scrollbar-width: 15px;
     }
 
     #page {
-        width: 100%
+        width: 100%;
     }
 
     main,
@@ -450,11 +446,10 @@ html:has(#explorer:checked) {
     }
 
     #unity-canvas {
-        width: min(96vh, 96vw);
-        height: min(60vh, 60vw);
-        margin-top: min(2vh, 2vw);
+        width: calc(min(96vh, 96vw) - 2em - var(--scrollbar-width));
+        aspect-ratio: 1.6;
         position: relative;
-        right: calc((min(100vh, 100vw) - 70ch) / 2 - min(2vh, 2vw));
+        right: calc((min(100vh, 100vw) - 70ch) / 2 - 2em - var(--scrollbar-width));
     }
 }
 
