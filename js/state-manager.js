@@ -9,15 +9,9 @@ const Themes = {
   DARK: 'dark'
 };
 
-const Controls = {
-  TOUCH: 'touch',
-  KEYBOARD: 'keyboard',
-};
-
 const UserPref = {
   THEME: Themes,
-  LANG: Languages,
-  CTRL: Controls,
+  LANG: Languages
 };
 
 function getKeyType(key) {
@@ -60,9 +54,6 @@ function applyState(lang, theme) {
     theme = localStorage.getItem(themeType) || Themes.DEVICE;
   }
   document.getElementById(theme).checked = true;
-
-  //const controls = localStorage.getItem('controls') || Controls.KEYBOARD;
-  //document.getElementById(controls).checked = true;
 }
 
 window.dispatchEvent(new Event(loadingEvents.STATE_SCRIPT));

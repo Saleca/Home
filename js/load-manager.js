@@ -224,7 +224,6 @@ function getCurrentPath() {
 function addPagePath() {
     const pagePathElement = document.getElementById('page-path');
     const path = getCurrentPath();
-    console.log(path);
     if (path !== '\\') {
         const homeLink = document.createElement('a');
         homeLink.href = "/";
@@ -267,7 +266,7 @@ function clearLoadScreen() {
     }, 300);
 }
 
-async function injectLocalSnippet(container, path) {
+async function injectLocalSnippet(container, path, replace) {
     const promise = waitEvent(path);
 
     const response = await fetch(path);
@@ -276,8 +275,12 @@ async function injectLocalSnippet(container, path) {
         return;
     }
     const content = await response.text();
+    
+    if (replace) {
+        container.replaceChildren();
+    }
 
-    container.innerHTML += content;
+    container.insertAdjacentHTML('beforeend', content);
 
     window.dispatchEvent(new Event(path));
     return promise;

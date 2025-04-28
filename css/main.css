@@ -344,6 +344,7 @@ td>* {
     display: flex;
     justify-content: space-between;
     padding-bottom: 1em;
+    padding-top: 1em;
 }
 
 .toggle {
