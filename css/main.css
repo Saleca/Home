@@ -101,7 +101,7 @@ body {
         --background-animated var(--animation-time),
         --background-secondary-animated var(--animation-time),
         --foreground-animated var(--animation-time);
-    ;
+    
 }
 
 #page {
