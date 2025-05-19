@@ -1,3 +1,6 @@
+html {
+    background-color: #111;
+}
 
 body {
     overflow: hidden;
@@ -11,7 +14,7 @@ body {
 }
 
 footer {
-        background-color: #111;
+    background-color: #111;
 }
 
 a {
