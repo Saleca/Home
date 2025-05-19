@@ -39,12 +39,18 @@ function storeItem(item) {
   localStorage.setItem(typeString, item);
 }
 
-function getSetAnimationPreference(anim){
+function toogleAnimationPreference() {
+  if (getSetAnimationPreference() === Animation.AUTO) {
+    return getSetAnimationPreference('none');
+  }
+  return getSetAnimationPreference('auto');
+}
+
+function getSetAnimationPreference(anim) {
   const animType = getKeyType(UserPref.ANIM);
   if (anim) {
     localStorage.setItem(animType, anim);
-  }
-  else {
+  } else {
     anim = localStorage.getItem(animType) || Animation.AUTO;
   }
   return anim;
@@ -59,7 +65,7 @@ function applyState(lang, theme) {
   else {
     lang = localStorage.getItem(langType) || Languages.ENGLISH;
   }
-  
+
   document.documentElement.lang = lang;
   document.getElementById(lang).checked = true;
 

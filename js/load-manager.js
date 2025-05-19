@@ -18,10 +18,10 @@ async function addBaseElements() {
 
     let anim;
     if (urlParams.has("anim")) {
-        if(urlParams.get("anim") === 'none'){
+        if (urlParams.get("anim") === 'none') {
             anim = 'none';
         }
-        else if(urlParams.get("anim") === 'auto'){
+        else if (urlParams.get("anim") === 'auto') {
             anim = 'auto';
         }
     }
@@ -32,7 +32,7 @@ async function addBaseElements() {
     const stateScriptLoad = waitEvent(loadingEvents.STATE_SCRIPT);
     addScript("state-manager.js");
     await stateScriptLoad;
-    
+
     anim = getSetAnimationPreference(anim);
 
     if (metaDocument)//if exists its implicitly true 
@@ -71,6 +71,7 @@ async function addBaseElements() {
     const headedLoad = injectLocalSnippet(resizable, componentPath('header'));
     await headedLoad;
     applyState(urlParams.get("lang"), urlParams.get("theme"));
+    setConsoleIconLogic(anim);
     addPagePath();
 
     resizable.appendChild(main);
@@ -282,7 +283,7 @@ async function injectLocalSnippet(container, path, replace) {
         return;
     }
     const content = await response.text();
-    
+
     if (replace) {
         container.replaceChildren();
     }
@@ -335,6 +336,29 @@ function waitEvent(event) {
         };
         window.addEventListener(event, eventHandler);
     });
+}
+
+function setConsoleIconLogic(anim) {
+    function styleIcon(anim, icon) {
+        const consoleIcon = document.getElementById('console-icon');
+        if (anim === 'none') {
+            consoleIcon.classList.add('toogle-icon');
+        } else {
+            consoleIcon.classList.remove('toogle-icon');
+        }
+    }
+
+    const consoleIcon = document.getElementById('console-icon');
+    styleIcon(anim, consoleIcon);
+
+    if (consoleIcon) {
+        consoleIcon.addEventListener('click', () => {
+            let newAnim = toogleAnimationPreference();
+            styleIcon(newAnim, consoleIcon);
+        });
+    } else {
+        console.error("console icon logic not available");
+    }
 }
 
 document.addEventListener('DOMContentLoaded', addBaseElements);

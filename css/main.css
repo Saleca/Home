@@ -101,7 +101,7 @@ body {
         --background-animated var(--animation-time),
         --background-secondary-animated var(--animation-time),
         --foreground-animated var(--animation-time);
-    
+
 }
 
 #page {
@@ -261,10 +261,24 @@ td>* {
 
 .flex {
     display: flex;
+    gap: 10px;
 }
 
 .flex-filler {
     flex-grow: 1;
+}
+
+.toogle-icon {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 100%;
+    padding: 5px;
+    border-color: var(--foreground);
+
+    &>* {
+        height: 12px;
+        width: 12px;
+    }
 }
 
 #page-path {
