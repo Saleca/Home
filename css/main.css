@@ -88,6 +88,7 @@ html:has(#dark:checked) body {
 html {
     height: 100%;
     overflow: hidden;
+    overscroll-behavior: auto;
 }
 
 body {
