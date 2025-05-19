@@ -1,5 +1,5 @@
-:root{
-        --animation-time: .3s;
+:root {
+    --animation-time: .3s;
 }
 
 body {
@@ -7,17 +7,29 @@ body {
     background-color: #111;
     color: #111;
 
-    transition: none;
-    /*
+    transition:
+        /**/
         background-color var(--animation-time),
         --background-animated var(--animation-time),
         --background-secondary-animated var(--animation-time),
         --foreground-animated var(--animation-time);
-        */
+    /**/
+}
+
+#page {
+    transition:
+        background-color var(--animation-time),
+        color var(--animation-time),
+        border-color var(--animation-time);
+}
+
+footer {
+    transition: background-color var(--animation-time);
 }
 
 a {
     color: #111;
+    transition: color var(--animation-time);
 }
 
 a:visited {
@@ -29,7 +41,5 @@ button {
     color: #111;
     border: none;
 
-    /*
     transition: background-color var(--animation-time), color var(--animation-time), border-color var(--animation-time);
-    */
 }
