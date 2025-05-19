@@ -1,35 +1,21 @@
-:root {
-    --animation-time: .3s;
-}
 
 body {
     overflow: hidden;
     background-color: #111;
     color: #111;
 
-    transition:
-        /**/
-        background-color var(--animation-time),
-        --background-animated var(--animation-time),
-        --background-secondary-animated var(--animation-time),
-        --foreground-animated var(--animation-time);
-    /**/
 }
 
 #page {
-    transition:
-        background-color var(--animation-time),
-        color var(--animation-time),
-        border-color var(--animation-time);
+    background-color: #111;
 }
 
 footer {
-    transition: background-color var(--animation-time);
+        background-color: #111;
 }
 
 a {
     color: #111;
-    transition: color var(--animation-time);
 }
 
 a:visited {
@@ -40,6 +26,4 @@ button {
     background-color: #111;
     color: #111;
     border: none;
-
-    transition: background-color var(--animation-time), color var(--animation-time), border-color var(--animation-time);
 }
