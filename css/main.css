@@ -88,12 +88,13 @@ html:has(#dark:checked) body {
 html {
     height: 100%;
     overflow: hidden;
-    overscroll-behavior: auto !important;
+    
 }
 
 body {
     height: 100%;
     overflow: auto;
+overscroll-behavior: auto !important;
     background-color: var(--background);
     margin: 0;
 
