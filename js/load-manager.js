@@ -26,7 +26,7 @@ async function addBaseElements() {
         }
     }
 
-    addIcon("sun.svg");
+    addIcon("s.svg");
     addStyleSheet("main.css");
 
     const stateScriptLoad = waitEvent(loadingEvents.STATE_SCRIPT);
