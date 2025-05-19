@@ -16,16 +16,14 @@ async function addBaseElements() {
     const urlParams = new URLSearchParams(window.location.search);
     const initialStyle = document.styleSheets[0];
 
-    let anim = 'auto';
+    let anim;
     if (urlParams.has("anim")) {
         if(urlParams.get("anim") === 'none'){
             anim = 'none';
         }
-        /*
         else if(urlParams.get("anim") === 'auto'){
             anim = 'auto';
         }
-        //*/
     }
 
     addIcon("sun.svg");
