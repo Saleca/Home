@@ -9,9 +9,15 @@ const Themes = {
   DARK: 'dark'
 };
 
+const Animation = {
+  NONE: 'none',
+  AUTO: 'auto'
+};
+
 const UserPref = {
   THEME: Themes,
-  LANG: Languages
+  LANG: Languages,
+  ANIM: Animation
 };
 
 function getKeyType(key) {
@@ -31,6 +37,17 @@ function storeItem(item) {
     return;
   }
   localStorage.setItem(typeString, item);
+}
+
+function getSetAnimationPreference(anim){
+  const animType = getKeyType(UserPref.ANIM);
+  if (anim) {
+    localStorage.setItem(animType, anim);
+  }
+  else {
+    anim = localStorage.getItem(animType) || Animation.AUTO;
+  }
+  return anim;
 }
 
 /** Configures the state of the page at start up. */

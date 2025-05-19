@@ -16,15 +16,16 @@ async function addBaseElements() {
     const urlParams = new URLSearchParams(window.location.search);
     const initialStyle = document.styleSheets[0];
 
-    let anim = true;
+    let anim = 'auto';
     if (urlParams.has("anim")) {
-        anim = urlParams.get("anim") === 'true';
-    }
-
-    if (metaDocument)//if exists its implicitly true 
-    {
-        anim = false;
-        addStyleSheet("print.css");
+        if(urlParams.get("anim") === 'none'){
+            anim = 'none';
+        }
+        /*
+        else if(urlParams.get("anim") === 'auto'){
+            anim = 'auto';
+        }
+        //*/
     }
 
     addIcon("sun.svg");
@@ -32,9 +33,18 @@ async function addBaseElements() {
 
     const stateScriptLoad = waitEvent(loadingEvents.STATE_SCRIPT);
     addScript("state-manager.js");
+    await stateScriptLoad;
+    
+    anim = getSetAnimationPreference(anim);
+
+    if (metaDocument)//if exists its implicitly true 
+    {
+        anim = 'none';
+        addStyleSheet("print.css");
+    }
 
     const consoleAnimScriptLoad = waitEvent(loadingEvents.CONSOLE_ANIM_SCRIPT);
-    if (anim) {
+    if (anim === 'auto') {
         addScript("console-animation.js");
     }
     else {
@@ -45,7 +55,7 @@ async function addBaseElements() {
     let loadingPromise;
     let controller;
     const navigationType = navigationAnalizer();
-    if (anim) {
+    if (anim === 'auto') {
         controller = new AbortController();
         loadingPromise = loadingAnimation(navigationType, controller.signal);
     }
@@ -62,7 +72,6 @@ async function addBaseElements() {
 
     const headedLoad = injectLocalSnippet(resizable, componentPath('header'));
     await headedLoad;
-    await stateScriptLoad;
     applyState(urlParams.get("lang"), urlParams.get("theme"));
     addPagePath();
 
@@ -106,7 +115,7 @@ async function addBaseElements() {
         initialStyle.disabled = true;
     }
 
-    if (anim) {
+    if (anim === 'auto') {
         await loadingPromise;
         if (Date.now() - startTime < 2000) {
             await new Promise(resolve => setTimeout(resolve, 5000 - (Date.now() - startTime)));
