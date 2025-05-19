@@ -269,15 +269,19 @@ td>* {
 }
 
 .toogle-icon {
+    height: 100%;
+    aspect-ratio: 1;
+
     border-width: 1px;
     border-style: solid;
     border-radius: 100%;
-    padding: 5px;
+    padding: 2px;
     border-color: var(--foreground);
-
+    display:flex;
+    justify-content: center;
     &>* {
-        height: 12px;
-        width: 12px;
+        height: 18px;
+        width: 18px;
     }
 }
 
