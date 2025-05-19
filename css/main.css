@@ -92,7 +92,7 @@ html {
 }
 
 body {
-    height: 100%;
+    height: 100vh;
     overflow: auto;
 overscroll-behavior: auto !important;
     background-color: var(--background);
