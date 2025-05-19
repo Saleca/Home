@@ -270,7 +270,6 @@ function clearLoadScreen() {
     setTimeout(() => {
 
         document.body.removeChild(loadScreen);
-        document.body.style.overflow = 'auto';
     }, 300);
 }
 

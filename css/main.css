@@ -87,14 +87,12 @@ html:has(#dark:checked) body {
 
 html {
     height: 100%;
-    overflow: hidden;
-    
+    overflow-x:hidden;
 }
 
 body {
-    height: 100vh;
-    overflow: auto;
-overscroll-behavior: auto !important;
+    height: 100%;
+    overflow-x: hidden;
     background-color: var(--background);
     margin: 0;
 
@@ -474,12 +472,12 @@ html:has(#explorer:checked) {
     }
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: var(--scrollbar-width);
     background-color: transparent;
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     border-color: var(--foreground-animated);
     border-width: var(--border-width);
     border-style: solid;
@@ -488,7 +486,7 @@ body::-webkit-scrollbar-track {
     box-shadow: inset 0 0 4px var(--foreground-overlay);
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: var(--background-animated);
     border-color: var(--foreground-animated);
     border-width: var(--border-width);
@@ -496,6 +494,6 @@ body::-webkit-scrollbar-thumb {
     border-radius: var(--border-radius);
 }
 
-body::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: var(--background-secondary-animated);
 }
