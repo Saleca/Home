@@ -87,7 +87,7 @@ html:has(#dark:checked) body {
 
 html {
     height: 100vh;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 body {
@@ -266,28 +266,16 @@ td>* {
     gap: 10px;
 }
 
+.spread {
+    justify-content: space-between;
+}
+
 .flex-filler {
     flex-grow: 1;
 }
 
-.toogle-icon {
-    height: 100%;
-    aspect-ratio: 1;
-
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 100%;
-    padding: 2px;
-    border-color: var(--foreground);
-    display:flex;
-    justify-content: center;
-    &>* {
-        height: 18px;
-        width: 18px;
-    }
-}
-
 #page-path {
+    margin: 0;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-align: left;
@@ -295,7 +283,6 @@ td>* {
     hyphens: none;
     word-break: break-all;
     line-height: 1em;
-    vertical-align: center;
 }
 
 #page-path a {
@@ -367,29 +354,50 @@ td>* {
     padding-top: 1em;
 }
 
-.toggle {
-    display: flex;
+#state-form .flex {
+    gap: 0;
 }
 
-.toggle label {
-    /*change toogles to radial button or div*/
+.state label {
     padding: .25em;
     cursor: pointer;
     border: 1px solid var(--foreground);
     margin: 0;
 }
 
-#dark:checked~.toggle label[for="dark"],
-#device:checked~.toggle label[for="device"],
-#light:checked~.toggle label[for="light"],
-#keys:checked~.toggle label[for="keys"],
-#touch:checked~.toggle label[for="touch"],
-#classic:checked~.toggle label[for="classic"],
-#explorer:checked~.toggle label[for="explorer"],
-#pt:checked~.toggle label[for="pt"],
-#en:checked~.toggle label[for="en"] {
+#dark:checked~.state label[for="dark"],
+#device:checked~.state label[for="device"],
+#light:checked~.state label[for="light"],
+#keys:checked~.state label[for="keys"],
+#touch:checked~.state label[for="touch"],
+#classic:checked~.state label[for="classic"],
+#explorer:checked~.state label[for="explorer"],
+#pt:checked~.state label[for="pt"],
+#en:checked~.state label[for="en"] {
     background-color: var(--foreground);
     color: var(--background);
+}
+
+#console-icon {
+    margin: auto 0;
+}
+
+.toogle-icon {
+    height: 100%;
+    aspect-ratio: 1;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 100%;
+    padding: 2px;
+    border-color: var(--foreground);
+
+    display: flex;
+    justify-content: center;
+
+    &>* {
+        height: 18px;
+        width: 18px;
+    }
 }
 
 .pt,

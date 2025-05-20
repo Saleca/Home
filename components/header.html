@@ -7,12 +7,14 @@
         <input type="radio" id="device" name="theme" value="device" hidden checked>
         <input type="radio" id="dark" name="theme" value="dark" hidden>
 
-        <div class="toggle lang">
+        <div class="flex state">
             <label for="pt" onclick="setLanguage(Languages.PORTUGUESE)">PT</label>
             <label for="en" onclick="setLanguage(Languages.ENGLISH)">EN</label>
         </div>
+        
+        <div id="console-icon" data-path="/resources/icons/console.svg">console-animation</div>
 
-        <div class="toggle theme">
+        <div class="flex state">
             <label for="light" onclick="storeItem(Themes.LIGHT)">Light</label>
             <label for="device" onclick="storeItem(Themes.DEVICE)">Device</label>
             <label for="dark" onclick="storeItem(Themes.DARK)">Dark</label>
@@ -21,10 +23,8 @@
     <hr>
 </div>
 <div id="top"></div>
-<header id="header" class="flex no-print">
+<header id="header" class="flex spread no-print">
     <p id="page-path"></p>
-    <div class="flex-filler"></div>
-    <div id="console-icon" data-path="/resources/icons/console.svg">console-animation</div>
     <a href="#hidden-content">
         <div data-path="/resources/icons/settings.svg">settings</div>
     </a>
