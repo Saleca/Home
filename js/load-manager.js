@@ -268,7 +268,6 @@ function clearLoadScreen() {
     loadScreen.style.background = `transparent`;
     loadScreen.style.color = 'transparent';
     setTimeout(() => {
-
         document.body.removeChild(loadScreen);
     }, 300);
 }

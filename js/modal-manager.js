@@ -13,10 +13,7 @@ function openModal(modalId) {
         return;
     }
     currentModal = modal;
-    document.body.style.overflowY = 'hidden';
-    const styles = window.getComputedStyle(document.documentElement);
-    const scrollWidth = styles.getPropertyValue('--scrollbar-width');
-    document.body.style.paddingRight = `${scrollWidth}`;
+    document.documentElement.style.overflowY = 'hidden';
     overlay.style.display = "block";
     modal.style.display = "block";
     modal.addEventListener("click", stopClickPropagation);
@@ -25,8 +22,7 @@ function openModal(modalId) {
 function closeModal() {
     overlay.style.display = "none";
     currentModal.style.display = "none";
-    document.body.style.overflowY = 'auto';
-    document.body.style.paddingRight = '0';
+    document.documentElement.style.overflowY = 'auto';
     currentModal.removeEventListener("click", stopClickPropagation);
 }
 
