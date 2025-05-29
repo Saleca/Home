@@ -7,23 +7,59 @@ title: Contact Info
 
 <head>
     <meta charset="UTF-8">
+    <meta name="has-form" content="true">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" type="text/css" href="/css/init-black.css">
     <script src="/js/load-manager.js" defer></script>
+
 </head>
 
 <body>
     <main>
-        <div class="en">
-            <p>Contact: <a href="mailto:sal.devsprt@gmail.com?subject=Portfolio">sal.devsprt@gmail.com</a>
-            </p>
-        </div>
+        <h2>Contact Form</h2>
+        <p class="focus">
+            <span>
+                <span class="en">For suggestions or clarification contact directly </span>
+                <span class="pt">Para qualquer sugestao ou esclarecimento contacte diretamente </span>
+            </span>
+            <br>
+            <a href="mailto:sal.devsprt@gmail.com?subject=Portfolio">sal.devsprt@gmail.com</a>
+            <span>
+                <span class="en"> or fill the form bellow:</span>
+                <span class="pt"> ou preencha a forma abaixo:</span>
+            </span>
+        </p>
+        <br>
+        <form id="submission-form" class="flex column gap">
+            <div class="flex strech">
+                <label class="min-size center-text" for="name">
+                    <span class="en">Name</span>
+                    <span class="pt">Nome</span>
+                </label>
+                <input class="min-size" id="name" type="text" required>
+            </div>
+            <div class="flex strech">
+                <label class="min-size center-text" for="email">Email</label>
+                <input class="min-size" id="email" type="email" required>
+            </div>
+            <div class="flex strech">
+                <label class="min-size center-text" for="subject">
+                    <span class="en">Subject</span>
+                    <span class="pt">Assunto</span>
+                </label>
+                <input class="min-size" id="subject" type="text" required>
+            </div>
+            <label class="center-text" for="content">Content</label>
+            <textarea id="content" required></textarea>
 
-        <div class="pt">
-            <p>Contacto: <a href="mailto:sal.devsprt@gmail.com?subject=Portfolio">sal.devsprt@gmail.com</a>
-            </p>
-        </div>
+            <button type="submit" id="submit-button">
+                <span class="en">Send</span>
+                <span class="pt">Enviar</span>
+            </button>
+        </form>
+
+        <p id="submission-response" class="focus"></p>
     </main>
 </body>
 

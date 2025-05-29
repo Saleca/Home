@@ -15,22 +15,37 @@ permalink: /404.html
 
 <body>
     <main>
+        <h3 class="en">Page not found</h3>
+        <h3 class="pt">Pagina nao encontrada</h3>
+
+        <p id="url" class="focus"><i>url</i></p>
+
         <div class="en">
-            <h3>Page not found</h3>
+            <p>Possible causes:</p>
+            <ul>
+                <li>Wrong url - check for any typo on the url.</li>
+                <li>Broken link - the page is under a different address, private or removed.</li>
+            </ul>
+            <p>In the meanwhile why not start from the <a href="/">home page</a>?</p>
+            <p class="details">If something seems wrong consider contact me via the contact form, apreciated.</p>
         </div>
 
         <div class="pt">
-            <h3>Pagina nao encontrada</h3>
+            <p>Causas possiveis:</p>
+            <ul>
+                <li>Url errado - check for any typo on the url.</li>
+                <li>Link invalido - the page is under a different address, private or removed.</li>
+            </ul>
+            <p>In the meanwhile why not start from the <a href="/">pagina principal</a>?</p>
+            <p class="details">If something seems wrong consider contact me via the contact form, apreciated.</p>
         </div>
-
-        <p id="url" class="focus"><i>url</i></p>
-        <p>test version</p>
     </main>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const urlDisplay = document.getElementById('url');
         urlDisplay.textContent = window.location.href;
     });
 </script>
+
 </html>

@@ -31,86 +31,52 @@ title: Snake Explorer
         <h2>WebGL demo</h2>
 
         <button class="focus modal-button" data-modal-target="modal-1">
-            <div class="en">
-                Controls
-            </div>
-            <div class="pt">
-                Controlos
-            </div>
+            <span class="en"> Controls </span>
+            <span class="pt"> Controlos </span>
         </button>
 
         <canvas id="unity-canvas" tabindex="-1"></canvas>
 
         <div id="overlay"></div>
         <div id="modal-1" class="modal">
-            <h3>
-                <div class="en">
-                    Controls
-                </div>
-                <div class="pt">
-                    Controlos
-                </div>
-            </h3>
-            <div class="flex">
+            <h3 class="en"> Controls </h3>
+            <h3 class="pt"> Controlos </h3>
+
+            <div class="flex spread">
                 <input type="radio" id="touch" name="control-type" value="touch" hidden>
                 <input type="radio" id="keys" name="control-type" value="keys" hidden checked>
-                <div class="toggle control-type">
+                <div class="flex state control-type">
                     <label for="touch" onclick="">
-                        <div class="en">
-                            Touch screen
-                        </div>
-                        <div class="pt">
-                            Ecra tatil
-                        </div>
+                        <div class="en"> Touch screen </div>
+                        <div class="pt"> Ecra tatil </div>
                     </label>
                     <label for="keys" onclick="">
-                        <div class="en">
-                            Keyboard
-                        </div>
-                        <div class="pt">
-                            Teclado
-                        </div>
+                        <div class="en"> Keyboard </div>
+                        <div class="pt"> Teclado </div>
                     </label>
                 </div>
-                <div class="flex-filler"></div>
                 <input type="radio" id="classic" name="game-type" value="classic" hidden>
                 <input type="radio" id="explorer" name="game-type" value="explorer" hidden checked>
-                <div class="toggle game-type">
+                <div class="flex state game-type">
                     <label for="classic">
-                        <div class="en">
-                            Classic
-                        </div>
-                        <div class="pt">
-                            Classico
-                        </div>
+                        <div class="en"> Classic </div>
+                        <div class="pt"> Classico </div>
                     </label>
                     <label for="explorer">
-                        <div class="en">
-                            Explorer
-                        </div>
-                        <div class="pt">
-                            Aventura
-                        </div>
+                        <div class="en"> Explorer </div>
+                        <div class="pt"> Aventura </div>
                     </label>
                 </div>
             </div>
 
             <div class="center-childs">
                 <div class="classic-mode">
-                    <div class="en">
-                        <h4>Classic Mode</h4>
-                    </div>
-                    <div class="pt">
-                        <h4>Modo Classico</h4>
-                    </div>
+                    <h4 class="en">Classic Mode</h4>
+                    <h4 class="pt">Modo Classico</h4>
                 </div>
                 <div class="explorer-mode">
-                    <div class="en">
-                        <h4>Explorer Mode</h4>
-                    </div>
-                    <div class="pt">
-                        <h4>Modo de Aventura</h4>
-                    </div>
+                    <h4 class="en">Explorer Mode</h4>
+                    <h4 class="pt">Modo de Aventura</h4>
                 </div>
             </div>
 
@@ -127,12 +93,8 @@ title: Snake Explorer
                         </div>
                     </td>
                     <td>
-                        <div class="en">
-                            <label>Pause</label>
-                        </div>
-                        <div class="pt">
-                            <label>Pausa</label>
-                        </div>
+                        <label class="en">Pause</label>
+                        <label class="pt">Pausa</label>
                     </td>
                 </tr>
                 <tr class="explorer-mode">
@@ -147,12 +109,8 @@ title: Snake Explorer
                         </div>
                     </td>
                     <td>
-                        <div class="en">
-                            <label>Sprint</label>
-                        </div>
-                        <div class="pt">
-                            <label>Acelerar</label>
-                        </div>
+                        <label class="en">Sprint</label>
+                        <label class="pt">Acelerar</label>
                     </td>
                 </tr>
                 <tr>
@@ -224,12 +182,8 @@ title: Snake Explorer
                             </div>
                         </div>
                         <div class="explorer-mode">
-                            <div class="en">
-                                <label>Turn</label>
-                            </div>
-                            <div class="pt">
-                                <label>Virar</label>
-                            </div>
+                            <label class="en">Turn</label>
+                            <label class="pt">Virar</label>
                         </div>
                     </td>
                 </tr>
@@ -237,12 +191,8 @@ title: Snake Explorer
             </table>
 
             <button class="close-modal">
-                <div class="en">
-                    Back
-                </div>
-                <div class="pt">
-                    Voltar
-                </div>
+                <div class="en"> Back </div>
+                <div class="pt"> Voltar </div>
             </button>
         </div>
 

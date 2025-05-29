@@ -13,6 +13,7 @@ async function addBaseElements() {
     const metaUnityGame = document.querySelector('meta[name="unity-game"]');
     const metaHasKeys = document.querySelector('meta[name="has-keys"]');
     const metaHasModal = document.querySelector('meta[name="has-modal"]');
+    const metaHasForm = document.querySelector('meta[name="has-form"]');
     const urlParams = new URLSearchParams(window.location.search);
     const initialStyle = document.styleSheets[0];
 
@@ -96,6 +97,10 @@ async function addBaseElements() {
             function () {
                 addScript("initialize-unity-player.js");
             });
+    }
+
+    if (metaHasForm) {
+        addScript("submission-form.js");
     }
 
     const snippetScriptLoad = waitEvent(loadingEvents.SNIPPET_SCRIPT);

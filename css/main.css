@@ -106,6 +106,7 @@ body {
 
 }
 
+
 #page {
     height: 100%;
     display: flex;
@@ -217,7 +218,7 @@ button {
 h1+.focus,
 h2+.focus,
 h3+.focus {
-    padding-top: -1em;
+    margin-top: -1em;
 }
 
 /*button focus*/
@@ -263,15 +264,34 @@ td>* {
 
 .flex {
     display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.gap {
     gap: 10px;
+}
+
+.min-size {
+    flex: .3;
+}
+
+.strech {
+    justify-content: space-evenly;
 }
 
 .spread {
     justify-content: space-between;
 }
 
-.flex-filler {
+.fill {
     flex-grow: 1;
+}
+
+.center-text {
+    text-align: center;
 }
 
 #page-path {
@@ -347,15 +367,41 @@ td>* {
     border-radius: 5px;
 }
 
+input[type=text],
+input[type=email],
+textarea {
+    background-color: var(--background);
+    color: var(--foreground);
+    border-color: var(--foreground);
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+input:autofill {
+    /*a week's worth of delay*/
+    transition-delay: 604800s;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 40vh;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
 #state-form {
     display: flex;
     justify-content: space-between;
     padding-bottom: 1em;
     padding-top: 1em;
-}
-
-#state-form .flex {
-    gap: 0;
 }
 
 .state label {
@@ -406,11 +452,11 @@ td>* {
 }
 
 html[lang="pt"] .pt {
-    display: block;
+    display: inherit;
 }
 
 html[lang="en"] .en {
-    display: block;
+    display: inherit;
 }
 
 .touch-controls,
@@ -458,6 +504,13 @@ html:has(#explorer:checked) {
     }
 }
 
+@media (max-width: 400px) {
+    .strech {
+        flex-direction: column;
+        gap:10px;
+    }
+}
+
 @media (min-width: 600px) {
     :root {
         --scrollbar-width: 15px;
@@ -466,6 +519,8 @@ html:has(#explorer:checked) {
     #page {
         width: 100%;
     }
+
+
 
     main,
     footer {
