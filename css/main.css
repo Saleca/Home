@@ -402,6 +402,8 @@ textarea {
     justify-content: space-between;
     padding-bottom: 1em;
     padding-top: 1em;
+    height: 60px;
+    user-select: none;
 }
 
 .state label {
@@ -425,7 +427,7 @@ textarea {
 }
 
 #console-icon {
-    margin: auto 0;
+    margin: auto auto;
 }
 
 .toogle-icon {
@@ -434,7 +436,7 @@ textarea {
     border-width: 1px;
     border-style: solid;
     border-radius: 100%;
-    padding: 2px;
+    padding-top: 4px;
     border-color: var(--foreground);
 
     display: flex;
